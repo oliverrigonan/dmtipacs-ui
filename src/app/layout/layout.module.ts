@@ -5,16 +5,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpModule } from '@angular/http';
 
 // ========
 // Material
 // ========
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // =============
 // Wijmo Modules
 // =============
+import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
 
 // ==========
@@ -22,11 +25,17 @@ import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
 // ==========
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ModalityProcedureComponent } from '../modality-procedure/modality-procedure.component';
+import { ModalityProcedureDetailDialogComponent } from '../dialog/modality-procedure/modality-procedure-detail.dialog.component';
 import { BodyPartsComponent } from '../body-parts/body-parts.component';
 import { UserComponent } from '../user/user.component';
 import { RateComponent } from '../rate/rate.component';
 import { ProcedureComponent } from '../procedure/procedure.component';
 import { ReportsComponent } from '../reports/reports.component';
+
+// ========
+// Services
+// ========
+import { ModalityProcedureService } from '../modality-procedure/modality-procedure.service'
 
 // ==============
 // Custom Modules
@@ -49,7 +58,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    ModalityProcedureComponent,
+    ModalityProcedureComponent, ModalityProcedureDetailDialogComponent,
     BodyPartsComponent,
     UserComponent,
     RateComponent,
@@ -61,14 +70,23 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule,
     NgbModule.forRoot(),
-    MatCardModule, MatInputModule,
+    HttpModule,
+    MatCardModule, MatInputModule, MatDialogModule,
+    WjGridFilterModule,
     WjGridModule
   ],
   exports: [
     RouterModule,
     ComponentsModule,
-    MatCardModule, MatInputModule,
+    MatCardModule, MatInputModule, MatDialogModule,
+    WjGridFilterModule,
     WjGridModule
+  ],
+  providers: [
+    ModalityProcedureService
+  ],
+  entryComponents: [
+    ModalityProcedureDetailDialogComponent
   ]
 })
 export class LayoutModule { }
