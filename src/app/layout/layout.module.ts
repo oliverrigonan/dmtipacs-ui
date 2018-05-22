@@ -6,6 +6,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// ========
+// Material
+// ========
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+
 // ==========
 // Components
 // ==========
@@ -49,11 +55,13 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    MatCardModule, MatInputModule
   ],
   exports: [
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    MatCardModule, MatInputModule
   ]
 })
 export class LayoutModule { }

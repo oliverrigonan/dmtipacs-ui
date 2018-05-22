@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./modality-procedure.component.css']
 })
 export class ModalityProcedureComponent {
-  title = 'modality procedure';
+  title = 'Modality Procedure';
 }

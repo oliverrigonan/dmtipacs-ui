@@ -1,1 +1,48 @@
-{{ title }}
+<mat-card class="example-card">
+    <mat-card-header style="margin-left: -15px;">
+        <table border="0" style="width: 100%;">
+            <tr>
+                <td style="width: 50%;">
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Search">
+                        </mat-form-field>
+                    </form>
+                </td>
+                <td style="width: 40%;;"></td>
+                <td style="width: 5%;">
+                    <button mat-raised-button color="primary" class="btn-block">
+                        <i class="fa fa-plus"></i> Add
+                    </button>
+                </td>
+                <td style="width: 5%;">
+                    <button mat-raised-button color="warn" class="btn-block" routerLink="/dashboard">
+                        <i class="fa fa-close"></i> Close
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card-header>
+    <mat-card-content>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="btn-group col-md-7" id="bankNavigationFlexGrid">
+                    <button type="button" class="btn btn-default" id="btnBankMoveToFirstPageGrid">
+                        <span class="fa fa-fast-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="btnBankMoveToPreviousPageGrid">
+                        <span class="fa fa-step-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" disabled style="width: 100px" id="btnBankCurrentPageGrid"></button>
+                    <button type="button" class="btn btn-default" id="btnBankMoveToNextPageGrid">
+                        <span class="fa fa-step-forward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="btnBankMoveToLastPageGrid">
+                        <span class="fa fa-fast-forward"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
