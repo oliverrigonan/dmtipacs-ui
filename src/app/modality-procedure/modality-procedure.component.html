@@ -1,30 +1,25 @@
-<mat-card class="example-card">
-    <mat-card-header style="margin-left: -15px;">
+<div class="card">
+    <div class="card-header">
         <table border="0" style="width: 100%;">
             <tr>
                 <td style="width: 50%;">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Search">
-                        </mat-form-field>
-                    </form>
+
                 </td>
                 <td style="width: 40%;;"></td>
-                <td style="width: 5%;">
-                    <button mat-raised-button color="primary" class="btn-block">
-                        <i class="fa fa-plus"></i> Add
-                    </button>
-                </td>
-                <td style="width: 5%;">
-                    <button mat-raised-button color="warn" class="btn-block" routerLink="/dashboard">
-                        <i class="fa fa-close"></i> Close
+                <td style="width: 5%;" align="right">
+                    <button mat-fab color="primary" class="btn-block">
+                        <i class="fa fa-plus"></i>
                     </button>
                 </td>
             </tr>
         </table>
-    </mat-card-header>
-    <mat-card-content>
-
+    </div>
+    <div class="card-body">
+        <wj-flex-grid [itemsSource]="data">
+            
+        </wj-flex-grid>
+    </div>
+    <div class="card-footer">
         <div class="panel-footer">
             <div class="row">
                 <div class="btn-group col-md-7" id="bankNavigationFlexGrid">
@@ -44,5 +39,5 @@
                 </div>
             </div>
         </div>
-    </mat-card-content>
-</mat-card>
+    </div>
+</div>

@@ -27,6 +27,7 @@
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
     "rxjs": "^6.0.0",
+    "wijmo": "http://prerelease.componentone.com/wijmo5/npm-images/C1Wijmo-Enterprise-Eval-AMD-5.20163.254.tgz",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

@@ -12,6 +12,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 
+// =============
+// Wijmo Modules
+// =============
+import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
+
 // ==========
 // Components
 // ==========
@@ -56,12 +61,14 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule,
     NgbModule.forRoot(),
-    MatCardModule, MatInputModule
+    MatCardModule, MatInputModule,
+    WjGridModule
   ],
   exports: [
     RouterModule,
     ComponentsModule,
-    MatCardModule, MatInputModule
+    MatCardModule, MatInputModule,
+    WjGridModule
   ]
 })
 export class LayoutModule { }

@@ -12,6 +12,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ComponentsModule } from './components/components.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// =============
+// Wijmo Modules
+// =============
+import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
+
 // ==========
 // Components
 // ==========
@@ -50,7 +55,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     ComponentsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    WjGridModule
   ],
   exports: [
     RouterModule,
