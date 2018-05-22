@@ -25,6 +25,7 @@ export class ModalityProcedureComponent {
   // Global Variables
   // ================
   title = 'Modality Procedure';
+  isProgressBarHidden = false;
 
   // ========================================
   // Modality Procedure Async Task Properties
@@ -50,6 +51,7 @@ export class ModalityProcedureComponent {
     this.modalityProcedureService.getModalityProcedure();
     this.modalityProcedureSubscription = this.modalityProcedureService.modalityProcedureObservable.subscribe(
       data => {
+        this.isProgressBarHidden = true;
         if (data.length > 0) {
           this.modalityProcedureData = data;
           this.modalityProcedureCollectionView = new CollectionView(this.modalityProcedureData);

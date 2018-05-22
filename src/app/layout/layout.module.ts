@@ -13,6 +13,7 @@ import { HttpModule } from '@angular/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // =============
 // Wijmo Modules
@@ -71,14 +72,14 @@ const routes: Routes = [
     ComponentsModule,
     NgbModule.forRoot(),
     HttpModule,
-    MatCardModule, MatInputModule, MatDialogModule,
+    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
     WjGridFilterModule,
     WjGridModule
   ],
   exports: [
     RouterModule,
     ComponentsModule,
-    MatCardModule, MatInputModule, MatDialogModule,
+    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
     WjGridFilterModule,
     WjGridModule
   ],
