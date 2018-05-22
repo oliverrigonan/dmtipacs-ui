@@ -59,6 +59,9 @@ export class ModalityProcedureService {
 
                     this.modalityProcedureSource.next(modalityProcedureObservableArray);
                 }
+            },
+            error => {
+                this.modalityProcedureSource.next(null);
             }
         );
     }

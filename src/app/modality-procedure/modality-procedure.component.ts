@@ -51,12 +51,16 @@ export class ModalityProcedureComponent {
     this.modalityProcedureService.getModalityProcedure();
     this.modalityProcedureSubscription = this.modalityProcedureService.modalityProcedureObservable.subscribe(
       data => {
-        this.isProgressBarHidden = true;
-        if (data.length > 0) {
-          this.modalityProcedureData = data;
-          this.modalityProcedureCollectionView = new CollectionView(this.modalityProcedureData);
-          this.modalityProcedureCollectionView.pageSize = 15;
-          this.modalityProcedureCollectionView.trackChanges = true;
+        if (data != null) {
+          this.isProgressBarHidden = true;
+          if (data.length > 0) {
+            this.modalityProcedureData = data;
+            this.modalityProcedureCollectionView = new CollectionView(this.modalityProcedureData);
+            this.modalityProcedureCollectionView.pageSize = 15;
+            this.modalityProcedureCollectionView.trackChanges = true;
+          }
+        } else {
+          this.isProgressBarHidden = true;
         }
       }
     );
