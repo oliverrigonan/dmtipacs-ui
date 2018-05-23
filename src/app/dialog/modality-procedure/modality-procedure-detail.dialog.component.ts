@@ -23,8 +23,6 @@ export class ModalityProcedureDetailDialogComponent {
   // ================
   title = 'modality procedure detail dialog';
 
-  public isModalityProcedureFormDetailDialogHidden = true;
-
   // ========================================
   // Modality Procedure Async Task Properties
   // ========================================
@@ -82,10 +80,10 @@ export class ModalityProcedureDetailDialogComponent {
         }
 
         this.cboModalityObservableArray = modalityObservableArray;
+        
         setTimeout(() => {
           this.modalityProcedureModel.ModalityId = modalityId;
-          this.isModalityProcedureFormDetailDialogHidden = false;
-        }, 50);
+        }, 1000);
       }
     );
   }

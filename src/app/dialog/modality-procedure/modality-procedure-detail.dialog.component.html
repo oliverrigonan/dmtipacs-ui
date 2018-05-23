@@ -1,9 +1,5 @@
 <h2 mat-dialog-title>{{ title }}</h2>
-<div align="center" [hidden]="isSpinnerHidden">
-    <mat-progress-spinner class="example-margin" [color]="'primary'" [mode]="'indeterminate'">
-    </mat-progress-spinner>
-</div>
-<mat-dialog-content [hidden]="isModalityProcedureFormDetailDialogHidden">
+<mat-dialog-content>
     <mat-form-field class="input-100-percent" appearance="outline">
         <mat-label>Modality Procedure</mat-label>
         <input [(ngModel)]="modalityProcedureModel.ModalityProcedure" matInput />
@@ -20,6 +16,7 @@
             </wj-combo-box>
         </div>
     </div>
+    <br /><br />
 </mat-dialog-content>
 <mat-dialog-actions>
     <table border="0" style="width: 100%;">

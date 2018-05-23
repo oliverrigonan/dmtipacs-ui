@@ -32,6 +32,8 @@ import { ModalityProcedureComponent } from '../modality-procedure/modality-proce
 import { ModalityProcedureDetailDialogComponent } from '../dialog/modality-procedure/modality-procedure-detail.dialog.component';
 import { ModalityProcedureDeleteDialogComponent } from '../dialog/modality-procedure/modality-procedure-delete.dialog.component';
 import { BodyPartsComponent } from '../body-parts/body-parts.component';
+import { BodyPartsDetailDialogComponent } from '../dialog/body-parts/body-parts-detail.dialog.component';
+import { BodyPartsDeleteDialogComponent } from '../dialog/body-parts/body-parts-delete.dialog.component';
 import { UserComponent } from '../user/user.component';
 import { RateComponent } from '../rate/rate.component';
 import { ProcedureComponent } from '../procedure/procedure.component';
@@ -41,6 +43,7 @@ import { ReportsComponent } from '../reports/reports.component';
 // Services
 // ========
 import { ModalityProcedureService } from '../modality-procedure/modality-procedure.service'
+import { BodyPartsService } from '../body-parts/body-parts.service'
 
 // ==============
 // Custom Modules
@@ -64,7 +67,7 @@ const routes: Routes = [
   declarations: [
     DashboardComponent,
     ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
-    BodyPartsComponent,
+    BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
     UserComponent,
     RateComponent,
     ProcedureComponent,
@@ -89,11 +92,12 @@ const routes: Routes = [
     WjGridModule, WjInputModule
   ],
   providers: [
-    ModalityProcedureService
+    ModalityProcedureService,
+    BodyPartsService
   ],
   entryComponents: [
-    ModalityProcedureDetailDialogComponent,
-    ModalityProcedureDeleteDialogComponent
+    ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
+    BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent
   ]
 })
 export class LayoutModule { }

@@ -65,7 +65,7 @@ export class AccountLoginComponent {
 
     let inpUsername: Element = document.getElementById("inpUsername");
     inpUsername.setAttribute("disabled", "disabled");
-    
+
     let inpPassword: Element = document.getElementById("inpPassword");
     inpPassword.setAttribute("disabled", "disabled");
 
@@ -92,9 +92,7 @@ export class AccountLoginComponent {
   // On Load Page
   // ============
   ngOnInit() {
-    if (localStorage.getItem("access_token") == null) {
-      
-    } else {
+    if (localStorage.getItem("access_token") != null) {
       this.router.navigate(['/dashboard']);
     }
   }
