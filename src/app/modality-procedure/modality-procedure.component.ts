@@ -115,6 +115,12 @@ export class ModalityProcedureComponent {
       if (result == 200) {
         this.toastr.success('Save Successful!');
         this.getModalityProcedureData();
+      } else if (result == 404) {
+        this.toastr.success('Not Found!');
+      } else if (result == 400) {
+        this.toastr.success('Bad Request!');
+      } else if (result == 500) {
+        this.toastr.success('Internal Server Error!');
       };
     });
   }
@@ -143,6 +149,12 @@ export class ModalityProcedureComponent {
       if (result == 200) {
         this.toastr.success('Update Successful!');
         this.getModalityProcedureData();
+      } else if (result == 404) {
+        this.toastr.success('Not Found!');
+      } else if (result == 400) {
+        this.toastr.success('Bad Request!');
+      } else if (result == 500) {
+        this.toastr.success('Internal Server Error!');
       };
     });
   }
@@ -166,6 +178,12 @@ export class ModalityProcedureComponent {
       if (result == 200) {
         this.toastr.success('Delete Successful!');
         this.getModalityProcedureData();
+      } else if (result == 404) {
+        this.toastr.success('Not Found!');
+      } else if (result == 400) {
+        this.toastr.success('Bad Request!');
+      } else if (result == 500) {
+        this.toastr.success('Internal Server Error!');
       };
     });
   }
