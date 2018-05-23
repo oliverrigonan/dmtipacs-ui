@@ -24,7 +24,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/wijmo/wijmo.min.css"
+              "src/assets/wijmo/wijmo.min.css",
+              "src/assets/toastr/toastr.css"
             ],
             "scripts": []
           },

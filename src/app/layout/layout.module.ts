@@ -23,6 +23,11 @@ import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
 import { WjInputModule } from 'wijmo/wijmo.angular2.input';
 
+// ======
+// Toastr
+// ======
+import { ToastrModule } from 'ngx-toastr';
+
 // ==========
 // Components
 // ==========
@@ -76,6 +81,12 @@ const routes: Routes = [
     NgbModule.forRoot(),
     HttpModule,
     FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+      progressBar: true
+    }),
     MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
     WjGridFilterModule,
     WjGridModule, WjInputModule

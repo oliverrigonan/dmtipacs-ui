@@ -22,13 +22,13 @@
         <tr>
             <td style="width: 89%;"></td>
             <td style="width: 5%;" align="right">
-                <button mat-raised-button color="primary" (click)="btnSaveModalityProcedureClick()">
+                <button mat-raised-button color="primary" id="btnSaveModalityProcedure" (click)="btnSaveModalityProcedureClick()">
                     <i class="fa fa-save"></i> Save
                 </button>
             </td>
             <td style="width: 1%;"></td>
             <td style="width: 5%;" align="right">
-                <button mat-raised-button color="warn" [mat-dialog-close]="true">
+                <button mat-raised-button color="warn" id="btnCloseModalityProcedure" [mat-dialog-close]="true">
                     <i class="fa fa-close"></i> Close
                 </button>
             </td>

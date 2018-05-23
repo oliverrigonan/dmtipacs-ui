@@ -42,7 +42,7 @@ export class ModalityProcedureDeleteDialogComponent {
     // Constructor
     // ===========
     constructor(
-        public dialogRef: MatDialogRef<ModalityProcedureDeleteDialogComponent>,
+        public deleteModalityProcedureDialogRef: MatDialogRef<ModalityProcedureDeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private modalityProcedureService: ModalityProcedureService
     ) {
@@ -54,17 +54,36 @@ export class ModalityProcedureDeleteDialogComponent {
     // Confirm Delete Modality Procedure
     // =================================
     public btnConfirmDeleteModalityProcedureClick(): void {
+        let btnConfirmDeleteModalityProcedure: Element = document.getElementById("btnConfirmDeleteModalityProcedure");
+        btnConfirmDeleteModalityProcedure.setAttribute("disabled", "disabled");
+        btnConfirmDeleteModalityProcedure.innerHTML = "<i class='fa fa-trash fa-fw'></i> Deleting...";
+    
+        let btnCloseConfirmDeleteModalityProcedure: Element = document.getElementById("btnCloseConfirmDeleteModalityProcedure");
+        btnCloseConfirmDeleteModalityProcedure.setAttribute("disabled", "disabled");
+
         this.modalityProcedureService.deleteModalityProcedure(this.modalityProcedureModel.Id);
         this.modalityProcedureSubscription = this.modalityProcedureService.modalityProcedureDeletedObservable.subscribe(
             data => {
                 if (data == 200) {
-
+                    this.deleteModalityProcedureDialogRef.close(200);
+                    btnConfirmDeleteModalityProcedure.removeAttribute("disabled");
+                    btnConfirmDeleteModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+                    btnCloseConfirmDeleteModalityProcedure.removeAttribute("disabled");
                 } else if (data == 404) {
-
+                    this.deleteModalityProcedureDialogRef.close(404);
+                    btnConfirmDeleteModalityProcedure.removeAttribute("disabled");
+                    btnConfirmDeleteModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+                    btnCloseConfirmDeleteModalityProcedure.removeAttribute("disabled");
                 } else if (data == 400) {
-
+                    this.deleteModalityProcedureDialogRef.close(400);
+                    btnConfirmDeleteModalityProcedure.removeAttribute("disabled");
+                    btnConfirmDeleteModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+                    btnCloseConfirmDeleteModalityProcedure.removeAttribute("disabled");
                 } else if (data == 500) {
-
+                    this.deleteModalityProcedureDialogRef.close(500);
+                    btnConfirmDeleteModalityProcedure.removeAttribute("disabled");
+                    btnConfirmDeleteModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+                    btnCloseConfirmDeleteModalityProcedure.removeAttribute("disabled");
                 }
             }
         );

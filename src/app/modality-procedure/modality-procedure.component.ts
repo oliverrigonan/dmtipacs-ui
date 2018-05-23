@@ -4,6 +4,11 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+// ======
+// Toastr
+// ======
+import { ToastrService } from 'ngx-toastr';
+
 // =======
 // Dialogs
 // =======
@@ -57,13 +62,16 @@ export class ModalityProcedureComponent {
   // ===========
   constructor(
     public dialog: MatDialog,
-    private modalityProcedureService: ModalityProcedureService
+    private modalityProcedureService: ModalityProcedureService,
+    private toastr: ToastrService
   ) { }
 
   // ===========================
   // Get Modality Procedure Data
   // ===========================
   public getModalityProcedureData(): void {
+    this.isProgressBarHidden = false;
+
     let projects = new ObservableArray();
 
     this.modalityProcedureService.getModalityProcedure();
@@ -95,12 +103,19 @@ export class ModalityProcedureComponent {
     this.modalityProcedureModel.ModalityResultTemplate = "";
     this.modalityProcedureModel.DoctorId = null;
 
-    let dialogRef = this.dialog.open(ModalityProcedureDetailDialogComponent, {
+    let detailModalityProcedureDialogRef = this.dialog.open(ModalityProcedureDetailDialogComponent, {
       width: '800px',
       data: {
         objModalityDetailProcedureDialogTitle: "Add Modality Procedure",
         objCurrentModalityProcedure: this.modalityProcedureModel
       }
+    });
+
+    detailModalityProcedureDialogRef.afterClosed().subscribe(result => {
+      if (result == 200) {
+        this.toastr.success('Save Successful!');
+        this.getModalityProcedureData();
+      };
     });
   }
 
@@ -116,12 +131,19 @@ export class ModalityProcedureComponent {
     this.modalityProcedureModel.ModalityResultTemplate = currentModalityProcedure.ModalityResultTemplate;
     this.modalityProcedureModel.DoctorId = currentModalityProcedure.DoctorId;
 
-    let dialogRef = this.dialog.open(ModalityProcedureDetailDialogComponent, {
+    let detailModalityProcedureDialogRef = this.dialog.open(ModalityProcedureDetailDialogComponent, {
       width: '800px',
       data: {
         objModalityDetailProcedureDialogTitle: "Edit Modality Procedure",
         objCurrentModalityProcedure: this.modalityProcedureModel
       }
+    });
+
+    detailModalityProcedureDialogRef.afterClosed().subscribe(result => {
+      if (result == 200) {
+        this.toastr.success('Update Successful!');
+        this.getModalityProcedureData();
+      };
     });
   }
 
@@ -132,12 +154,19 @@ export class ModalityProcedureComponent {
     let currentModalityProcedure = this.modalityProcedureCollectionView.currentItem;
     this.modalityProcedureModel.Id = currentModalityProcedure.Id;
 
-    let dialogRef = this.dialog.open(ModalityProcedureDeleteDialogComponent, {
+    let deleteModalityProcedureDialogRef = this.dialog.open(ModalityProcedureDeleteDialogComponent, {
       width: '400px',
       data: {
         objModalityProcedureDeleteDialogTitle: "Delete Modality Procedure",
         objCurrentModalityProcedure: this.modalityProcedureModel
       }
+    });
+
+    deleteModalityProcedureDialogRef.afterClosed().subscribe(result => {
+      if (result == 200) {
+        this.toastr.success('Delete Successful!');
+        this.getModalityProcedureData();
+      };
     });
   }
 

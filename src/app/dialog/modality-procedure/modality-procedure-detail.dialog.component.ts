@@ -46,7 +46,7 @@ export class ModalityProcedureDetailDialogComponent {
   // Constructor
   // ===========
   constructor(
-    public dialogRef: MatDialogRef<ModalityProcedureDetailDialogComponent>,
+    public detailModalityProcedureDialogRef: MatDialogRef<ModalityProcedureDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private modalityProcedureService: ModalityProcedureService
   ) {
@@ -91,17 +91,36 @@ export class ModalityProcedureDetailDialogComponent {
   // Save Modality Procedure
   // =======================
   public btnSaveModalityProcedureClick(): void {
+    let btnSaveModalityProcedure: Element = document.getElementById("btnSaveModalityProcedure");
+    btnSaveModalityProcedure.setAttribute("disabled", "disabled");
+    btnSaveModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Saving...";
+
+    let btnCloseModalityProcedure: Element = document.getElementById("btnCloseModalityProcedure");
+    btnCloseModalityProcedure.setAttribute("disabled", "disabled");
+
     this.modalityProcedureService.saveModalityProcedure(this.modalityProcedureModel);
     this.modalityProcedureSubscription = this.modalityProcedureService.modalityProcedureSavedObservable.subscribe(
       data => {
         if (data == 200) {
-
+          this.detailModalityProcedureDialogRef.close(200);
+          btnSaveModalityProcedure.removeAttribute("disabled");
+          btnSaveModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+          btnCloseModalityProcedure.removeAttribute("disabled");
         } else if (data == 404) {
-
+          this.detailModalityProcedureDialogRef.close(404);
+          btnSaveModalityProcedure.removeAttribute("disabled");
+          btnSaveModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+          btnCloseModalityProcedure.removeAttribute("disabled");
         } else if (data == 400) {
-
+          this.detailModalityProcedureDialogRef.close(400);
+          btnSaveModalityProcedure.removeAttribute("disabled");
+          btnSaveModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+          btnCloseModalityProcedure.removeAttribute("disabled");
         } else if (data == 500) {
-
+          this.detailModalityProcedureDialogRef.close(500);
+          btnSaveModalityProcedure.removeAttribute("disabled");
+          btnSaveModalityProcedure.innerHTML = "<i class='fa fa-save fa-fw'></i> Save";
+          btnCloseModalityProcedure.removeAttribute("disabled");
         }
       }
     );
@@ -110,7 +129,7 @@ export class ModalityProcedureDetailDialogComponent {
   // ===============================
   // Close Modality Procedure Dialog
   // ===============================
-  btnCloseModalityProcedureClick(): void {
-    this.dialogRef.close();
+  public btnCloseModalityProcedureClick(): void {
+    this.detailModalityProcedureDialogRef.close();
   }
 }

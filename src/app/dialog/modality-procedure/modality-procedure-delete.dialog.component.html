@@ -9,13 +9,13 @@
         <tr>
             <td style="width: 89%;"></td>
             <td style="width: 5%;" align="right">
-                <button mat-raised-button color="warn" (click)="btnConfirmDeleteModalityProcedureClick()">
+                <button mat-raised-button color="warn" id="btnConfirmDeleteModalityProcedure" (click)="btnConfirmDeleteModalityProcedureClick()">
                     <i class="fa fa-trash fa-fw"></i> Delete
                 </button>
             </td>
             <td style="width: 1%;"></td>
             <td style="width: 5%;" align="right">
-                <button mat-raised-button [mat-dialog-close]="true">
+                <button mat-raised-button id="btnCloseConfirmDeleteModalityProcedure" [mat-dialog-close]="true">
                     <i class="fa fa-close fa-fw"></i> Close
                 </button>
             </td>
