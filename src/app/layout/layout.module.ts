@@ -29,6 +29,7 @@ import { WjInputModule } from 'wijmo/wijmo.angular2.input';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ModalityProcedureComponent } from '../modality-procedure/modality-procedure.component';
 import { ModalityProcedureDetailDialogComponent } from '../dialog/modality-procedure/modality-procedure-detail.dialog.component';
+import { ModalityProcedureDeleteDialogComponent } from '../dialog/modality-procedure/modality-procedure-delete.dialog.component';
 import { BodyPartsComponent } from '../body-parts/body-parts.component';
 import { UserComponent } from '../user/user.component';
 import { RateComponent } from '../rate/rate.component';
@@ -61,7 +62,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    ModalityProcedureComponent, ModalityProcedureDetailDialogComponent,
+    ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
     BodyPartsComponent,
     UserComponent,
     RateComponent,
@@ -90,7 +91,8 @@ const routes: Routes = [
     ModalityProcedureService
   ],
   entryComponents: [
-    ModalityProcedureDetailDialogComponent
+    ModalityProcedureDetailDialogComponent,
+    ModalityProcedureDeleteDialogComponent
   ]
 })
 export class LayoutModule { }

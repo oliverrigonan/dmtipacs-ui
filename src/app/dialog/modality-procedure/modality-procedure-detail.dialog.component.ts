@@ -13,7 +13,7 @@ import { ModalityProcedureService } from '../../modality-procedure/modality-proc
 import { ObservableArray } from 'wijmo/wijmo';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-modality-procedure-detail-dialog',
   templateUrl: './modality-procedure-detail.dialog.component.html',
   styleUrls: ['../dialog.css']
 })

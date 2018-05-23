@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 // Dialogs
 // =======
 import { ModalityProcedureDetailDialogComponent } from '../dialog/modality-procedure/modality-procedure-detail.dialog.component';
+import { ModalityProcedureDeleteDialogComponent } from '../dialog/modality-procedure/modality-procedure-delete.dialog.component';
 
 // ====================
 // Async Task and Wijmo
@@ -119,6 +120,22 @@ export class ModalityProcedureComponent {
       width: '800px',
       data: {
         objModalityDetailProcedureDialogTitle: "Edit Modality Procedure",
+        objCurrentModalityProcedure: this.modalityProcedureModel
+      }
+    });
+  }
+
+  // =========================
+  // Delete Modality Procedure
+  // =========================
+  public btnDeleteModalityProcedureClick(): void {
+    let currentModalityProcedure = this.modalityProcedureCollectionView.currentItem;
+    this.modalityProcedureModel.Id = currentModalityProcedure.Id;
+
+    let dialogRef = this.dialog.open(ModalityProcedureDeleteDialogComponent, {
+      width: '400px',
+      data: {
+        objModalityProcedureDeleteDialogTitle: "Delete Modality Procedure",
         objCurrentModalityProcedure: this.modalityProcedureModel
       }
     });
