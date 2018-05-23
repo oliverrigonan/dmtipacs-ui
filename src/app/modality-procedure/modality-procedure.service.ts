@@ -11,6 +11,11 @@ import { Router } from '@angular/router';
 import { ObservableArray } from 'wijmo/wijmo';
 import { Subject, Observable } from 'rxjs';
 
+// =====
+// Model
+// =====
+import { ModalityProcedureModel } from '../model/modality-procedure.model';
+
 @Injectable()
 export class ModalityProcedureService {
     // ================================
@@ -27,6 +32,10 @@ export class ModalityProcedureService {
     // ================
     public modalityProcedureSource = new Subject<ObservableArray>();
     public modalityProcedureObservable = this.modalityProcedureSource.asObservable();
+    public modalityProcedureSavedSource = new Subject<number>();
+    public modalityProcedureSavedObservable = this.modalityProcedureSavedSource.asObservable();
+    public modalityProcedureDeletedSource = new Subject<number>();
+    public modalityProcedureDeletedObservable = this.modalityProcedureDeletedSource.asObservable();
 
     // ===========
     // Constructor
@@ -49,7 +58,7 @@ export class ModalityProcedureService {
                 if (results.length > 0) {
                     for (var i = 0; i <= results.length - 1; i++) {
                         modalityProcedureObservableArray.push({
-                            id: results[i].Id,
+                            Id: results[i].Id,
                             ModalityId: results[i].ModalityId,
                             Modality: results[i].Modality,
                             ModalityProcedure: results[i].ModalityProcedure,
@@ -64,5 +73,66 @@ export class ModalityProcedureService {
                 this.modalityProcedureSource.next(null);
             }
         );
+    }
+
+    // =======================
+    // Save Modality Procedure
+    // =======================
+    public saveModalityProcedure(modalityProcedureModel: ModalityProcedureModel): void {
+        if (modalityProcedureModel.Id == 0) {
+            let url = "http://localhost:52125/api/modalityProcedure/add";
+            this.http.post(url, JSON.stringify(modalityProcedureModel), this.options).subscribe(
+                response => {
+                    this.modalityProcedureSavedSource.next(200);
+                },
+                error => {
+                    if (error.status == 404) {
+                        this.modalityProcedureSavedSource.next(404);
+                    } else if (error.status == 400) {
+                        this.modalityProcedureSavedSource.next(400);
+                    } else if (error.status == 500) {
+                        this.modalityProcedureSavedSource.next(500);
+                    }
+                }
+            )
+        } else {
+            let id = modalityProcedureModel.Id;
+            let url = "http://localhost:52125/api/modalityProcedure/update/{" + id + "}";
+            this.http.put(url, JSON.stringify(modalityProcedureModel), this.options).subscribe(
+                response => {
+                    this.modalityProcedureSavedSource.next(200);
+                },
+                error => {
+                    if (error.status == 404) {
+                        this.modalityProcedureSavedSource.next(404);
+                    } else if (error.status == 400) {
+                        this.modalityProcedureSavedSource.next(400);
+                    } else if (error.status == 500) {
+                        this.modalityProcedureSavedSource.next(500);
+                    }
+                }
+            )
+        }
+    }
+
+    // =========================
+    // Delete Modality Procedure
+    // =========================
+    public deleteModalityProcedure(id: number): void {
+        let url = "http://localhost:52125/api/modalityProcedure/delete/{" + id + "}";
+        this.http.delete(url, this.options).subscribe(
+            response => {
+                this.modalityProcedureDeletedSource.next(200);
+            },
+            error => {
+                if (error.status == 404) {
+                    this.modalityProcedureDeletedSource.next(404);
+                } else if (error.status == 400) {
+                    this.modalityProcedureDeletedSource.next(400);
+                } else if (error.status == 500) {
+                    this.modalityProcedureDeletedSource.next(500);
+                }
+            }
+        )
     }
 }

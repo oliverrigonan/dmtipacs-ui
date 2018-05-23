@@ -2,11 +2,11 @@
 <mat-dialog-content>
     <mat-form-field class="input-100-percent" appearance="outline">
         <mat-label>Modality Procedure</mat-label>
-        <input matInput />
+        <input [(ngModel)]="modalityProcedureModel.ModalityProcedure" matInput />
     </mat-form-field>
     <mat-form-field class="input-100-percent" appearance="outline">
         <mat-label>Result Template</mat-label>
-        <textarea rows="10" matInput></textarea>
+        <textarea [(ngModel)]="modalityProcedureModel.ModalityResultTemplate" rows="10" matInput></textarea>
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>

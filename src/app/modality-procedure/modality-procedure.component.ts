@@ -15,6 +15,11 @@ import { ModalityProcedureDetailDialogComponent } from '../dialog/modality-proce
 import { ObservableArray, CollectionView } from 'wijmo/wijmo';
 import { ModalityProcedureService } from './modality-procedure.service';
 
+// =====
+// Model
+// =====
+import { ModalityProcedureModel } from '../model/modality-procedure.model';
+
 @Component({
   selector: 'app-modality-procedure',
   templateUrl: './modality-procedure.component.html',
@@ -33,6 +38,18 @@ export class ModalityProcedureComponent {
   public modalityProcedureSubscription: any;
   public modalityProcedureData: ObservableArray = new ObservableArray();
   public modalityProcedureCollectionView: CollectionView = new CollectionView(this.modalityProcedureData);
+
+  // ================
+  // Initialize Model
+  // ================
+  public modalityProcedureModel: ModalityProcedureModel = {
+    Id: 0,
+    ModalityId: 0,
+    Modality: "",
+    ModalityProcedure: "",
+    ModalityResultTemplate: "",
+    DoctorId: 0
+  };
 
   // ===========
   // Constructor
@@ -70,10 +87,18 @@ export class ModalityProcedureComponent {
   // Add Modality Procedure
   // ======================
   public btnAddModalityProcedureClick(): void {
+    this.modalityProcedureModel.Id = 0;
+    this.modalityProcedureModel.ModalityId = 0;
+    this.modalityProcedureModel.Modality = "";
+    this.modalityProcedureModel.ModalityProcedure = "";
+    this.modalityProcedureModel.ModalityResultTemplate = "";
+    this.modalityProcedureModel.DoctorId = 0;
+
     let dialogRef = this.dialog.open(ModalityProcedureDetailDialogComponent, {
       width: '800px',
       data: {
-        objModalityDetailProcedureDialogTitle: "Add Modality Procedure"
+        objModalityDetailProcedureDialogTitle: "Add Modality Procedure",
+        objCurrentModalityProcedure: this.modalityProcedureModel
       }
     });
   }
@@ -82,10 +107,19 @@ export class ModalityProcedureComponent {
   // Edit Modality Procedure
   // =======================
   public btnEditModalityProcedureClick(): void {
+    let currentModalityProcedure = this.modalityProcedureCollectionView.currentItem;
+    this.modalityProcedureModel.Id = currentModalityProcedure.Id;
+    this.modalityProcedureModel.ModalityId = currentModalityProcedure.ModalityId;
+    this.modalityProcedureModel.Modality = currentModalityProcedure.Modality;
+    this.modalityProcedureModel.ModalityProcedure = currentModalityProcedure.ModalityProcedure;
+    this.modalityProcedureModel.ModalityResultTemplate = currentModalityProcedure.ModalityResultTemplate;
+    this.modalityProcedureModel.DoctorId = currentModalityProcedure.DoctorId;
+
     let dialogRef = this.dialog.open(ModalityProcedureDetailDialogComponent, {
       width: '800px',
       data: {
-        objModalityDetailProcedureDialogTitle: "Edit Modality Procedure"
+        objModalityDetailProcedureDialogTitle: "Edit Modality Procedure",
+        objCurrentModalityProcedure: this.modalityProcedureModel
       }
     });
   }

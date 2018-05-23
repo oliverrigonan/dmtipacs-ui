@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 // ========
 // Material
@@ -72,6 +73,7 @@ const routes: Routes = [
     ComponentsModule,
     NgbModule.forRoot(),
     HttpModule,
+    FormsModule,
     MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
     WjGridFilterModule,
     WjGridModule
