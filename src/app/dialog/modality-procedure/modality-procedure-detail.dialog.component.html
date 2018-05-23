@@ -1,5 +1,9 @@
 <h2 mat-dialog-title>{{ title }}</h2>
-<mat-dialog-content>
+<div align="center" [hidden]="isSpinnerHidden">
+    <mat-progress-spinner class="example-margin" [color]="'primary'" [mode]="'indeterminate'">
+    </mat-progress-spinner>
+</div>
+<mat-dialog-content [hidden]="isModalityProcedureFormDetailDialogHidden">
     <mat-form-field class="input-100-percent" appearance="outline">
         <mat-label>Modality Procedure</mat-label>
         <input [(ngModel)]="modalityProcedureModel.ModalityProcedure" matInput />

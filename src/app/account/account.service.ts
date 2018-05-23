@@ -1,6 +1,74 @@
+// =======
+// Angular
+// =======
 import { Injectable } from "@angular/core";
+import { Headers, Http, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+
+// =============
+// Async Classes
+// =============
+import { Subject, Observable } from 'rxjs';
+
+// =====
+// Model
+// =====
+import { User } from '../model/user.model';
 
 @Injectable()
 export class AccountService {
+    // ==================
+    // private properties
+    // ==================
+    private headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+    private options = new RequestOptions({ headers: this.headers });
 
+    // =================
+    // public properties
+    // =================
+    public loginSource = new Subject<number>();
+    public loginObservable = this.loginSource.asObservable();
+
+    // ================
+    // Initialize Model
+    // ================
+    public user: User = {
+        Username: "",
+        Password: "",
+        Token: ""
+    };
+
+    // ===========
+    // Constructor
+    // ===========
+    constructor(
+        private router: Router,
+        private http: Http) {
+    }
+
+    // =====
+    // Login
+    // =====
+    public login(username: string, password: string): void {
+        let url = 'http://localhost:52125/token';
+        let body = "username=" + username + "&password=" + password + "&grant_type=password";
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers })
+
+        this.http.post(url, body, options).subscribe(
+            response => {
+                localStorage.setItem('access_token', response.json().access_token);
+                localStorage.setItem('expires_in', response.json().expires_in);
+                localStorage.setItem('token_type', response.json().token_type);
+                localStorage.setItem('username', response.json().userName);
+
+                this.loginSource.next(1);
+            },
+            error => {
+                this.loginSource.next(0);
+            }
+        )
+    }
 }

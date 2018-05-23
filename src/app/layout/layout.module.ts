@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // =============
 // Wijmo Modules
@@ -22,11 +23,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
 import { WjInputModule } from 'wijmo/wijmo.angular2.input';
-
-// ======
-// Toastr
-// ======
-import { ToastrModule } from 'ngx-toastr';
 
 // ==========
 // Components
@@ -81,20 +77,14 @@ const routes: Routes = [
     NgbModule.forRoot(),
     HttpModule,
     FormsModule,
-    ToastrModule.forRoot({
-      timeOut: 5000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: false,
-      progressBar: true
-    }),
-    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
+    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule,
     WjGridFilterModule,
     WjGridModule, WjInputModule
   ],
   exports: [
     RouterModule,
     ComponentsModule,
-    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
+    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule,
     WjGridFilterModule,
     WjGridModule, WjInputModule
   ],

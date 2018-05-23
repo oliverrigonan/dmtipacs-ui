@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <br />
+    <br />
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -13,38 +14,39 @@
                         <br />
                         <br />
                         <h3>
-                            Register
+                            Create an account
                         </h3>
                         <h6 style="margin-left: 1px;">to continue to application</h6>
                     </mat-card-title>
                 </mat-card-header>
                 <br />
                 <mat-card-content>
-                    <mat-form-field class="input-100-percent" appearance="outline">
-                        <mat-label>Full Name</mat-label>
-                        <input matInput />
-                    </mat-form-field>
-                    <mat-form-field class="input-100-percent" appearance="outline">
-                        <mat-label>Username</mat-label>
-                        <input matInput />
-                    </mat-form-field>
-                    <mat-form-field class="input-100-percent" appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input matInput [type]="passwordhide ? 'text' : 'password'">
-                        <mat-icon matSuffix (click)="passwordhide = !passwordhide">{{passwordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                    </mat-form-field>
-                    <mat-form-field class="input-100-percent" appearance="outline">
-                        <mat-label>Confirm Password</mat-label>
-                        <input matInput [type]="confirmPasswordhide ? 'text' : 'password'">
-                        <mat-icon matSuffix (click)="confirmPasswordhide = !confirmPasswordhide">{{confirmPasswordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                    </mat-form-field>
+                    <form>
+                        <mat-form-field class="input-100-percent" appearance="outline">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput />
+                        </mat-form-field>
+                        <mat-form-field class="input-100-percent" appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput />
+                        </mat-form-field>
+                        <mat-form-field class="input-100-percent" appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="passwordhide ? 'text' : 'password'">
+                            <mat-icon matSuffix (click)="passwordhide = !passwordhide">{{passwordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field class="input-100-percent" appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput [type]="confirmPasswordhide ? 'text' : 'password'">
+                            <mat-icon matSuffix (click)="confirmPasswordhide = !confirmPasswordhide">{{confirmPasswordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        </mat-form-field>
+                        <br />
+                        <br />
+                        <button mat-raised-button color="primary" type="submit" style="height: 50px; font-size: 20px; width: 100%;">
+                            Register
+                        </button>
+                    </form>
                 </mat-card-content>
-                <br />
-                <button mat-raised-button color="primary" style="height: 50px; font-size: 20px; width: 100%;">
-                    Register
-                </button>
-                <br />
-                <br />
                 <div class="text-center">
                     <a routerLink="/account/login">Login to an existing account</a>
                 </div>

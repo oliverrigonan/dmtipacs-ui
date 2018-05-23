@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 // ==============
 // Custom Modules
@@ -17,6 +19,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // ========
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+
+// ======
+// Toastr
+// ======
+import { ToastrModule } from 'ngx-toastr';
 
 // =============
 // Wijmo Modules
@@ -60,6 +67,14 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
+    HttpModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+      progressBar: true
+    }),
     ComponentsModule,
     NgbModule.forRoot(),
     MatCardModule, MatInputModule,

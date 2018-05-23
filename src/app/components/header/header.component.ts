@@ -1,4 +1,13 @@
+// =======
+// Angular
+// =======
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+// ======
+// Toastr
+// ======
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +16,26 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   title = 'header';
+  currentUser = localStorage.getItem("username");
+
+  // ===========
+  // Constructor
+  // ===========
+  constructor(
+    private router: Router,
+    private toastr: ToastrService) {
+  }
+
+  // ======
+  // Logout
+  // ======
+  public btnLogout(): void {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('expires_in');
+    localStorage.removeItem('token_type');
+    localStorage.removeItem('username');
+
+    this.toastr.success("Logout successful.");
+    this.router.navigate(['/account/login']);
+  }
 }
