@@ -19,7 +19,7 @@ export class ModalityProcedureDeleteDialogComponent {
     // ================
     // Global Variables
     // ================
-    title = 'modality procedure delete dialog';
+    title = 'Delete Modality Procedure';
 
     // ========================================
     // Modality Procedure Async Task Properties
@@ -46,7 +46,7 @@ export class ModalityProcedureDeleteDialogComponent {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private modalityProcedureService: ModalityProcedureService
     ) {
-        this.title = data.objModalityDetailProcedureDialogTitle;
+        this.title = data.objModalityProcedureDeleteDialogTitle;
         this.modalityProcedureModel.Id = data.objCurrentModalityProcedure.Id;
     }
 
