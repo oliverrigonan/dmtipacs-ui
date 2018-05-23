@@ -1,1 +1,60 @@
-{{ title }}
+<div class="container-fluid">
+    <br />
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <mat-card class="example-card">
+                <br />
+                <mat-card-header>
+                    <mat-card-title style="margin-left: -10px;">
+                        <a routerLink="/home">
+                            <img src="../../assets/logo/DMTiPACS2.png" style="height: 30px;" />
+                        </a>
+                        <br />
+                        <br />
+                        <h3>
+                            Register
+                        </h3>
+                        <h6 style="margin-left: 1px;">to continue to application</h6>
+                    </mat-card-title>
+                </mat-card-header>
+                <br />
+                <mat-card-content>
+                    <mat-form-field class="input-100-percent" appearance="outline">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput />
+                    </mat-form-field>
+                    <mat-form-field class="input-100-percent" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput />
+                    </mat-form-field>
+                    <mat-form-field class="input-100-percent" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="passwordhide ? 'text' : 'password'">
+                        <mat-icon matSuffix (click)="passwordhide = !passwordhide">{{passwordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="input-100-percent" appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput [type]="confirmPasswordhide ? 'text' : 'password'">
+                        <mat-icon matSuffix (click)="confirmPasswordhide = !confirmPasswordhide">{{confirmPasswordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </mat-form-field>
+                </mat-card-content>
+                <br />
+                <button mat-raised-button color="primary" style="height: 50px; font-size: 20px; width: 100%;">
+                    Register
+                </button>
+                <br />
+                <br />
+                <div class="text-center">
+                    <a routerLink="/account/login">Login to an existing account</a>
+                </div>
+            </mat-card>
+            <br />
+            <p class="text-center" style="color: gray; font-size: 12px;">
+                Copyright © 2018 - DMTiPACS Application
+                <br /> version 3.0.Beta.20180523
+            </p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

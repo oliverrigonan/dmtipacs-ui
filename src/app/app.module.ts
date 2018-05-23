@@ -12,6 +12,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { ComponentsModule } from './components/components.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// ========
+// Material
+// ========
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+
 // =============
 // Wijmo Modules
 // =============
@@ -56,10 +62,13 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ComponentsModule,
     NgbModule.forRoot(),
+    MatCardModule, MatInputModule,
     WjGridModule
   ],
   exports: [
     RouterModule,
+    MatCardModule, MatInputModule,
+    WjGridModule
   ],
   providers: [
     AccountService
