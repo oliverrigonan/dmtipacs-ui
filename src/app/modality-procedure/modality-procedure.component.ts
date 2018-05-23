@@ -48,7 +48,7 @@ export class ModalityProcedureComponent {
     Modality: "",
     ModalityProcedure: "",
     ModalityResultTemplate: "",
-    DoctorId: 0
+    DoctorId: null
   };
 
   // ===========
@@ -92,7 +92,7 @@ export class ModalityProcedureComponent {
     this.modalityProcedureModel.Modality = "";
     this.modalityProcedureModel.ModalityProcedure = "";
     this.modalityProcedureModel.ModalityResultTemplate = "";
-    this.modalityProcedureModel.DoctorId = 0;
+    this.modalityProcedureModel.DoctorId = null;
 
     let dialogRef = this.dialog.open(ModalityProcedureDetailDialogComponent, {
       width: '800px',

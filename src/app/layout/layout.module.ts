@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 // =============
 import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
+import { WjInputModule } from 'wijmo/wijmo.angular2.input';
 
 // ==========
 // Components
@@ -76,14 +77,14 @@ const routes: Routes = [
     FormsModule,
     MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
     WjGridFilterModule,
-    WjGridModule
+    WjGridModule, WjInputModule
   ],
   exports: [
     RouterModule,
     ComponentsModule,
     MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule,
     WjGridFilterModule,
-    WjGridModule
+    WjGridModule, WjInputModule
   ],
   providers: [
     ModalityProcedureService

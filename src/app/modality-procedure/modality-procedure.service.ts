@@ -32,6 +32,8 @@ export class ModalityProcedureService {
     // ================
     public modalityProcedureSource = new Subject<ObservableArray>();
     public modalityProcedureObservable = this.modalityProcedureSource.asObservable();
+    public modalitySource = new Subject<ObservableArray>();
+    public modalityObservable = this.modalitySource.asObservable();
     public modalityProcedureSavedSource = new Subject<number>();
     public modalityProcedureSavedObservable = this.modalityProcedureSavedSource.asObservable();
     public modalityProcedureDeletedSource = new Subject<number>();
@@ -62,7 +64,8 @@ export class ModalityProcedureService {
                             ModalityId: results[i].ModalityId,
                             Modality: results[i].Modality,
                             ModalityProcedure: results[i].ModalityProcedure,
-                            ModalityResultTemplate: results[i].ModalityResultTemplate
+                            ModalityResultTemplate: results[i].ModalityResultTemplate,
+                            DoctorId: results[i].DoctorId == null ? null : results[i].DoctorId
                         });
                     }
 
@@ -71,6 +74,33 @@ export class ModalityProcedureService {
             },
             error => {
                 this.modalityProcedureSource.next(null);
+            }
+        );
+    }
+
+    // ============
+    // Get Modality
+    // ============
+    public getModality(): void {
+        let url = "http://localhost:52125/api/modality/list";
+        let modalityObservableArray = new ObservableArray();
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = new ObservableArray(response.json());
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        modalityObservableArray.push({
+                            Id: results[i].Id,
+                            Modality: results[i].Modality
+                        });
+                    }
+
+                    this.modalitySource.next(modalityObservableArray);
+                }
+            },
+            error => {
+                this.modalitySource.next(null);
             }
         );
     }
@@ -97,7 +127,7 @@ export class ModalityProcedureService {
             )
         } else {
             let id = modalityProcedureModel.Id;
-            let url = "http://localhost:52125/api/modalityProcedure/update/{" + id + "}";
+            let url = "http://localhost:52125/api/modalityProcedure/update/" + id;
             this.http.put(url, JSON.stringify(modalityProcedureModel), this.options).subscribe(
                 response => {
                     this.modalityProcedureSavedSource.next(200);
@@ -119,7 +149,7 @@ export class ModalityProcedureService {
     // Delete Modality Procedure
     // =========================
     public deleteModalityProcedure(id: number): void {
-        let url = "http://localhost:52125/api/modalityProcedure/delete/{" + id + "}";
+        let url = "http://localhost:52125/api/modalityProcedure/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.modalityProcedureDeletedSource.next(200);

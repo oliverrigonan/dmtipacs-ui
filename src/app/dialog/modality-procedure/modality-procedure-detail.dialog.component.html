@@ -8,6 +8,14 @@
         <mat-label>Result Template</mat-label>
         <textarea [(ngModel)]="modalityProcedureModel.ModalityResultTemplate" rows="10" matInput></textarea>
     </mat-form-field>
+    <div class="form-group">
+        <label>Modality</label>
+        <div>
+            <wj-combo-box #cboModality [itemsSource]="cboModalityObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'Modality'"
+                [selectedValuePath]="'Id'" [(ngModel)]="modalityProcedureModel.ModalityId">
+            </wj-combo-box>
+        </div>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions>
     <table border="0" style="width: 100%;">

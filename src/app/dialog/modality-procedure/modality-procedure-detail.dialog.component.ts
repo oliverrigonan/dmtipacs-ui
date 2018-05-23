@@ -10,6 +10,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalityProcedureModel } from '../../model/modality-procedure.model';
 import { ModalityProcedureService } from '../../modality-procedure/modality-procedure.service';
 
+import { ObservableArray } from 'wijmo/wijmo';
+
 @Component({
   selector: 'app-home',
   templateUrl: './modality-procedure-detail.dialog.component.html',
@@ -25,6 +27,8 @@ export class ModalityProcedureDetailDialogComponent {
   // Modality Procedure Async Task Properties
   // ========================================
   public modalityProcedureSubscription: any;
+  public modalitySubscription: any;
+  public cboModalityObservableArray: ObservableArray;
 
   // ================
   // Initialize Model
@@ -35,7 +39,7 @@ export class ModalityProcedureDetailDialogComponent {
     Modality: "",
     ModalityProcedure: "",
     ModalityResultTemplate: "",
-    DoctorId: 0
+    DoctorId: null
   };
 
   // ===========
@@ -53,6 +57,34 @@ export class ModalityProcedureDetailDialogComponent {
     this.modalityProcedureModel.ModalityProcedure = data.objCurrentModalityProcedure.ModalityProcedure;
     this.modalityProcedureModel.ModalityResultTemplate = data.objCurrentModalityProcedure.ModalityResultTemplate;
     this.modalityProcedureModel.DoctorId = data.objCurrentModalityProcedure.DoctorId;
+
+    this.getModalityData(this.modalityProcedureModel.ModalityId);
+  }
+
+  // =================
+  // Get Modality Data
+  // =================
+  public getModalityData(modalityId: number): void {
+    this.modalityProcedureService.getModality();
+    this.modalitySubscription = this.modalityProcedureService.modalityObservable.subscribe(
+      data => {
+        let modalityObservableArray = new ObservableArray();
+
+        if (data.length > 0) {
+          for (var i = 0; i <= data.length - 1; i++) {
+            modalityObservableArray.push({
+              Id: data[i].Id,
+              Modality: data[i].Modality,
+            });
+          }
+        }
+
+        this.cboModalityObservableArray = modalityObservableArray;
+        setTimeout(() => {
+          this.modalityProcedureModel.ModalityId = modalityId;
+        }, 50);
+      }
+    );
   }
 
   // =======================
