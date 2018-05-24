@@ -12,24 +12,33 @@
         <div class="demo-tab-content">
             <div class="card">
                 <div class="card-header">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <b>Start Date</b>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <b>Start Date</b>
+                                    </div>
+                                </div>
+                                <wj-input-date #procedureSummaryReportStartDate [(ngModel)]="procedureSummaryReportStartDateData" [ngModelOptions]="{standalone: true}"
+                                    (textChanged)="getProcedureSummaryReportData()" format="MM-dd-yyyy">
+                                </wj-input-date>
+                                &nbsp; &nbsp;
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <b>End Date</b>
+                                    </div>
+                                </div>
+                                <wj-input-date #procedureSummaryReportEndDate [(ngModel)]="procedureSummaryReportEndDateData" [ngModelOptions]="{standalone: true}"
+                                    (textChanged)="getProcedureSummaryReportData()" format="MM-dd-yyyy">
+                                </wj-input-date>
                             </div>
                         </div>
-                        <wj-input-date #procedureSummaryReportStartDate [(ngModel)]="procedureSummaryReportStartDateData" [ngModelOptions]="{standalone: true}"
-                            (textChanged)="getProcedureSummaryReportData()" format="MM-dd-yyyy">
-                        </wj-input-date>
-                        &nbsp; &nbsp;
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <b>End Date</b>
-                            </div>
+                        <div class="col-md-4" align="right">
+                            <button mat-raised-button color="warn" routerLink="/dashboard">
+                                <i class="fa fa-close"></i> Close
+                            </button>
                         </div>
-                        <wj-input-date #procedureSummaryReportEndDate [(ngModel)]="procedureSummaryReportEndDateData" [ngModelOptions]="{standalone: true}"
-                            (textChanged)="getProcedureSummaryReportData()" format="MM-dd-yyyy">
-                        </wj-input-date>
                     </div>
                 </div>
                 <div class="card-body">
@@ -73,24 +82,33 @@
         <div class="demo-tab-content">
             <div class="card">
                 <div class="card-header">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <b>Start Date</b>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <b>Start Date</b>
+                                    </div>
+                                </div>
+                                <wj-input-date #procedureDetailReportStartDate [(ngModel)]="procedureDetailReportStartDateData" [ngModelOptions]="{standalone: true}"
+                                    (textChanged)="getProcedureDetailReportData()" format="MM-dd-yyyy">
+                                </wj-input-date>
+                                &nbsp; &nbsp;
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <b>End Date</b>
+                                    </div>
+                                </div>
+                                <wj-input-date #procedureDetailReportEndDate [(ngModel)]="procedureDetailReportEndDateData" [ngModelOptions]="{standalone: true}"
+                                    (textChanged)="getProcedureDetailReportData()" format="MM-dd-yyyy">
+                                </wj-input-date>
                             </div>
                         </div>
-                        <wj-input-date #procedureDetailReportStartDate [(ngModel)]="procedureDetailReportStartDateData" [ngModelOptions]="{standalone: true}"
-                            (textChanged)="getProcedureDetailReportData()" format="MM-dd-yyyy">
-                        </wj-input-date>
-                        &nbsp; &nbsp;
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <b>End Date</b>
-                            </div>
+                        <div class="col-md-4" align="right">
+                            <button mat-raised-button color="warn" class="pull-right" routerLink="/dashboard">
+                                <i class="fa fa-close"></i> Close
+                            </button>
                         </div>
-                        <wj-input-date #procedureDetailReportEndDate [(ngModel)]="procedureDetailReportEndDateData" [ngModelOptions]="{standalone: true}"
-                            (textChanged)="getProcedureDetailReportData()" format="MM-dd-yyyy">
-                        </wj-input-date>
                     </div>
                 </div>
                 <div class="card-body">
