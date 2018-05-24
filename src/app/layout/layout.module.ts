@@ -37,6 +37,8 @@ import { BodyPartsDetailDialogComponent } from '../dialog/body-parts/body-parts-
 import { BodyPartsDeleteDialogComponent } from '../dialog/body-parts/body-parts-delete.dialog.component';
 import { UserComponent } from '../user/user.component';
 import { UserDetailComponent } from '../user/user-detail.component';
+import { UserDoctorDetailDialogComponent } from '../dialog/user/user-doctor-detail.dialog.component';
+import { UserDoctorDeleteDialogComponent } from '../dialog/user/user-doctor-delete.dialog.component';
 import { RateComponent } from '../rate/rate.component';
 import { RateDetailDialogComponent } from '../dialog/rate/rate-detail.dialog.component';
 import { RateDeleteDialogComponent } from '../dialog/rate/rate-delete.dialog.component';
@@ -75,7 +77,7 @@ const routes: Routes = [
     DashboardComponent,
     ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
     BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
-    UserComponent, UserDetailComponent,
+    UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
     RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
     ProcedureComponent,
     ReportsComponent
@@ -107,7 +109,8 @@ const routes: Routes = [
   entryComponents: [
     ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
     BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
-    RateDetailDialogComponent, RateDeleteDialogComponent
+    RateDetailDialogComponent, RateDeleteDialogComponent,
+    UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent
   ]
 })
 export class LayoutModule { }

@@ -1,7 +1,8 @@
-// =======
-// Angular
-// =======
-import { Component } from '@angular/core';
+// ====================
+// Angular and Material
+// ====================
+import { Component, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // ======
@@ -19,10 +20,17 @@ import { UserService } from './user.service';
 // ====================
 import { ObservableArray, CollectionView } from 'wijmo/wijmo';
 
+// =======
+// Dialogs
+// =======
+import { UserDoctorDetailDialogComponent } from '../dialog/user/user-doctor-detail.dialog.component';
+import { UserDoctorDeleteDialogComponent } from '../dialog/user/user-doctor-delete.dialog.component';
+
 // =====
 // Model
 // =====
 import { UserModel } from '../model/user.model';
+import { UserDoctorModel } from '../model/user-doctor.model';
 
 @Component({
   selector: 'app-user-detail',
@@ -52,6 +60,11 @@ export class UserDetailComponent {
     ContactNumber: "",
     UserTypeId: 0
   };
+  public userDoctorModel: UserDoctorModel = {
+    Id: 0,
+    UserId: 0,
+    DoctorId: 0,
+  };
 
   // =================================
   // User Doctor Async Task Properties
@@ -64,6 +77,7 @@ export class UserDetailComponent {
   // Constructor
   // ===========
   constructor(
+    public dialog: MatDialog,
     private userService: UserService,
     private toastr: ToastrService,
     private activatedRoute: ActivatedRoute
@@ -189,6 +203,96 @@ export class UserDetailComponent {
         }
       }
     );
+  }
+
+  // ===============
+  // Add User Doctor
+  // ===============
+  public btnAddUserDoctorClick(): void {
+    this.userDoctorModel.Id = 0;
+    this.userDoctorModel.UserId = this.getId();
+    this.userDoctorModel.DoctorId = 0;
+
+    let detailUserDoctorDialogRef = this.dialog.open(UserDoctorDetailDialogComponent, {
+      width: '800px',
+      data: {
+        objUserDoctorDetailDialogTitle: "Add User Doctor",
+        objCurrentUserDoctor: this.userDoctorModel
+      }
+    });
+
+    detailUserDoctorDialogRef.afterClosed().subscribe(result => {
+      if (result == 200) {
+        this.toastr.success('Save Successful!');
+        this.getUserDoctorData();
+      } else if (result == 404) {
+        this.toastr.error('Not Found!');
+      } else if (result == 400) {
+        this.toastr.error('Bad Request!');
+      } else if (result == 500) {
+        this.toastr.error('Internal Server Error!');
+      };
+    });
+  }
+
+  // ================
+  // Edit User Doctor
+  // ================
+  public btnEditUserDoctorClick(): void {
+    let currentUserDoctor = this.userDoctorCollectionView.currentItem;
+    this.userDoctorModel.Id = currentUserDoctor.Id;
+    this.userDoctorModel.UserId = this.getId();
+    this.userDoctorModel.DoctorId = currentUserDoctor.DoctorId;
+
+    let detailUserDoctorDialogRef = this.dialog.open(UserDoctorDetailDialogComponent, {
+      width: '800px',
+      data: {
+        objUserDoctorDetailDialogTitle: "Edit User Doctor",
+        objCurrentUserDoctor: this.userDoctorModel
+      }
+    });
+
+    detailUserDoctorDialogRef.afterClosed().subscribe(result => {
+      if (result == 200) {
+        this.toastr.success('Update Successful!');
+        this.getUserDoctorData();
+      } else if (result == 404) {
+        this.toastr.error('Not Found!');
+      } else if (result == 400) {
+        this.toastr.error('Bad Request!');
+      } else if (result == 500) {
+        this.toastr.error('Internal Server Error!');
+      };
+    });
+  }
+
+  // ==================
+  // Delete User Doctor
+  // ==================
+  public btnDeleteUserDoctorClick(): void {
+    let currentUserDoctor = this.userDoctorCollectionView.currentItem;
+    this.userDoctorModel.Id = currentUserDoctor.Id;
+
+    let deleteUserDoctorDialogRef = this.dialog.open(UserDoctorDeleteDialogComponent, {
+      width: '400px',
+      data: {
+        objUserDoctorDeleteDialogTitle: "Delete User Doctor",
+        objCurrentUserDoctor: this.userDoctorModel
+      }
+    });
+
+    deleteUserDoctorDialogRef.afterClosed().subscribe(result => {
+      if (result == 200) {
+        this.toastr.success('Delete Successful!');
+        this.getUserDoctorData();
+      } else if (result == 404) {
+        this.toastr.error('Not Found!');
+      } else if (result == 400) {
+        this.toastr.error('Bad Request!');
+      } else if (result == 500) {
+        this.toastr.error('Internal Server Error!');
+      };
+    });
   }
 
   // ============

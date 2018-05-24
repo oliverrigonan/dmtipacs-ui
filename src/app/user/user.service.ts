@@ -15,6 +15,7 @@ import { Subject, Observable } from 'rxjs';
 // Model
 // =====
 import { UserModel } from '../model/user.model';
+import { UserDoctorModel } from '../model/user-doctor.model';
 
 @Injectable()
 export class UserService {
@@ -40,6 +41,21 @@ export class UserService {
     public userUpdateObservable = this.userUpdateSource.asObservable();
     public userDoctorSource = new Subject<ObservableArray>();
     public userDoctorObservable = this.userDoctorSource.asObservable();
+    public doctorSource = new Subject<ObservableArray>();
+    public doctorObservable = this.doctorSource.asObservable();
+    public userDoctorSavedSource = new Subject<number>();
+    public userDoctorSavedObservable = this.userDoctorSavedSource.asObservable();
+    public userDoctorDeletedSource = new Subject<number>();
+    public userDoctorDeletedObservable = this.userDoctorDeletedSource.asObservable();
+
+    // ================
+    // Initialize Model
+    // ================
+    public userDoctorModel: UserDoctorModel = {
+        Id: 0,
+        UserId: 0,
+        DoctorId: 0,
+    };
 
     // ===========
     // Constructor
@@ -189,5 +205,95 @@ export class UserService {
                 this.userDoctorSource.next(null);
             }
         );
+    }
+
+    // ==========
+    // Get Doctor
+    // ==========
+    public getDoctor(): void {
+        let url = "http://localhost:52125/api/user/list/byUserType/2";
+        let doctorObservableArray = new ObservableArray();
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = new ObservableArray(response.json());
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        doctorObservableArray.push({
+                            Id: results[i].Id,
+                            FullName: results[i].FullName
+                        });
+                    }
+
+                    this.doctorSource.next(doctorObservableArray);
+                } else {
+                    this.doctorSource.next(null);
+                }
+            },
+            error => {
+                this.doctorSource.next(null);
+            }
+        );
+    }
+
+    // ================
+    // Save User Doctor
+    // ================
+    public saveUserDoctor(userDoctorModel: UserDoctorModel): void {
+        if (userDoctorModel.Id == 0) {
+            let url = "http://localhost:52125/api/userDoctor/add";
+            this.http.post(url, JSON.stringify(userDoctorModel), this.options).subscribe(
+                response => {
+                    this.userDoctorSavedSource.next(200);
+                },
+                error => {
+                    if (error.status == 404) {
+                        this.userDoctorSavedSource.next(404);
+                    } else if (error.status == 400) {
+                        this.userDoctorSavedSource.next(400);
+                    } else if (error.status == 500) {
+                        this.userDoctorSavedSource.next(500);
+                    }
+                }
+            )
+        } else {
+            let id = userDoctorModel.Id;
+            let url = "http://localhost:52125/api/userDoctor/update/" + id;
+            this.http.put(url, JSON.stringify(userDoctorModel), this.options).subscribe(
+                response => {
+                    this.userDoctorSavedSource.next(200);
+                },
+                error => {
+                    if (error.status == 404) {
+                        this.userDoctorSavedSource.next(404);
+                    } else if (error.status == 400) {
+                        this.userDoctorSavedSource.next(400);
+                    } else if (error.status == 500) {
+                        this.userDoctorSavedSource.next(500);
+                    }
+                }
+            )
+        }
+    }
+
+    // ==================
+    // Delete User Doctor
+    // ==================
+    public deleteUserDoctor(id: number): void {
+        let url = "http://localhost:52125/api/userDoctor/delete/" + id;
+        this.http.delete(url, this.options).subscribe(
+            response => {
+                this.userDoctorDeletedSource.next(200);
+            },
+            error => {
+                if (error.status == 404) {
+                    this.userDoctorDeletedSource.next(404);
+                } else if (error.status == 400) {
+                    this.userDoctorDeletedSource.next(400);
+                } else if (error.status == 500) {
+                    this.userDoctorDeletedSource.next(500);
+                }
+            }
+        )
     }
 }
