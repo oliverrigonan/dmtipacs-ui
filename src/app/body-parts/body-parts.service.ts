@@ -32,8 +32,6 @@ export class BodyPartsService {
     // ================
     public bodyPartsSource = new Subject<ObservableArray>();
     public bodyPartsObservable = this.bodyPartsSource.asObservable();
-    public modalitySource = new Subject<ObservableArray>();
-    public modalityObservable = this.modalitySource.asObservable();
     public bodyPartsSavedSource = new Subject<number>();
     public bodyPartsSavedObservable = this.bodyPartsSavedSource.asObservable();
     public bodyPartsDeletedSource = new Subject<number>();

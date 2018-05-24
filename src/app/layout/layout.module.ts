@@ -36,6 +36,8 @@ import { BodyPartsDetailDialogComponent } from '../dialog/body-parts/body-parts-
 import { BodyPartsDeleteDialogComponent } from '../dialog/body-parts/body-parts-delete.dialog.component';
 import { UserComponent } from '../user/user.component';
 import { RateComponent } from '../rate/rate.component';
+import { RateDetailDialogComponent } from '../dialog/rate/rate-detail.dialog.component';
+import { RateDeleteDialogComponent } from '../dialog/rate/rate-delete.dialog.component';
 import { ProcedureComponent } from '../procedure/procedure.component';
 import { ReportsComponent } from '../reports/reports.component';
 
@@ -44,6 +46,7 @@ import { ReportsComponent } from '../reports/reports.component';
 // ========
 import { ModalityProcedureService } from '../modality-procedure/modality-procedure.service'
 import { BodyPartsService } from '../body-parts/body-parts.service'
+import { RateService } from '../rate/rate.service'
 
 // ==============
 // Custom Modules
@@ -69,7 +72,7 @@ const routes: Routes = [
     ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
     BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
     UserComponent,
-    RateComponent,
+    RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
     ProcedureComponent,
     ReportsComponent
   ],
@@ -93,11 +96,13 @@ const routes: Routes = [
   ],
   providers: [
     ModalityProcedureService,
-    BodyPartsService
+    BodyPartsService,
+    RateService
   ],
   entryComponents: [
     ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
-    BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent
+    BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
+    RateDetailDialogComponent, RateDeleteDialogComponent
   ]
 })
 export class LayoutModule { }

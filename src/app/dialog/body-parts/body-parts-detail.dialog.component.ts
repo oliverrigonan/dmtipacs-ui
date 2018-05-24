@@ -24,11 +24,9 @@ export class BodyPartsDetailDialogComponent {
     title = 'modality procedure detail dialog';
 
     // ========================================
-    // Modality Procedure Async Task Properties
+    // Body Part Async Task Properties
     // ========================================
     public bodyPartsSubscription: any;
-    public modalitySubscription: any;
-    public cboModalityObservableArray: ObservableArray;
 
     // ================
     // Initialize Model
@@ -51,9 +49,9 @@ export class BodyPartsDetailDialogComponent {
         this.bodyPartsModel.BodyPart = data.objCurrentBodyParts.BodyPart;
     }
 
-    // =======================
-    // Save Modality Procedure
-    // =======================
+    // ==============
+    // Save Body Part
+    // ==============
     public btnSaveBodyPartsClick(): void {
         let btnSaveBodyParts: Element = document.getElementById("btnSaveBodyParts");
         btnSaveBodyParts.setAttribute("disabled", "disabled");
@@ -90,13 +88,12 @@ export class BodyPartsDetailDialogComponent {
         );
     }
 
-    // ===============================
-    // Close Modality Procedure Dialog
-    // ===============================
+    // ======================
+    // Close Body Part Dialog
+    // ======================
     public btnCloseBodyPartsClick(): void {
         this.detailBodyPartsDialogRef.close();
 
         if (this.bodyPartsSubscription != null) this.bodyPartsSubscription.unsubscribe();
-        if (this.modalitySubscription != null) this.modalitySubscription.unsubscribe();
     }
 }
