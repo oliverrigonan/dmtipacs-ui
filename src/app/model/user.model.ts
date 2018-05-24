@@ -1,5 +1,9 @@
-export class User {
-	Username: string;
+export class UserModel {
+    Id: number;
+	UserName: string;
     Password: string;
-    Token: String;
+    FullName: string;
+    Address: string;
+    ContactNumber: string;
+    UserTypeId: number;
 }

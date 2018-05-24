@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // =============
 // Wijmo Modules
@@ -35,6 +36,7 @@ import { BodyPartsComponent } from '../body-parts/body-parts.component';
 import { BodyPartsDetailDialogComponent } from '../dialog/body-parts/body-parts-detail.dialog.component';
 import { BodyPartsDeleteDialogComponent } from '../dialog/body-parts/body-parts-delete.dialog.component';
 import { UserComponent } from '../user/user.component';
+import { UserDetailComponent } from '../user/user-detail.component';
 import { RateComponent } from '../rate/rate.component';
 import { RateDetailDialogComponent } from '../dialog/rate/rate-detail.dialog.component';
 import { RateDeleteDialogComponent } from '../dialog/rate/rate-delete.dialog.component';
@@ -47,6 +49,7 @@ import { ReportsComponent } from '../reports/reports.component';
 import { ModalityProcedureService } from '../modality-procedure/modality-procedure.service'
 import { BodyPartsService } from '../body-parts/body-parts.service'
 import { RateService } from '../rate/rate.service'
+import { UserService } from '../user/user.service'
 
 // ==============
 // Custom Modules
@@ -61,6 +64,7 @@ const routes: Routes = [
   { path: 'modality/procedure', component: ModalityProcedureComponent },
   { path: 'body/parts', component: BodyPartsComponent },
   { path: 'user', component: UserComponent },
+  { path: 'user/detail/:id', component: UserDetailComponent },
   { path: 'rate', component: RateComponent },
   { path: 'procedure', component: ProcedureComponent },
   { path: 'reports', component: ReportsComponent }
@@ -71,7 +75,7 @@ const routes: Routes = [
     DashboardComponent,
     ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
     BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
-    UserComponent,
+    UserComponent, UserDetailComponent,
     RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
     ProcedureComponent,
     ReportsComponent
@@ -83,21 +87,22 @@ const routes: Routes = [
     NgbModule.forRoot(),
     HttpModule,
     FormsModule,
-    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule,
+    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule,
     WjGridFilterModule,
     WjGridModule, WjInputModule
   ],
   exports: [
     RouterModule,
     ComponentsModule,
-    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule,
+    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule,
     WjGridFilterModule,
     WjGridModule, WjInputModule
   ],
   providers: [
     ModalityProcedureService,
     BodyPartsService,
-    RateService
+    RateService,
+    UserService
   ],
   entryComponents: [
     ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,

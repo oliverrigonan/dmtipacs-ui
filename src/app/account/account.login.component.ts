@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 // =====
 // Model
 // =====
-import { User } from '../model/user.model';
+import { UserModel } from '../model/user.model';
 
 @Component({
   selector: 'app-account-login',
@@ -38,10 +38,14 @@ export class AccountLoginComponent {
   // ================
   // Initialize Model
   // ================
-  public user: User = {
-    Username: "",
+  public userModel: UserModel = {
+    Id: 0,
+    UserName: "",
     Password: "",
-    Token: ""
+    FullName: "",
+    Address: "",
+    ContactNumber: "",
+    UserTypeId: 0
   };
 
   // ===========
@@ -69,7 +73,7 @@ export class AccountLoginComponent {
     let inpPassword: Element = document.getElementById("inpPassword");
     inpPassword.setAttribute("disabled", "disabled");
 
-    this.accountService.login(this.user.Username, this.user.Password);
+    this.accountService.login(this.userModel.UserName, this.userModel.Password);
     this.loginSubscription = this.accountService.loginObservable.subscribe(
       data => {
         if (data == 1) {

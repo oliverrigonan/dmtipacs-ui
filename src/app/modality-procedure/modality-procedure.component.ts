@@ -72,8 +72,6 @@ export class ModalityProcedureComponent {
   public getModalityProcedureData(): void {
     this.isProgressBarHidden = false;
 
-    let projects = new ObservableArray();
-
     this.modalityProcedureService.getModalityProcedure();
     this.modalityProcedureSubscription = this.modalityProcedureService.modalityProcedureObservable.subscribe(
       data => {
@@ -116,11 +114,11 @@ export class ModalityProcedureComponent {
         this.toastr.success('Save Successful!');
         this.getModalityProcedureData();
       } else if (result == 404) {
-        this.toastr.success('Not Found!');
+        this.toastr.error('Not Found!');
       } else if (result == 400) {
-        this.toastr.success('Bad Request!');
+        this.toastr.error('Bad Request!');
       } else if (result == 500) {
-        this.toastr.success('Internal Server Error!');
+        this.toastr.error('Internal Server Error!');
       };
     });
   }
@@ -150,11 +148,11 @@ export class ModalityProcedureComponent {
         this.toastr.success('Update Successful!');
         this.getModalityProcedureData();
       } else if (result == 404) {
-        this.toastr.success('Not Found!');
+        this.toastr.error('Not Found!');
       } else if (result == 400) {
-        this.toastr.success('Bad Request!');
+        this.toastr.error('Bad Request!');
       } else if (result == 500) {
-        this.toastr.success('Internal Server Error!');
+        this.toastr.error('Internal Server Error!');
       };
     });
   }
@@ -179,11 +177,11 @@ export class ModalityProcedureComponent {
         this.toastr.success('Delete Successful!');
         this.getModalityProcedureData();
       } else if (result == 404) {
-        this.toastr.success('Not Found!');
+        this.toastr.error('Not Found!');
       } else if (result == 400) {
-        this.toastr.success('Bad Request!');
+        this.toastr.error('Bad Request!');
       } else if (result == 500) {
-        this.toastr.success('Internal Server Error!');
+        this.toastr.error('Internal Server Error!');
       };
     });
   }

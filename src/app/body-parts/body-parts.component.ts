@@ -68,8 +68,6 @@ export class BodyPartsComponent {
   public getBodyPartsData(): void {
     this.isProgressBarHidden = false;
 
-    let projects = new ObservableArray();
-
     this.bodyPartsService.getBodyParts();
     this.bodyPartsSubscription = this.bodyPartsService.bodyPartsObservable.subscribe(
       data => {
@@ -108,11 +106,11 @@ export class BodyPartsComponent {
         this.toastr.success('Save Successful!');
         this.getBodyPartsData();
       } else if (result == 404) {
-        this.toastr.success('Not Found!');
+        this.toastr.error('Not Found!');
       } else if (result == 400) {
-        this.toastr.success('Bad Request!');
+        this.toastr.error('Bad Request!');
       } else if (result == 500) {
-        this.toastr.success('Internal Server Error!');
+        this.toastr.error('Internal Server Error!');
       };
     });
   }
@@ -138,11 +136,11 @@ export class BodyPartsComponent {
         this.toastr.success('Update Successful!');
         this.getBodyPartsData();
       } else if (result == 404) {
-        this.toastr.success('Not Found!');
+        this.toastr.error('Not Found!');
       } else if (result == 400) {
-        this.toastr.success('Bad Request!');
+        this.toastr.error('Bad Request!');
       } else if (result == 500) {
-        this.toastr.success('Internal Server Error!');
+        this.toastr.error('Internal Server Error!');
       };
     });
   }
@@ -167,11 +165,11 @@ export class BodyPartsComponent {
         this.toastr.success('Delete Successful!');
         this.getBodyPartsData();
       } else if (result == 404) {
-        this.toastr.success('Not Found!');
+        this.toastr.error('Not Found!');
       } else if (result == 400) {
-        this.toastr.success('Bad Request!');
+        this.toastr.error('Bad Request!');
       } else if (result == 500) {
-        this.toastr.success('Internal Server Error!');
+        this.toastr.error('Internal Server Error!');
       };
     });
   }

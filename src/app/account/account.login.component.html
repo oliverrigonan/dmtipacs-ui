@@ -25,11 +25,11 @@
                     <form (ngSubmit)="btnLoginClick()">
                         <mat-form-field class="input-100-percent" appearance="outline">
                             <mat-label>Username</mat-label>
-                            <input required matInput id="inpUsername" [(ngModel)]="user.Username" [ngModelOptions]="{standalone: true}" />
+                            <input required matInput id="inpUsername" [(ngModel)]="userModel.UserName" [ngModelOptions]="{standalone: true}" />
                         </mat-form-field>
                         <mat-form-field class="input-100-percent" appearance="outline">
                             <mat-label>Password</mat-label>
-                            <input required matInput id="inpPassword"  placeholder="Enter your password" [(ngModel)]="user.Password" [ngModelOptions]="{standalone: true}"
+                            <input required matInput id="inpPassword" placeholder="Enter your password" [(ngModel)]="userModel.Password" [ngModelOptions]="{standalone: true}"
                                 [type]="hide ? 'text' : 'password'">
                             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                         </mat-form-field>

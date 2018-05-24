@@ -10,6 +10,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalityProcedureModel } from '../../model/modality-procedure.model';
 import { ModalityProcedureService } from '../../modality-procedure/modality-procedure.service';
 
+// =====
+// Wijmo
+// =====
 import { ObservableArray } from 'wijmo/wijmo';
 
 @Component({

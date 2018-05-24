@@ -1,1 +1,110 @@
-{{ title }}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/dashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">
+        Reports
+    </li>
+</ol>
+<mat-tab-group class="demo-tab-group">
+    <mat-tab label="Procedure Summary Report">
+        <br />
+        <div class="demo-tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <form>
+                        <div class="form-row align-items-center">
+                            <div class="col-sm-3 my-1">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Start Date</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 my-1">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">End Date</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+
+                </div>
+                <div class="card-footer">
+                    <div class="col-sm-12 btn-group" style="padding: 5px 0px 5px 0px;">
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToFirstPage()">
+                            <i class="fa fa-fast-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToPreviousPage()">
+                            <i class="fa fa-step-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" disabled style="width:100px">
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToNextPage()">
+                            <i class="fa fa-step-forward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToLastPage()">
+                            <i class="fa fa-fast-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Procedure Detail Report">
+        <br />
+        <div class="demo-tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <form>
+                        <div class="form-row align-items-center">
+                            <div class="col-sm-3 my-1">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Start Date</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 my-1">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">End Date</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+
+                </div>
+                <div class="card-footer">
+                    <div class="col-sm-12 btn-group" style="padding: 5px 0px 5px 0px;">
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToFirstPage()">
+                            <i class="fa fa-fast-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToPreviousPage()">
+                            <i class="fa fa-step-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" disabled style="width:100px">
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToNextPage()">
+                            <i class="fa fa-step-forward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="rateCollectionView.moveToLastPage()">
+                            <i class="fa fa-fast-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

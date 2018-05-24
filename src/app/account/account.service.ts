@@ -10,11 +10,6 @@ import { Router } from '@angular/router';
 // =============
 import { Subject, Observable } from 'rxjs';
 
-// =====
-// Model
-// =====
-import { User } from '../model/user.model';
-
 @Injectable()
 export class AccountService {
     // ==================
@@ -30,15 +25,6 @@ export class AccountService {
     // =================
     public loginSource = new Subject<number>();
     public loginObservable = this.loginSource.asObservable();
-
-    // ================
-    // Initialize Model
-    // ================
-    public user: User = {
-        Username: "",
-        Password: "",
-        Token: ""
-    };
 
     // ===========
     // Constructor
