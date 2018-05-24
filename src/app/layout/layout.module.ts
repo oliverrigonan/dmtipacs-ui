@@ -52,6 +52,7 @@ import { ModalityProcedureService } from '../modality-procedure/modality-procedu
 import { BodyPartsService } from '../body-parts/body-parts.service'
 import { RateService } from '../rate/rate.service'
 import { UserService } from '../user/user.service'
+import { ReportService } from '../reports/reports.service'
 
 // ==============
 // Custom Modules
@@ -104,7 +105,8 @@ const routes: Routes = [
     ModalityProcedureService,
     BodyPartsService,
     RateService,
-    UserService
+    UserService,
+    ReportService
   ],
   entryComponents: [
     ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
