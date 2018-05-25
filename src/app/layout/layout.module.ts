@@ -53,6 +53,7 @@ import { BodyPartsService } from '../body-parts/body-parts.service'
 import { RateService } from '../rate/rate.service'
 import { UserService } from '../user/user.service'
 import { ReportService } from '../reports/reports.service'
+import { ProcedureService } from '../procedure/procedure.service'
 
 // ==============
 // Custom Modules
@@ -106,7 +107,8 @@ const routes: Routes = [
     BodyPartsService,
     RateService,
     UserService,
-    ReportService
+    ReportService,
+    ProcedureService
   ],
   entryComponents: [
     ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
