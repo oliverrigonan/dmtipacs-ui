@@ -46,6 +46,8 @@ import { RateDeleteDialogComponent } from '../dialog/rate/rate-delete.dialog.com
 import { ProcedureComponent } from '../procedure/procedure.component';
 import { ProcedureDetailComponent } from '../procedure/procedure-detail.component';
 import { ProcedureDeleteDialogComponent } from '../dialog/procedure/procedure-delete.dialog.component';
+import { ProcedureResultDetailDialogComponent } from '../dialog/procedure/procedure-result-detail.dialog.component';
+import { ProcedureResultDeleteDialogComponent } from '../dialog/procedure/procedure-result-delete.dialog.component';
 import { ReportsComponent } from '../reports/reports.component';
 
 // ========
@@ -85,7 +87,7 @@ const routes: Routes = [
     BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
     UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
     RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
-    ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent,
+    ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent,
     ReportsComponent
   ],
   imports: [
@@ -119,7 +121,7 @@ const routes: Routes = [
     BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
     RateDetailDialogComponent, RateDeleteDialogComponent,
     UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
-    ProcedureDeleteDialogComponent
+    ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent
   ]
 })
 export class LayoutModule { }

@@ -15,6 +15,7 @@ import { Subject, Observable } from 'rxjs';
 // Model
 // =====
 import { ProcedureModel } from '../model/procedure.model';
+import { ProcedureResultModel } from '../model/procedure-result.model';
 
 @Injectable()
 export class ProcedureService {
@@ -32,10 +33,33 @@ export class ProcedureService {
     // ================
     public procedureSource = new Subject<ObservableArray>();
     public procedureObservable = this.procedureSource.asObservable();
+    public procedureDetailSource = new Subject<ProcedureModel>();
+    public procedureDetailObservable = this.procedureDetailSource.asObservable();
     public procedureSavedSource = new Subject<number>();
     public procedureSavedObservable = this.procedureSavedSource.asObservable();
     public procedureDeletedSource = new Subject<number>();
     public procedureDeletedObservable = this.procedureDeletedSource.asObservable();
+
+    public procedureResultSource = new Subject<ObservableArray>();
+    public procedureResultObservable = this.procedureResultSource.asObservable();
+    public procedureResultSavedSource = new Subject<number>();
+    public procedureResultSavedObservable = this.procedureResultSavedSource.asObservable();
+    public procedureResultDeletedSource = new Subject<number>();
+    public procedureResultDeletedObservable = this.procedureResultDeletedSource.asObservable();
+
+    // ================
+    // Initialize Model
+    // ================
+    public procedureResultModel: ProcedureResultModel = {
+        Id: 0,
+        ProcedureId: 0,
+        ModalityProcedureId: 0,
+        ModalityProcedure: "",
+        Result: "",
+        DoctorId: 0,
+        Doctor: "",
+        DoctorDateTime: ""
+    };
 
     // ===========
     // Constructor
@@ -80,51 +104,56 @@ export class ProcedureService {
         );
     }
 
-    // ==============
-    // Save Procedure
-    // ==============
-    public saveProcedure(procedureModel: ProcedureModel): void {
-        if (procedureModel.Id == 0) {
-            let url = "http://localhost:52125/api/userProcedure/add";
-            this.http.post(url, JSON.stringify(procedureModel), this.options).subscribe(
-                response => {
-                    this.procedureSavedSource.next(200);
-                },
-                error => {
-                    if (error.status == 404) {
-                        this.procedureSavedSource.next(404);
-                    } else if (error.status == 400) {
-                        this.procedureSavedSource.next(400);
-                    } else if (error.status == 500) {
-                        this.procedureSavedSource.next(500);
-                    }
+    // ====================
+    // Get Procedure Detail
+    // ====================
+    public getProcedureDetail(id: number): void {
+        let procedureModel: ProcedureModel;
+        let url = "http://localhost:52125/api/procedure/detail/" + id;
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var result = response.json();
+                if (result != null) {
+                    procedureModel = {
+                        Id: result.Id,
+                        TransactionNumber: result.TransactionNumber,
+                        TransactionDateTime: result.TransactionDateTime,
+                        TransactionTime: result.TransactionTime,
+                        DICOMFileName: result.DICOMFileName,
+                        PatientName: result.PatientName,
+                        Gender: result.Gender,
+                        DateOfBirth: result.DateOfBirth,
+                        Age: result.Age,
+                        Particulars: result.Particulars,
+                        ModalityId: result.ModalityId,
+                        Modality: result.Modality,
+                        BodyPartId: result.BodyPartId,
+                        BodyPart: result.BodyPart,
+                        UserId: result.UserId,
+                        User: result.User,
+                        PatientAddress: result.PatientAddress,
+                        ReferringPhysician: result.ReferringPhysician,
+                        StudyDate: result.StudyDate,
+                        HospitalNumber: result.HospitalNumber,
+                        HospitalWardNumber: result.HospitalWardNumber,
+                        StudyInstanceId: result.StudyInstanceId
+                    };
+
+                    this.procedureDetailSource.next(procedureModel);
                 }
-            )
-        } else {
-            let id = procedureModel.Id;
-            let url = "http://localhost:52125/api/userProcedure/update/" + id;
-            this.http.put(url, JSON.stringify(procedureModel), this.options).subscribe(
-                response => {
-                    this.procedureSavedSource.next(200);
-                },
-                error => {
-                    if (error.status == 404) {
-                        this.procedureSavedSource.next(404);
-                    } else if (error.status == 400) {
-                        this.procedureSavedSource.next(400);
-                    } else if (error.status == 500) {
-                        this.procedureSavedSource.next(500);
-                    }
-                }
-            )
-        }
+            },
+            error => {
+                this.procedureDetailSource.next(null);
+            }
+        );
     }
 
     // ================
     // Delete Procedure
     // ================
     public deleteProcedure(id: number): void {
-        let url = "http://localhost:52125/api/userProcedure/delete/" + id;
+        let url = "http://localhost:52125/api/procedureProcedure/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.procedureDeletedSource.next(200);
@@ -136,6 +165,103 @@ export class ProcedureService {
                     this.procedureDeletedSource.next(400);
                 } else if (error.status == 500) {
                     this.procedureDeletedSource.next(500);
+                }
+            }
+        )
+    }
+
+    // ====================
+    // Get Procedure Result
+    // ====================
+    public getProcedureResult(procedureId: number): void {
+        let url = "http://localhost:52125/api/procedureResult/list/" + procedureId;
+        let procedureResultObservableArray = new ObservableArray();
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = new ObservableArray(response.json());
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        procedureResultObservableArray.push({
+                            Id: results[i].Id,
+                            ProcedureId: results[i].ProcedureId,
+                            ModalityProcedureId: results[i].ModalityProcedureId,
+                            ModalityProcedure: results[i].ModalityProcedure,
+                            Result: results[i].Result,
+                            DoctorId: results[i].DoctorId,
+                            Doctor: results[i].Doctor,
+                            DoctorDateTime: results[i].DoctorDateTime,
+                            DoctorTime: results[i].DoctorTime
+                        });
+                    }
+
+                    this.procedureResultSource.next(procedureResultObservableArray);
+                } else {
+                    this.procedureResultSource.next(null);
+                }
+            },
+            error => {
+                this.procedureResultSource.next(null);
+            }
+        );
+    }
+
+    // =====================
+    // Save Procedure Result
+    // =====================
+    public saveProcedureResult(procedureResultModel: ProcedureResultModel): void {
+        if (procedureResultModel.Id == 0) {
+            let url = "http://localhost:52125/api/procedureResult/add";
+            this.http.post(url, JSON.stringify(procedureResultModel), this.options).subscribe(
+                response => {
+                    this.procedureResultSavedSource.next(200);
+                },
+                error => {
+                    if (error.status == 404) {
+                        this.procedureResultSavedSource.next(404);
+                    } else if (error.status == 400) {
+                        this.procedureResultSavedSource.next(400);
+                    } else if (error.status == 500) {
+                        this.procedureResultSavedSource.next(500);
+                    }
+                }
+            )
+        } else {
+            let id = procedureResultModel.Id;
+            let url = "http://localhost:52125/api/procedureResult/update/" + id;
+            this.http.put(url, JSON.stringify(procedureResultModel), this.options).subscribe(
+                response => {
+                    this.procedureResultSavedSource.next(200);
+                },
+                error => {
+                    if (error.status == 404) {
+                        this.procedureResultSavedSource.next(404);
+                    } else if (error.status == 400) {
+                        this.procedureResultSavedSource.next(400);
+                    } else if (error.status == 500) {
+                        this.procedureResultSavedSource.next(500);
+                    }
+                }
+            )
+        }
+    }
+
+    // =======================
+    // Delete Procedure Result
+    // =======================
+    public deleteProcedureResult(id: number): void {
+        let url = "http://localhost:52125/api/procedureResult/delete/" + id;
+        this.http.delete(url, this.options).subscribe(
+            response => {
+                this.procedureResultDeletedSource.next(200);
+            },
+            error => {
+                if (error.status == 404) {
+                    this.procedureResultDeletedSource.next(404);
+                } else if (error.status == 400) {
+                    this.procedureResultDeletedSource.next(400);
+                } else if (error.status == 500) {
+                    this.procedureResultDeletedSource.next(500);
                 }
             }
         )
