@@ -39,9 +39,12 @@ export class ProcedureService {
     public procedureSavedObservable = this.procedureSavedSource.asObservable();
     public procedureDeletedSource = new Subject<number>();
     public procedureDeletedObservable = this.procedureDeletedSource.asObservable();
-
     public procedureResultSource = new Subject<ObservableArray>();
     public procedureResultObservable = this.procedureResultSource.asObservable();
+    public modalityProcedureSource = new Subject<ObservableArray>();
+    public modalityProcedureObservable = this.modalityProcedureSource.asObservable();
+    public doctorSource = new Subject<ObservableArray>();
+    public doctorObservable = this.doctorSource.asObservable();
     public procedureResultSavedSource = new Subject<number>();
     public procedureResultSavedObservable = this.procedureResultSavedSource.asObservable();
     public procedureResultDeletedSource = new Subject<number>();
@@ -202,6 +205,62 @@ export class ProcedureService {
             },
             error => {
                 this.procedureResultSource.next(null);
+            }
+        );
+    }
+
+    // ======================
+    // Get Modality Procedure
+    // ======================
+    public getModalityProcedure(): void {
+        let url = "http://localhost:52125/api/modalityProcedure/list";
+        let modalityProcedureObservableArray = new ObservableArray();
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = new ObservableArray(response.json());
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        modalityProcedureObservableArray.push({
+                            Id: results[i].Id,
+                            ModalityProcedure: results[i].ModalityProcedure,
+                        });
+                    }
+
+                    this.modalityProcedureSource.next(modalityProcedureObservableArray);
+                }
+            },
+            error => {
+                this.modalityProcedureSource.next(null);
+            }
+        );
+    }
+
+    // ==========
+    // Get Doctor
+    // ==========
+    public getDoctor(): void {
+        let url = "http://localhost:52125/api/user/list/byUserType/2";
+        let doctorObservableArray = new ObservableArray();
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = new ObservableArray(response.json());
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        doctorObservableArray.push({
+                            Id: results[i].Id,
+                            FullName: results[i].FullName
+                        });
+                    }
+
+                    this.doctorSource.next(doctorObservableArray);
+                } else {
+                    this.doctorSource.next(null);
+                }
+            },
+            error => {
+                this.doctorSource.next(null);
             }
         );
     }

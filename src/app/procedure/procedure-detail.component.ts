@@ -24,6 +24,13 @@ import { ObservableArray, CollectionView } from 'wijmo/wijmo';
 // Model
 // =====
 import { ProcedureModel } from '../model/procedure.model';
+import { ProcedureResultModel } from '../model/procedure-result.model';
+
+// =======
+// Dialogs
+// =======
+import { ProcedureResultDetailDialogComponent } from '../dialog/procedure/procedure-result-detail.dialog.component';
+import { ProcedureResultDeleteDialogComponent } from '../dialog/procedure/procedure-result-delete.dialog.component';
 
 @Component({
     selector: 'app-procedure-detail',
@@ -94,6 +101,16 @@ export class ProcedureDetailComponent {
         HospitalWardNumber: "",
         StudyInstanceId: ""
     };
+    public procedureResultModel: ProcedureResultModel = {
+        Id: 0,
+        ProcedureId: 0,
+        ModalityProcedureId: 0,
+        ModalityProcedure: "",
+        Result: "",
+        DoctorId: 0,
+        Doctor: "",
+        DoctorDateTime: ""
+    };
 
     // =========================
     // Get Procedure Detail Data
@@ -151,6 +168,100 @@ export class ProcedureDetailComponent {
                 }
             }
         );
+    }
+
+    // ====================
+    // Add Procedure Result
+    // ====================
+    public btnAddProcedureResultClick(): void {
+        this.procedureResultModel.Id = 0;
+        this.procedureResultModel.ProcedureId = this.getId();
+        this.procedureResultModel.ModalityProcedureId = 0;
+        this.procedureResultModel.Result = "";
+        this.procedureResultModel.DoctorId = 0;
+
+        let detailProcedureResultDialogRef = this.dialog.open(ProcedureResultDetailDialogComponent, {
+            width: '800px',
+            data: {
+                objProcedureResultDetailDialogTitle: "Add Procedure Result",
+                objCurrentProcedureResult: this.procedureResultModel
+            }
+        });
+
+        detailProcedureResultDialogRef.afterClosed().subscribe(result => {
+            if (result == 200) {
+                this.toastr.success('Save Successful!');
+                this.getProcedureResultData();
+            } else if (result == 404) {
+                this.toastr.error('Not Found!');
+            } else if (result == 400) {
+                this.toastr.error('Bad Request!');
+            } else if (result == 500) {
+                this.toastr.error('Internal Server Error!');
+            };
+        });
+    }
+
+    // =====================
+    // Edit Procedure Result
+    // =====================
+    public btnEditProcedureResultClick(): void {
+        let currentProcedureResult = this.procedureResultCollectionView.currentItem;
+        this.procedureResultModel.Id = currentProcedureResult.Id;
+        this.procedureResultModel.ProcedureId = this.getId();
+        this.procedureResultModel.ModalityProcedureId = currentProcedureResult.ModalityProcedureId;
+        this.procedureResultModel.Result = currentProcedureResult.Result;
+        this.procedureResultModel.DoctorId = currentProcedureResult.DoctorId;
+
+        let detailProcedureResultDialogRef = this.dialog.open(ProcedureResultDetailDialogComponent, {
+            width: '800px',
+            data: {
+                objProcedureResultDetailDialogTitle: "Edit Procedure Result",
+                objCurrentProcedureResult: this.procedureResultModel
+            }
+        });
+
+        detailProcedureResultDialogRef.afterClosed().subscribe(result => {
+            if (result == 200) {
+                this.toastr.success('Update Successful!');
+                this.getProcedureResultData();
+            } else if (result == 404) {
+                this.toastr.error('Not Found!');
+            } else if (result == 400) {
+                this.toastr.error('Bad Request!');
+            } else if (result == 500) {
+                this.toastr.error('Internal Server Error!');
+            };
+        });
+    }
+
+    // =======================
+    // Delete Procedure Result
+    // =======================
+    public btnDeleteProcedureResultClick(): void {
+        let currentProcedureResult = this.procedureResultCollectionView.currentItem;
+        this.procedureResultModel.Id = currentProcedureResult.Id;
+
+        let deleteProcedureResultDialogRef = this.dialog.open(ProcedureResultDeleteDialogComponent, {
+            width: '400px',
+            data: {
+                objProcedureResultDeleteDialogTitle: "Delete Procedure Result",
+                objCurrentProcedureResult: this.procedureResultModel
+            }
+        });
+
+        deleteProcedureResultDialogRef.afterClosed().subscribe(result => {
+            if (result == 200) {
+                this.toastr.success('Delete Successful!');
+                this.getProcedureResultData();
+            } else if (result == 404) {
+                this.toastr.error('Not Found!');
+            } else if (result == 400) {
+                this.toastr.error('Bad Request!');
+            } else if (result == 500) {
+                this.toastr.error('Internal Server Error!');
+            };
+        });
     }
 
     // ============
