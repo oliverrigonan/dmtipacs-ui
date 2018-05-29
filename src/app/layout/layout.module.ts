@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 // =============
 // Wijmo Modules
@@ -43,6 +44,8 @@ import { RateComponent } from '../rate/rate.component';
 import { RateDetailDialogComponent } from '../dialog/rate/rate-detail.dialog.component';
 import { RateDeleteDialogComponent } from '../dialog/rate/rate-delete.dialog.component';
 import { ProcedureComponent } from '../procedure/procedure.component';
+import { ProcedureDetailComponent } from '../procedure/procedure-detail.component';
+import { ProcedureDeleteDialogComponent } from '../dialog/procedure/procedure-delete.dialog.component';
 import { ReportsComponent } from '../reports/reports.component';
 
 // ========
@@ -71,6 +74,7 @@ const routes: Routes = [
   { path: 'user/detail/:id', component: UserDetailComponent },
   { path: 'rate', component: RateComponent },
   { path: 'procedure', component: ProcedureComponent },
+  { path: 'procedure/detail/:id', component: ProcedureDetailComponent },
   { path: 'reports', component: ReportsComponent }
 ];
 
@@ -81,7 +85,7 @@ const routes: Routes = [
     BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
     UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
     RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
-    ProcedureComponent,
+    ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent,
     ReportsComponent
   ],
   imports: [
@@ -91,7 +95,7 @@ const routes: Routes = [
     NgbModule.forRoot(),
     HttpModule,
     FormsModule,
-    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule,
+    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule, MatGridListModule,
     WjGridFilterModule,
     WjGridModule, WjInputModule
   ],
@@ -114,7 +118,8 @@ const routes: Routes = [
     ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
     BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
     RateDetailDialogComponent, RateDeleteDialogComponent,
-    UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent
+    UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
+    ProcedureDeleteDialogComponent
   ]
 })
 export class LayoutModule { }

@@ -1,0 +1,256 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a routerLink="/dashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a routerLink="/procedure">Procedure</a>
+    </li>
+    <li class="breadcrumb-item active">
+        Procedure Detail
+    </li>
+</ol>
+<div class="card">
+    <div class="card-header">
+        <table border="0" style="width: 100%;">
+            <tr>
+                <td style="width: 95%;"></td>
+                <td style="width: 5%;" align="right">
+                    <button mat-raised-button color="warn" id="btnCloseProcedure" routerLink="/procedure">
+                        <i class="fa fa-close"></i> Close
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Transaction No.</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Date</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Time</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Patient</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Exam Taken</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Body Part</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Age</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Particulars</mat-label>
+                    <textarea rows="5" matInput></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>DICOM File</mat-label>
+                    <textarea rows="5" matInput></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Patient Address</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Referring Physician</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Study Date</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Hospital Number</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-100-percent" appearance="outline">
+                    <mat-label>Hospital Ward Number</mat-label>
+                    <input matInput />
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<mat-tab-group class="demo-tab-group">
+    <mat-tab label="Results">
+        <br />
+        <div class="demo-tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <table border="0" style="width: 100%;">
+                        <tr>
+                            <td style="width: 95%;"></td>
+                            <td style="width: 5%;" align="right">
+                                <button mat-raised-button color="primary" (click)="btnAddProcedureResultsClick()">
+                                    <i class="fa fa-plus"></i> Add
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <mat-progress-bar class="example-margin" [hidden]="isProcedureResultsProgressBarHidden" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
+                    <wj-flex-grid #procedureResultsFlexGrid [itemsSource]="procedureResultsCollectionView" [selectionMode]="3" [frozenColumns]="2">
+                        <wj-flex-grid-filter></wj-flex-grid-filter>
+                        <wj-flex-grid-column [header]="Edit" [isReadOnly]="true" [isContentHtml]="true" [width]="95">
+                            <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button mat-raised-button color="primary" class="btn-xs" (click)="btnEditProcedureResultsClick()">
+                                    <i class="fa fa-edit fa-fw"></i> Edit
+                                </button>
+                            </ng-template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="Delete" [isReadOnly]="true" [width]="96">
+                            <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button mat-raised-button color="warn" class="btn-xs" (click)="btnDeleteProcedureResultsClick()">
+                                    <i class="fa fa-trash fa-fw"></i> Delete
+                                </button>
+                            </ng-template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Doctor'" [binding]="'Doctor'" [isReadOnly]="true" [width]="'*'"></wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+                <div class="card-footer">
+                    <div class="col-sm-12 btn-group" style="padding: 5px 0px 5px 0px;">
+                        <button type="button" class="btn btn-secondary" (click)="procedureResultsCollectionView.moveToFirstPage()">
+                            <i class="fa fa-fast-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="procedureResultsCollectionView.moveToPreviousPage()">
+                            <i class="fa fa-step-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" disabled style="width:100px">
+                            <!-- {{ procedureResultsCollectionView.pageIndex + 1 }} / {{ procedureResultsCollectionView.pageCount }} -->
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="procedureResultsCollectionView.moveToNextPage()">
+                            <i class="fa fa-step-forward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="procedureResultsCollectionView.moveToLastPage()">
+                            <i class="fa fa-fast-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="History">
+        <br />
+        <div class="demo-tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <table border="0" style="width: 100%;">
+                        <tr>
+                            <td style="width: 95%;"></td>
+                            <td style="width: 5%;" align="right">
+                                <button mat-raised-button color="primary" (click)="btnViewProcedureHistoryAllImagesClick()">
+                                    <i class="fa fa-eye"></i> View All Images
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <mat-progress-bar class="example-margin" [hidden]="isProcedureHistoryProgressBarHidden" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
+                    <wj-flex-grid #procedureHistoryFlexGrid [itemsSource]="procedureHistoryCollectionView" [selectionMode]="3" [frozenColumns]="2">
+                        <wj-flex-grid-filter></wj-flex-grid-filter>
+                        <wj-flex-grid-column [header]="Edit" [isReadOnly]="true" [isContentHtml]="true" [width]="95">
+                            <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button mat-raised-button color="primary" class="btn-xs" (click)="btnEditProcedureHistoryClick()">
+                                    <i class="fa fa-edit fa-fw"></i> Edit
+                                </button>
+                            </ng-template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="Delete" [isReadOnly]="true" [width]="96">
+                            <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                                <button mat-raised-button color="warn" class="btn-xs" (click)="btnDeleteProcedureHistoryClick()">
+                                    <i class="fa fa-trash fa-fw"></i> Delete
+                                </button>
+                            </ng-template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Doctor'" [binding]="'Doctor'" [isReadOnly]="true" [width]="'*'"></wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+                <div class="card-footer">
+                    <div class="col-sm-12 btn-group" style="padding: 5px 0px 5px 0px;">
+                        <button type="button" class="btn btn-secondary" (click)="procedureHistoryCollectionView.moveToFirstPage()">
+                            <i class="fa fa-fast-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="procedureHistoryCollectionView.moveToPreviousPage()">
+                            <i class="fa fa-step-backward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" disabled style="width:100px">
+                            <!-- {{ procedureHistoryCollectionView.pageIndex + 1 }} / {{ procedureHistoryCollectionView.pageCount }} -->
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="procedureHistoryCollectionView.moveToNextPage()">
+                            <i class="fa fa-step-forward"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="procedureHistoryCollectionView.moveToLastPage()">
+                            <i class="fa fa-fast-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

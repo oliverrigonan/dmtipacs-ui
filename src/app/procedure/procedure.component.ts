@@ -3,6 +3,12 @@
 // ====================
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
+
+// =======
+// Dialogs
+// =======
+import { ProcedureDeleteDialogComponent } from '../dialog/procedure/procedure-delete.dialog.component';
 
 // ======
 // Toastr
@@ -75,7 +81,8 @@ export class ProcedureComponent {
   constructor(
     public dialog: MatDialog,
     private procedureService: ProcedureService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router,
   ) { }
 
   // ==================
@@ -105,19 +112,12 @@ export class ProcedureComponent {
     );
   }
 
-  // =============
-  // Add Procedure
-  // =============
-  public btnAddProcedureClick(): void {
-    this.procedureModel.Id = 0;
-  }
-
   // ==============
   // Edit Procedure
   // ==============
   public btnEditProcedureClick(): void {
     let currentProcedure = this.procedureCollectionView.currentItem;
-    this.procedureModel.Id = currentProcedure.Id;
+    this.router.navigate(['/procedure/detail', currentProcedure.Id]);
   }
 
   // ================
@@ -127,26 +127,26 @@ export class ProcedureComponent {
     let currentProcedure = this.procedureCollectionView.currentItem;
     this.procedureModel.Id = currentProcedure.Id;
 
-    // let deleteProcedureDialogRef = this.dialog.open(ProcedureDeleteDialogComponent, {
-    //   width: '400px',
-    //   data: {
-    //     objProcedureDeleteDialogTitle: "Delete Procedure",
-    //     objCurrentProcedure: this.procedureModel
-    //   }
-    // });
+    let deleteProcedureDialogRef = this.dialog.open(ProcedureDeleteDialogComponent, {
+      width: '400px',
+      data: {
+        objProcedureDeleteDialogTitle: "Delete Procedure",
+        objCurrentProcedure: this.procedureModel
+      }
+    });
 
-    // deleteProcedureDialogRef.afterClosed().subscribe(result => {
-    //   if (result == 200) {
-    //     this.toastr.success('Delete Successful!');
-    //     this.getProcedureData();
-    //   } else if (result == 404) {
-    //     this.toastr.error('Not Found!');
-    //   } else if (result == 400) {
-    //     this.toastr.error('Bad Request!');
-    //   } else if (result == 500) {
-    //     this.toastr.error('Internal Server Error!');
-    //   };
-    // });
+    deleteProcedureDialogRef.afterClosed().subscribe(result => {
+      if (result == 200) {
+        this.toastr.success('Delete Successful!');
+        this.getProcedureData();
+      } else if (result == 404) {
+        this.toastr.error('Not Found!');
+      } else if (result == 400) {
+        this.toastr.error('Bad Request!');
+      } else if (result == 500) {
+        this.toastr.error('Internal Server Error!');
+      };
+    });
   }
 
   // ============
