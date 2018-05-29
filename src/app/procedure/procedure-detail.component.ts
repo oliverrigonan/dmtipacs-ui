@@ -1,9 +1,10 @@
 // ====================
 // Angular and Material
 // ====================
-import { Component, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material';
 
 // ======
 // Toastr
@@ -19,6 +20,7 @@ import { ProcedureService } from './procedure.service';
 // Async Task and Wijmo
 // ====================
 import { ObservableArray, CollectionView } from 'wijmo/wijmo';
+import { WjFlexGrid } from 'wijmo/wijmo.angular2.grid';
 
 // =====
 // Model
@@ -40,6 +42,13 @@ import { ProcedureResultDeleteDialogComponent } from '../dialog/procedure/proced
 export class ProcedureDetailComponent {
     title = 'procedure detail';
     isProcedureResultProgressBarHidden = false;
+    isProcedureComparativeProgressBarHidden = false;
+
+    // =====
+    // Wijmo
+    // =====
+    @ViewChild('procedureResultFlexGrid') procedureResultFlexGrid: WjFlexGrid;
+    @ViewChild('procedureComparativeFlexGrid') procedureComparativeFlexGrid: WjFlexGrid;
 
     // ==========================
     // User Async Task Properties
@@ -52,6 +61,13 @@ export class ProcedureDetailComponent {
     public procedureResultSubscription: any;
     public procedureResultData: ObservableArray = new ObservableArray();
     public procedureResultCollectionView: CollectionView = new CollectionView(this.procedureResultData);
+
+    // ===========================================
+    // Procedure Comparative Async Task Properties
+    // ===========================================
+    public procedureComparativeSubscription: any;
+    public procedureComparativeData: ObservableArray = new ObservableArray();
+    public procedureComparativeCollectionView: CollectionView = new CollectionView(this.procedureComparativeData);
 
     // ===========
     // Constructor
@@ -264,12 +280,54 @@ export class ProcedureDetailComponent {
         });
     }
 
+    // ==============================
+    // Get Procedure Comparative Data
+    // ==============================
+    public getProcedureComparativeData(): void {
+        this.isProcedureComparativeProgressBarHidden = false;
+
+        this.procedureService.getProcedureComparative(this.getId());
+        this.procedureComparativeSubscription = this.procedureService.procedureComparativeObservable.subscribe(
+            data => {
+                if (data != null) {
+                    this.isProcedureComparativeProgressBarHidden = true;
+                    if (data.length > 0) {
+                        this.procedureComparativeData = data;
+                        this.procedureComparativeCollectionView = new CollectionView(this.procedureComparativeData);
+                        this.procedureComparativeCollectionView.pageSize = 15;
+                        this.procedureComparativeCollectionView.trackChanges = true;
+                    }
+                } else {
+                    this.isProcedureComparativeProgressBarHidden = true;
+                }
+            }
+        );
+    }
+
+    // =============
+    // On Click Tabs
+    // =============
+    public onTabClick(event: MatTabChangeEvent) {
+        if (event.index == 0) {
+            setTimeout(() => {
+                this.procedureResultCollectionView.refresh();
+                this.procedureResultFlexGrid.refresh();
+            }, 500);
+        } else if (event.index == 1) {
+            setTimeout(() => {
+                this.procedureComparativeCollectionView.refresh();
+                this.procedureComparativeFlexGrid.refresh();
+            }, 500);
+        }
+    }
+
     // ============
     // On Load Page
     // ============
     ngOnInit() {
         this.getProcedureDetailData();
         this.getProcedureResultData();
+        this.getProcedureComparativeData();
     }
 
     // ===============
@@ -278,5 +336,6 @@ export class ProcedureDetailComponent {
     ngOnDestroy() {
         if (this.procedureSubscription != null) this.procedureSubscription.unsubscribe();
         if (this.procedureResultSubscription != null) this.procedureResultSubscription.unsubscribe();
+        if (this.procedureComparativeSubscription != null) this.procedureComparativeSubscription.unsubscribe();
     }
 }

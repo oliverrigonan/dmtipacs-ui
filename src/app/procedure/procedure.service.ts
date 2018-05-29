@@ -49,6 +49,8 @@ export class ProcedureService {
     public procedureResultSavedObservable = this.procedureResultSavedSource.asObservable();
     public procedureResultDeletedSource = new Subject<number>();
     public procedureResultDeletedObservable = this.procedureResultDeletedSource.asObservable();
+    public procedureComparativeSource = new Subject<ObservableArray>();
+    public procedureComparativeObservable = this.procedureComparativeSource.asObservable();
 
     // ================
     // Initialize Model
@@ -324,5 +326,42 @@ export class ProcedureService {
                 }
             }
         )
+    }
+
+    // =========================
+    // Get Procedure Comparative
+    // =========================
+    public getProcedureComparative(id: number): void {
+        let url = "http://localhost:52125/api/procedure/list/comparative/" + id + "/24";
+        let procedureComparativeObservableArray = new ObservableArray();
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var results = new ObservableArray(response.json());
+                if (results.length > 0) {
+                    for (var i = 0; i <= results.length - 1; i++) {
+                        procedureComparativeObservableArray.push({
+                            Id: results[i].Id,
+                            TransactionNumber: results[i].TransactionNumber,
+                            TransactionDateTime: results[i].TransactionDateTime,
+                            TransactionTime: results[i].TransactionTime,
+                            PatientName: results[i].PatientName,
+                            Gender: results[i].Gender,
+                            Age: results[i].Age,
+                            Modality: results[i].Modality,
+                            BodyPart: results[i].BodyPart,
+                            Doctor: results[i].Doctor
+                        });
+                    }
+
+                    this.procedureComparativeSource.next(procedureComparativeObservableArray);
+                } else {
+                    this.procedureComparativeSource.next(null);
+                }
+            },
+            error => {
+                this.procedureComparativeSource.next(null);
+            }
+        );
     }
 }
