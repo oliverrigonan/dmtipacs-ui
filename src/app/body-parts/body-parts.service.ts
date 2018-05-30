@@ -26,6 +26,7 @@ export class BodyPartsService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
+    private defaultAPIHostURL: string = "http://localhost:52125";
 
     // ================
     // Async Properties 
@@ -49,7 +50,7 @@ export class BodyPartsService {
     // Get Body Parts
     // ==============
     public getBodyParts(): void {
-        let url = "http://localhost:52125/api/bodyParts/list";
+        let url = this.defaultAPIHostURL + "/api/bodyParts/list";
         let bodyPartsObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -77,7 +78,7 @@ export class BodyPartsService {
     // ===============
     public saveBodyParts(bodyPartsModel: BodyPartsModel): void {
         if (bodyPartsModel.Id == 0) {
-            let url = "http://localhost:52125/api/bodyParts/add";
+            let url = this.defaultAPIHostURL + "/api/bodyParts/add";
             this.http.post(url, JSON.stringify(bodyPartsModel), this.options).subscribe(
                 response => {
                     this.bodyPartsSavedSource.next(200);
@@ -94,7 +95,7 @@ export class BodyPartsService {
             )
         } else {
             let id = bodyPartsModel.Id;
-            let url = "http://localhost:52125/api/bodyParts/update/" + id;
+            let url = this.defaultAPIHostURL + "/api/bodyParts/update/" + id;
             this.http.put(url, JSON.stringify(bodyPartsModel), this.options).subscribe(
                 response => {
                     this.bodyPartsSavedSource.next(200);
@@ -116,7 +117,7 @@ export class BodyPartsService {
     // Delete Body Parts
     // =================
     public deleteBodyParts(id: number): void {
-        let url = "http://localhost:52125/api/bodyParts/delete/" + id;
+        let url = this.defaultAPIHostURL + "/api/bodyParts/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.bodyPartsDeletedSource.next(200);

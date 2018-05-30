@@ -19,6 +19,8 @@ export class AccountService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
+    private defaultAPIHostURL: string = "http://localhost:52125";
+
 
     // =================
     // public properties
@@ -38,7 +40,7 @@ export class AccountService {
     // Login
     // =====
     public login(username: string, password: string): void {
-        let url = 'http://localhost:52125/token';
+        let url = this.defaultAPIHostURL + '/token';
         let body = "username=" + username + "&password=" + password + "&grant_type=password";
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers })

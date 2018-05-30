@@ -27,6 +27,7 @@ export class UserService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
+    private defaultAPIHostURL: string = "http://localhost:52125";
 
     // ================
     // Async Properties 
@@ -69,7 +70,7 @@ export class UserService {
     // Get User
     // ========
     public getUser(): void {
-        let url = "http://localhost:52125/api/user/list";
+        let url = this.defaultAPIHostURL + "/api/user/list";
         let userObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -102,7 +103,7 @@ export class UserService {
     // ===============
     public getUserDetail(id: number): void {
         let userModel: UserModel;
-        let url = "http://localhost:52125/api/user/detail/" + id;
+        let url = this.defaultAPIHostURL + "/api/user/detail/" + id;
 
         this.http.get(url, this.options).subscribe(
             response => {
@@ -131,7 +132,7 @@ export class UserService {
     // Get User Type
     // =============
     public getUserType(): void {
-        let url = "http://localhost:52125/api/userType/list";
+        let url = this.defaultAPIHostURL + "/api/userType/list";
         let userTypeObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -159,7 +160,7 @@ export class UserService {
     // ===========
     public updateUser(userModel: UserModel): void {
         let id = userModel.Id;
-        let url = "http://localhost:52125/api/user/update/" + id;
+        let url = this.defaultAPIHostURL + "/api/user/update/" + id;
         this.http.put(url, JSON.stringify(userModel), this.options).subscribe(
             response => {
                 this.userUpdateSource.next(200);
@@ -180,7 +181,7 @@ export class UserService {
     // Get User Doctor
     // ===============
     public getUserDoctor(userId: number): void {
-        let url = "http://localhost:52125/api/userDoctor/list/" + userId;
+        let url = this.defaultAPIHostURL + "/api/userDoctor/list/" + userId;
         let userDoctorObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -211,7 +212,7 @@ export class UserService {
     // Get Doctor
     // ==========
     public getDoctor(): void {
-        let url = "http://localhost:52125/api/user/list/byUserType/2";
+        let url = this.defaultAPIHostURL + "/api/user/list/byUserType/2";
         let doctorObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -241,7 +242,7 @@ export class UserService {
     // ================
     public saveUserDoctor(userDoctorModel: UserDoctorModel): void {
         if (userDoctorModel.Id == 0) {
-            let url = "http://localhost:52125/api/userDoctor/add";
+            let url = this.defaultAPIHostURL + "/api/userDoctor/add";
             this.http.post(url, JSON.stringify(userDoctorModel), this.options).subscribe(
                 response => {
                     this.userDoctorSavedSource.next(200);
@@ -258,7 +259,7 @@ export class UserService {
             )
         } else {
             let id = userDoctorModel.Id;
-            let url = "http://localhost:52125/api/userDoctor/update/" + id;
+            let url = this.defaultAPIHostURL + "/api/userDoctor/update/" + id;
             this.http.put(url, JSON.stringify(userDoctorModel), this.options).subscribe(
                 response => {
                     this.userDoctorSavedSource.next(200);
@@ -280,7 +281,7 @@ export class UserService {
     // Delete User Doctor
     // ==================
     public deleteUserDoctor(id: number): void {
-        let url = "http://localhost:52125/api/userDoctor/delete/" + id;
+        let url = this.defaultAPIHostURL + "/api/userDoctor/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.userDoctorDeletedSource.next(200);

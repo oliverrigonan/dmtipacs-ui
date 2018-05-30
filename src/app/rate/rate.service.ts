@@ -26,6 +26,7 @@ export class RateService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
+    private defaultAPIHostURL: string = "http://localhost:52125";
 
     // ================
     // Async Properties 
@@ -51,7 +52,7 @@ export class RateService {
     // Get Rate
     // ========
     public getRate(): void {
-        let url = "http://localhost:52125/api/userRate/list";
+        let url = this.defaultAPIHostURL + "/api/userRate/list";
         let rateObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -86,7 +87,7 @@ export class RateService {
     // Get Modality Procedure
     // ======================
     public getModalityProcedure(): void {
-        let url = "http://localhost:52125/api/modalityProcedure/list";
+        let url = this.defaultAPIHostURL + "/api/modalityProcedure/list";
         let modalityProcedureObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -114,7 +115,7 @@ export class RateService {
     // =========
     public saveRate(rateModel: RateModel): void {
         if (rateModel.Id == 0) {
-            let url = "http://localhost:52125/api/userRate/add";
+            let url = this.defaultAPIHostURL + "/api/userRate/add";
             this.http.post(url, JSON.stringify(rateModel), this.options).subscribe(
                 response => {
                     this.rateSavedSource.next(200);
@@ -131,7 +132,7 @@ export class RateService {
             )
         } else {
             let id = rateModel.Id;
-            let url = "http://localhost:52125/api/userRate/update/" + id;
+            let url = this.defaultAPIHostURL + "/api/userRate/update/" + id;
             this.http.put(url, JSON.stringify(rateModel), this.options).subscribe(
                 response => {
                     this.rateSavedSource.next(200);
@@ -153,7 +154,7 @@ export class RateService {
     // Delete Rate
     // ===========
     public deleteRate(id: number): void {
-        let url = "http://localhost:52125/api/userRate/delete/" + id;
+        let url = this.defaultAPIHostURL + "/api/userRate/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.rateDeletedSource.next(200);

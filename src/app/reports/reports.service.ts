@@ -21,13 +21,14 @@ export class ReportService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
+    private defaultAPIHostURL: string = "http://localhost:52125";
 
     // ================
     // Async Properties 
     // ================
     public procedureSummaryReportSource = new Subject<ObservableArray>();
     public procedureSummaryReportObservable = this.procedureSummaryReportSource.asObservable();
-    
+
     public procedureDetailReportSource = new Subject<ObservableArray>();
     public procedureDetailReportObservable = this.procedureDetailReportSource.asObservable();
 
@@ -43,7 +44,7 @@ export class ReportService {
     // Get Procedure Summary Report
     // ============================
     public getProcedureSummaryReport(startDate: string, endDate: string): void {
-        let url = "http://localhost:52125/api/procedureSummaryReport/list/byDateRange/" + startDate + "/" + endDate + "/1";
+        let url = this.defaultAPIHostURL + "/api/procedureSummaryReport/list/byDateRange/" + startDate + "/" + endDate + "/1";
         let procedureSummaryReportObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -74,12 +75,12 @@ export class ReportService {
             }
         );
     }
-    
+
     // ===========================
     // Get Procedure Detail Report
     // ===========================
     public getProcedureDetailReport(startDate: string, endDate: string): void {
-        let url = "http://localhost:52125/api/procedureDetailReport/list/byDateRange/" + startDate + "/" + endDate + "/1";
+        let url = this.defaultAPIHostURL + "/api/procedureDetailReport/list/byDateRange/" + startDate + "/" + endDate + "/1";
         let procedureDetailReportObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(

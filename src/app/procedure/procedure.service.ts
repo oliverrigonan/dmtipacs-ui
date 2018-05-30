@@ -27,6 +27,7 @@ export class ProcedureService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
+    private defaultAPIHostURL: string = "http://localhost:52125";
 
     // ================
     // Async Properties 
@@ -78,7 +79,7 @@ export class ProcedureService {
     // Get Procedure
     // =============
     public getProcedure(startDate: string, endDate: string): void {
-        let url = "http://localhost:52125/api/procedure/list/byDateRange/" + startDate + "/" + endDate + "/24";
+        let url = this.defaultAPIHostURL + "/api/procedure/list/byDateRange/" + startDate + "/" + endDate + "/24";
         let procedureObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -114,7 +115,7 @@ export class ProcedureService {
     // ====================
     public getProcedureDetail(id: number): void {
         let procedureModel: ProcedureModel;
-        let url = "http://localhost:52125/api/procedure/detail/" + id;
+        let url = this.defaultAPIHostURL + "/api/procedure/detail/" + id;
 
         this.http.get(url, this.options).subscribe(
             response => {
@@ -158,7 +159,7 @@ export class ProcedureService {
     // Delete Procedure
     // ================
     public deleteProcedure(id: number): void {
-        let url = "http://localhost:52125/api/procedureProcedure/delete/" + id;
+        let url = this.defaultAPIHostURL + "/api/procedureProcedure/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.procedureDeletedSource.next(200);
@@ -179,7 +180,7 @@ export class ProcedureService {
     // Get Procedure Result
     // ====================
     public getProcedureResult(procedureId: number): void {
-        let url = "http://localhost:52125/api/procedureResult/list/" + procedureId;
+        let url = this.defaultAPIHostURL + "/api/procedureResult/list/" + procedureId;
         let procedureResultObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -215,7 +216,7 @@ export class ProcedureService {
     // Get Modality Procedure
     // ======================
     public getModalityProcedure(): void {
-        let url = "http://localhost:52125/api/modalityProcedure/list";
+        let url = this.defaultAPIHostURL + "/api/modalityProcedure/list";
         let modalityProcedureObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -242,7 +243,7 @@ export class ProcedureService {
     // Get Doctor
     // ==========
     public getDoctor(): void {
-        let url = "http://localhost:52125/api/user/list/byUserType/2";
+        let url = this.defaultAPIHostURL + "/api/user/list/byUserType/2";
         let doctorObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -272,7 +273,7 @@ export class ProcedureService {
     // =====================
     public saveProcedureResult(procedureResultModel: ProcedureResultModel): void {
         if (procedureResultModel.Id == 0) {
-            let url = "http://localhost:52125/api/procedureResult/add";
+            let url = this.defaultAPIHostURL + "/api/procedureResult/add";
             this.http.post(url, JSON.stringify(procedureResultModel), this.options).subscribe(
                 response => {
                     this.procedureResultSavedSource.next(200);
@@ -289,7 +290,7 @@ export class ProcedureService {
             )
         } else {
             let id = procedureResultModel.Id;
-            let url = "http://localhost:52125/api/procedureResult/update/" + id;
+            let url = this.defaultAPIHostURL + "/api/procedureResult/update/" + id;
             this.http.put(url, JSON.stringify(procedureResultModel), this.options).subscribe(
                 response => {
                     this.procedureResultSavedSource.next(200);
@@ -311,7 +312,7 @@ export class ProcedureService {
     // Delete Procedure Result
     // =======================
     public deleteProcedureResult(id: number): void {
-        let url = "http://localhost:52125/api/procedureResult/delete/" + id;
+        let url = this.defaultAPIHostURL + "/api/procedureResult/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.procedureResultDeletedSource.next(200);
@@ -332,7 +333,7 @@ export class ProcedureService {
     // Get Procedure Comparative
     // =========================
     public getProcedureComparative(id: number): void {
-        let url = "http://localhost:52125/api/procedure/list/comparative/" + id + "/24";
+        let url = this.defaultAPIHostURL + "/api/procedure/list/comparative/" + id + "/24";
         let procedureComparativeObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(

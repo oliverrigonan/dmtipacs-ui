@@ -26,6 +26,7 @@ export class ModalityProcedureService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
+    private defaultAPIHostURL: string = "http://localhost:52125";
 
     // ================
     // Async Properties 
@@ -51,7 +52,7 @@ export class ModalityProcedureService {
     // Get Modality Procedure
     // ======================
     public getModalityProcedure(): void {
-        let url = "http://localhost:52125/api/modalityProcedure/list";
+        let url = this.defaultAPIHostURL + "/api/modalityProcedure/list";
         let modalityProcedureObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -82,7 +83,7 @@ export class ModalityProcedureService {
     // Get Modality
     // ============
     public getModality(): void {
-        let url = "http://localhost:52125/api/modality/list";
+        let url = this.defaultAPIHostURL + "/api/modality/list";
         let modalityObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -110,7 +111,7 @@ export class ModalityProcedureService {
     // =======================
     public saveModalityProcedure(modalityProcedureModel: ModalityProcedureModel): void {
         if (modalityProcedureModel.Id == 0) {
-            let url = "http://localhost:52125/api/modalityProcedure/add";
+            let url = this.defaultAPIHostURL + "/api/modalityProcedure/add";
             this.http.post(url, JSON.stringify(modalityProcedureModel), this.options).subscribe(
                 response => {
                     this.modalityProcedureSavedSource.next(200);
@@ -127,7 +128,7 @@ export class ModalityProcedureService {
             )
         } else {
             let id = modalityProcedureModel.Id;
-            let url = "http://localhost:52125/api/modalityProcedure/update/" + id;
+            let url = this.defaultAPIHostURL + "/api/modalityProcedure/update/" + id;
             this.http.put(url, JSON.stringify(modalityProcedureModel), this.options).subscribe(
                 response => {
                     this.modalityProcedureSavedSource.next(200);
@@ -149,7 +150,7 @@ export class ModalityProcedureService {
     // Delete Modality Procedure
     // =========================
     public deleteModalityProcedure(id: number): void {
-        let url = "http://localhost:52125/api/modalityProcedure/delete/" + id;
+        let url = this.defaultAPIHostURL + "/api/modalityProcedure/delete/" + id;
         this.http.delete(url, this.options).subscribe(
             response => {
                 this.modalityProcedureDeletedSource.next(200);
