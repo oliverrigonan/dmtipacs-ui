@@ -1,3 +1,18 @@
+<div class="side-username">
+    <img src="../../assets/svgicons/user.svg" class="svg-icon-style-side-menu" /> &nbsp; <small class="username-text"> {{ username }} </small>
+</div>
+<mat-divider></mat-divider>
+<div class="side-facility">
+    <div class="form-group">
+        <label>Current Facility</label>
+        <div>
+            <wj-combo-box class="cbo-100" #cboFacility [itemsSource]="cboFacilityObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'UserFacility'"
+                [selectedValuePath]="'Id'">
+            </wj-combo-box>
+        </div>
+    </div>
+</div>
+<mat-divider></mat-divider>
 <mat-nav-list class="mat-nav-list-styles">
     <a mat-list-item routerLink="/dashboard">&nbsp;&nbsp;<img src="../../assets/svgicons/grid.svg" class="svg-icon-style-side-menu" /> &nbsp; Dashboard</a>
     <a mat-list-item routerLink="/modality/procedure">&nbsp;&nbsp;<img src="../../assets/svgicons/mri.svg" class="svg-icon-style-side-menu" /> &nbsp; Modality Procedure</a>
@@ -7,3 +22,4 @@
     <a mat-list-item routerLink="/procedure">&nbsp;&nbsp;<img src="../../assets/svgicons/x-rays.svg" class="svg-icon-style-side-menu" /> &nbsp; Procedure</a>
     <a mat-list-item routerLink="/reports">&nbsp;&nbsp;<img src="../../assets/svgicons/printer.svg" class="svg-icon-style-side-menu" /> &nbsp; Reports</a>
 </mat-nav-list>
+<mat-divider></mat-divider>

@@ -28,7 +28,9 @@ import { ToastrModule } from 'ngx-toastr';
 // =============
 // Wijmo Modules
 // =============
+import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
+import { WjInputModule } from 'wijmo/wijmo.angular2.input';
 
 // ==========
 // Components
@@ -59,8 +61,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    AccountLoginComponent,
-    AccountRegisterComponent,
+    AccountLoginComponent, AccountRegisterComponent,
     LayoutComponent
   ],
   imports: [
@@ -78,12 +79,12 @@ const routes: Routes = [
     ComponentsModule,
     NgbModule.forRoot(),
     MatCardModule, MatInputModule,
-    WjGridModule
+    WjGridFilterModule, WjGridModule, WjInputModule
   ],
   exports: [
     RouterModule,
     MatCardModule, MatInputModule,
-    WjGridModule
+    WjGridFilterModule, WjGridModule, WjInputModule
   ],
   providers: [
     AccountService

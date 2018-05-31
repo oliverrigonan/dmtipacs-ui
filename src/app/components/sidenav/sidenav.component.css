@@ -8,3 +8,24 @@
   margin-right: 5px;
   margin-top: 5px;
 }
+
+.side-username {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 13px;
+  padding-bottom: 15px;
+}
+
+.username-text {
+  font-size: 20px;
+}
+
+.side-facility {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 10px;
+}
+
+.cbo-100 {
+  width: 100%;
+}
