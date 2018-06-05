@@ -4,20 +4,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 // ========
 // Material
 // ========
-import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatGridListModule } from '@angular/material/grid-list';
 
 // =============
 // Wijmo Modules
@@ -26,9 +22,9 @@ import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
 import { WjInputModule } from 'wijmo/wijmo.angular2.input';
 
-// ==========
-// Components
-// ==========
+// ===================
+// Software Components
+// ===================
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ModalityProcedureComponent } from '../modality-procedure/modality-procedure.component';
 import { ModalityProcedureDetailDialogComponent } from '../dialog/modality-procedure/modality-procedure-detail.dialog.component';
@@ -60,68 +56,48 @@ import { UserService } from '../user/user.service'
 import { ReportService } from '../reports/reports.service'
 import { ProcedureService } from '../procedure/procedure.service'
 
-// ==============
-// Custom Modules
-// ==============
-import { ComponentsModule } from '../components/components.module';
-
-// ======
-// Routes
-// ======
-const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'modality/procedure', component: ModalityProcedureComponent },
-  { path: 'body/parts', component: BodyPartsComponent },
-  { path: 'user', component: UserComponent },
-  { path: 'user/detail/:id', component: UserDetailComponent },
-  { path: 'rate', component: RateComponent },
-  { path: 'procedure', component: ProcedureComponent },
-  { path: 'procedure/detail/:id', component: ProcedureDetailComponent },
-  { path: 'reports', component: ReportsComponent }
-];
-
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
-    BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
-    UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
-    RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
-    ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent,
-    ReportsComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ComponentsModule,
-    NgbModule.forRoot(),
-    HttpModule,
-    FormsModule,
-    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule, MatGridListModule,
-    WjGridFilterModule,
-    WjGridModule, WjInputModule
-  ],
-  exports: [
-    RouterModule,
-    ComponentsModule,
-    MatCardModule, MatInputModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule,
-    WjGridFilterModule,
-    WjGridModule, WjInputModule
-  ],
-  providers: [
-    ModalityProcedureService,
-    BodyPartsService,
-    RateService,
-    UserService,
-    ReportService,
-    ProcedureService
-  ],
-  entryComponents: [
-    ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
-    BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
-    RateDetailDialogComponent, RateDeleteDialogComponent,
-    UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
-    ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent
-  ]
+    declarations: [
+        DashboardComponent,
+        ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
+        BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
+        UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
+        RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
+        ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent,
+        ReportsComponent
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        MatButtonModule, MatProgressBarModule, MatInputModule, MatDialogModule, MatTabsModule,
+        WjGridFilterModule, WjGridModule, WjInputModule
+    ],
+    exports: [
+        DashboardComponent,
+        ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
+        BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
+        UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
+        RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
+        ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent,
+        ReportsComponent,
+        MatButtonModule, MatProgressBarModule, MatInputModule, MatDialogModule, MatTabsModule,
+        WjGridFilterModule, WjGridModule, WjInputModule
+    ],
+    providers: [
+        ModalityProcedureService,
+        BodyPartsService,
+        RateService,
+        UserService,
+        ReportService,
+        ProcedureService
+    ],
+    entryComponents: [
+        ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
+        BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
+        RateDetailDialogComponent, RateDeleteDialogComponent,
+        UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
+        ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent
+    ]
 })
 export class LayoutModule { }

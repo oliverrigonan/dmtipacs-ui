@@ -79,7 +79,7 @@ export class AccountLoginComponent {
         if (data == 1) {
           this.toastr.success("Login successful.");
           setTimeout(() => {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/software']);
           }, 500);
         } else if (data == 0) {
           this.toastr.error("Login failed.");
@@ -97,7 +97,7 @@ export class AccountLoginComponent {
   // ============
   ngOnInit() {
     if (localStorage.getItem("access_token") != null) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/software']);
     }
   }
 

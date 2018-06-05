@@ -1,7 +1,7 @@
 // ====================
 // Angular and Material
 // ====================
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 // Async Task and Wijmo
 // ====================
 import { ObservableArray, CollectionView } from 'wijmo/wijmo';
+import { WjFlexGrid } from 'wijmo/wijmo.angular2.grid';
 import { ProcedureService } from './procedure.service';
 
 // =====
@@ -50,7 +51,14 @@ export class ProcedureComponent {
   // ===========================
   public procedureStartDateData = new Date();
   public procedureEndDateData = new Date();
+  public cboProcedureShowNumberOfRows: ObservableArray = new ObservableArray();
+  public procedureNumberOfPageIndex: number;
 
+  // =====
+  // Wijmo
+  // =====
+  @ViewChild('procedureFlexGrid') procedureFlexGrid: WjFlexGrid;
+  
   // ================
   // Initialize Model
   // ================
@@ -89,6 +97,49 @@ export class ProcedureComponent {
     private router: Router,
   ) { }
 
+  // ================================
+  // Create Combo Show Number of Rows
+  // ================================
+  public createCboShowNumberOfRows(): void {
+    for (var i = 0; i <= 4; i++) {
+      var rows = 0;
+      var rowsString = "";
+
+      if (i == 0) {
+        rows = 15;
+        rowsString = "Show 15 Rows";
+      } else if (i == 1) {
+        rows = 50;
+        rowsString = "Show 50 Rows";
+      } else if (i == 2) {
+        rows = 100;
+        rowsString = "Show 100 Rows";
+      } else if (i == 3) {
+        rows = 150;
+        rowsString = "Show 150 Rows";
+      } else {
+        rows = 200;
+        rowsString = "Show 200 Rows";
+      }
+
+      this.cboProcedureShowNumberOfRows.push({
+        rowNumber: rows,
+        rowString: rowsString
+      });
+    }
+  }
+
+  // ===================================================
+  // Combo Show Number of Rows On Selected Index Changed
+  // ===================================================
+  public cboShowNumberOfRowsOnSelectedIndexChanged(selectedValue: any): void {
+    this.procedureNumberOfPageIndex = selectedValue;
+    
+    this.procedureCollectionView.pageSize = this.procedureNumberOfPageIndex;
+    this.procedureCollectionView.refresh();
+    this.procedureFlexGrid.refresh();
+  }
+
   // ==================
   // Get Procedure Data
   // ==================
@@ -106,7 +157,7 @@ export class ProcedureComponent {
           if (data.length > 0) {
             this.procedureData = data;
             this.procedureCollectionView = new CollectionView(this.procedureData);
-            this.procedureCollectionView.pageSize = 15;
+            this.procedureCollectionView.pageSize = this.procedureNumberOfPageIndex;
             this.procedureCollectionView.trackChanges = true;
           }
         } else {
@@ -121,7 +172,7 @@ export class ProcedureComponent {
   // ==============
   public btnEditProcedureClick(): void {
     let currentProcedure = this.procedureCollectionView.currentItem;
-    this.router.navigate(['/procedure/detail', currentProcedure.Id]);
+    this.router.navigate(['/software/procedure/detail', currentProcedure.Id]);
   }
 
   // ================
@@ -157,6 +208,7 @@ export class ProcedureComponent {
   // On Load Page
   // ============
   ngOnInit() {
+    this.createCboShowNumberOfRows();
     this.getProcedureData();
   }
 

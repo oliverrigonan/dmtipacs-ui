@@ -4,33 +4,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-
-// ==============
-// Custom Modules
-// ==============
-import { ComponentsModule } from './components/components.module'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // ========
 // Material
 // ========
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
+// ==============
+// Custom Modules
+// ==============
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // ======
 // Toastr
 // ======
 import { ToastrModule } from 'ngx-toastr';
-
-// =============
-// Wijmo Modules
-// =============
-import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
-import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
-import { WjInputModule } from 'wijmo/wijmo.angular2.input';
 
 // ==========
 // Components
@@ -46,16 +43,16 @@ import { LayoutComponent } from './layout/layout.component';
 // ========
 import { AccountService } from './account/account.service';
 
-// ======
-// Routes
-// ======
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'account/login', component: AccountLoginComponent },
-  { path: 'account/register', component: AccountRegisterComponent },
-  { path: '', component: LayoutComponent, children: [{ path: '', loadChildren: './layout/layout.module#LayoutModule' }] },
-];
+// ===========
+// App Routing
+// ===========
+import { AppRoutingModule } from './app-routing.module';
+
+// ==============
+// Custom Modules
+// ==============
+import { ComponentsModule } from './components/components.module'
+import { LayoutModule } from './layout/layout.module'
 
 @NgModule({
   declarations: [
@@ -67,7 +64,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     HttpModule,
     FormsModule,
     ToastrModule.forRoot({
@@ -77,14 +74,24 @@ const routes: Routes = [
       progressBar: true
     }),
     ComponentsModule,
+    LayoutModule,
     NgbModule.forRoot(),
-    MatCardModule, MatInputModule,
-    WjGridFilterModule, WjGridModule, WjInputModule
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   exports: [
-    RouterModule,
-    MatCardModule, MatInputModule,
-    WjGridFilterModule, WjGridModule, WjInputModule
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   providers: [
     AccountService

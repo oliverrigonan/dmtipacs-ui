@@ -90,7 +90,7 @@ export class UserComponent {
   // =========
   public btnEditUserClick(): void {
     let currentUser = this.userCollectionView.currentItem;
-    this.router.navigate(['/user/detail', currentUser.Id]);
+    this.router.navigate(['/software/user/detail', currentUser.Id]);
   }
 
   // ============

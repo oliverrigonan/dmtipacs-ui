@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">
-        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/software/dashboard">Dashboard</a>
     </li>
     <li class="breadcrumb-item active">
         Procedure
@@ -29,10 +29,19 @@
                         <wj-input-date #procedureEndDate [(ngModel)]="procedureEndDateData" [ngModelOptions]="{standalone: true}" (textChanged)="getProcedureData()"
                             format="MM-dd-yyyy">
                         </wj-input-date>
+                        &nbsp; &nbsp;
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <b>Show</b>
+                            </div>
+                        </div>
+                        <wj-combo-box #cboProcedureNumberOfRows [itemsSource]="cboProcedureShowNumberOfRows" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'rowString'"
+                            [selectedValuePath]="'rowNumber'" (selectedIndexChanged)="cboShowNumberOfRowsOnSelectedIndexChanged(cboProcedureNumberOfRows.selectedValue)">
+                        </wj-combo-box>
                     </div>
                 </td>
                 <td style="width: 5%;" align="right">
-                    <button mat-raised-button color="warn" routerLink="/dashboard">
+                    <button mat-raised-button color="warn" routerLink="/software/dashboard">
                         <i class="fa fa-close"></i> Close
                     </button>
                 </td>

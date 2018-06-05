@@ -8,18 +8,8 @@ import { RouterModule, Routes } from '@angular/router';
 // ========
 // Material
 // ========
-import { MatButtonModule } from '@angular/material';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-
-// =========
-// Component
-// =========
-import { HeaderComponent } from '../components/header/header.component';
-import { FooterComponent } from '../components/footer/footer.component';
-import { SidenavComponent } from '../components/sidenav/sidenav.component';
 
 // =============
 // Wijmo Modules
@@ -27,6 +17,13 @@ import { SidenavComponent } from '../components/sidenav/sidenav.component';
 import { WjGridFilterModule } from 'wijmo/wijmo.angular2.grid.filter';
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
 import { WjInputModule } from 'wijmo/wijmo.angular2.input';
+
+// =========
+// Component
+// =========
+import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
+import { SidenavComponent } from '../components/sidenav/sidenav.component';
 
 // ========
 // Services
@@ -42,18 +39,18 @@ import { ComponentsService } from './components.service';
   imports: [
     CommonModule,
     RouterModule,
-    MatButtonModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule,
+    MatDividerModule, MatListModule,
     WjGridFilterModule, WjGridModule, WjInputModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SidenavComponent,
-    MatButtonModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule,
+    MatDividerModule, MatListModule,
     WjGridFilterModule, WjGridModule, WjInputModule
   ],
   providers: [
     ComponentsService
-  ],
+  ]
 })
 export class ComponentsModule { }
