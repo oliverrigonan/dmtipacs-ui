@@ -34,6 +34,8 @@ export class HeaderComponent {
     localStorage.removeItem('expires_in');
     localStorage.removeItem('token_type');
     localStorage.removeItem('username');
+    localStorage.removeItem('current_facility_id');
+    localStorage.removeItem('current_facility');
 
     this.toastr.success("Logout successful.");
     this.router.navigate(['/account/login']);

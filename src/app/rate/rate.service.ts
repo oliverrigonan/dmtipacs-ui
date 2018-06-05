@@ -75,6 +75,8 @@ export class RateService {
                     }
 
                     this.rateSource.next(rateObservableArray);
+                } else {
+                    this.rateSource.next(null);
                 }
             },
             error => {

@@ -79,7 +79,8 @@ export class ProcedureService {
     // Get Procedure
     // =============
     public getProcedure(startDate: string, endDate: string): void {
-        let url = this.defaultAPIHostURL + "/api/procedure/list/byDateRange/" + startDate + "/" + endDate + "/24";
+        let facilityId: number = parseInt(localStorage.getItem("current_facility_id"));
+        let url = this.defaultAPIHostURL + "/api/procedure/list/byDateRange/" + startDate + "/" + endDate + "/" + facilityId;
         let procedureObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -102,6 +103,8 @@ export class ProcedureService {
                     }
 
                     this.procedureSource.next(procedureObservableArray);
+                } else {
+                    this.procedureSource.next(null);
                 }
             },
             error => {
@@ -231,6 +234,8 @@ export class ProcedureService {
                     }
 
                     this.modalityProcedureSource.next(modalityProcedureObservableArray);
+                } else {
+                    this.modalityProcedureSource.next(null);
                 }
             },
             error => {

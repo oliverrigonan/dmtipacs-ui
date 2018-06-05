@@ -4,6 +4,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 // ========
 // Material
@@ -39,6 +40,7 @@ import { ComponentsService } from './components.service';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     MatDividerModule, MatListModule,
     WjGridFilterModule, WjGridModule, WjInputModule
   ],

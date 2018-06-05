@@ -44,7 +44,8 @@ export class ReportService {
     // Get Procedure Summary Report
     // ============================
     public getProcedureSummaryReport(startDate: string, endDate: string): void {
-        let url = this.defaultAPIHostURL + "/api/procedureSummaryReport/list/byDateRange/" + startDate + "/" + endDate + "/1";
+        let facilityId: number = parseInt(localStorage.getItem("current_facility_id"));
+        let url = this.defaultAPIHostURL + "/api/procedureSummaryReport/list/byDateRange/" + startDate + "/" + endDate + "/" + facilityId;
         let procedureSummaryReportObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(

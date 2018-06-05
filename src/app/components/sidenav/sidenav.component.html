@@ -1,25 +1,44 @@
 <div class="side-username">
-    <img src="../../assets/svgicons/user.svg" class="svg-icon-style-side-menu" /> &nbsp; <small class="username-text"> {{ username }} </small>
+    <table style="width: 100%;" border="0">
+        <tr>
+            <td style="width: 11.5%;">
+                <img src="../../assets/svgicons/user.svg" class="svg-icon-style-side-menu" />
+            </td>
+            <td style="width: 88.5%; font-size: 16px; padding-top: 3.5px;">
+                {{ username }}
+            </td>
+        </tr>
+    </table>
 </div>
 <mat-divider></mat-divider>
 <div class="side-facility">
     <div class="form-group">
         <label>Current Facility</label>
-        <div>
-            <wj-combo-box class="cbo-100" #cboFacility [itemsSource]="cboFacilityObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'UserFacility'"
-                [selectedValuePath]="'Id'">
-            </wj-combo-box>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" disabled [(ngModel)]="currentFacility" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="launchFacilityDialog()">
+                    <i class="fa fa-building"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
 <mat-divider></mat-divider>
 <mat-nav-list class="mat-nav-list-styles">
-    <a mat-list-item routerLink="/software/dashboard">&nbsp;&nbsp;<img src="../../assets/svgicons/grid.svg" class="svg-icon-style-side-menu" /> &nbsp; Dashboard</a>
-    <a mat-list-item routerLink="/software/modality/procedure">&nbsp;&nbsp;<img src="../../assets/svgicons/mri.svg" class="svg-icon-style-side-menu" /> &nbsp; Modality Procedure</a>
-    <a mat-list-item routerLink="/software/body/parts">&nbsp;&nbsp;<img src="../../assets/svgicons/broken-arm.svg" class="svg-icon-style-side-menu" /> &nbsp; Body Parts</a>
-    <a mat-list-item routerLink="/software/user">&nbsp;&nbsp;<img src="../../assets/svgicons/key.svg" class="svg-icon-style-side-menu" /> &nbsp; User</a>
-    <a mat-list-item routerLink="/software/rate">&nbsp;&nbsp;<img src="../../assets/svgicons/favorite.svg" class="svg-icon-style-side-menu" /> &nbsp; Rate</a>
-    <a mat-list-item routerLink="/software/procedure">&nbsp;&nbsp;<img src="../../assets/svgicons/x-rays.svg" class="svg-icon-style-side-menu" /> &nbsp; Procedure</a>
-    <a mat-list-item routerLink="/software/reports">&nbsp;&nbsp;<img src="../../assets/svgicons/printer.svg" class="svg-icon-style-side-menu" /> &nbsp; Reports</a>
+    <a mat-list-item routerLink="/software/dashboard">&nbsp;&nbsp;
+        <img src="../../assets/svgicons/grid.svg" class="svg-icon-style-side-menu" /> &nbsp; Dashboard</a>
+    <a mat-list-item routerLink="/software/modality/procedure">&nbsp;&nbsp;
+        <img src="../../assets/svgicons/mri.svg" class="svg-icon-style-side-menu" /> &nbsp; Modality Procedure</a>
+    <a mat-list-item routerLink="/software/body/parts">&nbsp;&nbsp;
+        <img src="../../assets/svgicons/broken-arm.svg" class="svg-icon-style-side-menu" /> &nbsp; Body Parts</a>
+    <a mat-list-item routerLink="/software/user">&nbsp;&nbsp;
+        <img src="../../assets/svgicons/key.svg" class="svg-icon-style-side-menu" /> &nbsp; User</a>
+    <a mat-list-item routerLink="/software/rate">&nbsp;&nbsp;
+        <img src="../../assets/svgicons/favorite.svg" class="svg-icon-style-side-menu" /> &nbsp; Rate</a>
+    <a mat-list-item routerLink="/software/procedure">&nbsp;&nbsp;
+        <img src="../../assets/svgicons/x-rays.svg" class="svg-icon-style-side-menu" /> &nbsp; Procedure</a>
+    <a mat-list-item routerLink="/software/reports">&nbsp;&nbsp;
+        <img src="../../assets/svgicons/printer.svg" class="svg-icon-style-side-menu" /> &nbsp; Reports</a>
 </mat-nav-list>
 <mat-divider></mat-divider>

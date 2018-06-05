@@ -2,6 +2,7 @@
 // Angular
 // =======
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 // =======
 // Service
@@ -18,6 +19,11 @@ import { ToastrService } from 'ngx-toastr';
 // ====================
 import { ObservableArray, CollectionView } from 'wijmo/wijmo';
 
+// =======
+// Dialogs
+// =======
+import { FacilityDialogComponent } from '../../dialog/facility/facility.dialog.component';
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -26,49 +32,44 @@ import { ObservableArray, CollectionView } from 'wijmo/wijmo';
 export class SidenavComponent {
   title = 'sidenav';
   username = localStorage.getItem("username");
-
-  // ========================================
-  // Modality Procedure Async Task Properties
-  // ========================================
-  public facilitySubscription: any;
-  public cboFacilityObservableArray: ObservableArray;
+  currentFacilityId: number = 0;
+  currentFacility: string;
 
   // ===========
   // Constructor
   // ===========
   constructor(
     private componentsService: ComponentsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dialog: MatDialog
   ) { }
 
-  // =================
-  // Get Facility Data
-  // =================
-  public getFacilityData(): void {
-    this.componentsService.getFacilities();
-    this.facilitySubscription = this.componentsService.facilitiesObservable.subscribe(
-      data => {
-        let facilityObservableArray = new ObservableArray();
-
-        if (data.length > 0) {
-          for (var i = 0; i <= data.length - 1; i++) {
-            facilityObservableArray.push({
-              Id: data[i].Id,
-              UserId: data[i].UserId,
-              UserFacility: data[i].UserFacility
-            });
-          }
-        }
-
-        this.cboFacilityObservableArray = facilityObservableArray;
+  // ======================
+  // Launch Facility Dialog
+  // ======================
+  public launchFacilityDialog(): void {
+    let detailFacilityDialogRef = this.dialog.open(FacilityDialogComponent, {
+      width: '400px',
+      data: {
+        objFacilityTitle: "Choose Facility",
       }
-    );
+    });
+    detailFacilityDialogRef.disableClose = true;
+    detailFacilityDialogRef.afterClosed().subscribe(result => {
+      this.currentFacility = result;
+    });
   }
 
   // ============
   // On Load Page
   // ============
   ngOnInit() {
-    this.getFacilityData();
+    if (localStorage.getItem("current_facility_id") == null || localStorage.getItem("current_facility") == null) {
+      setTimeout(() => {
+        this.launchFacilityDialog();
+      }, 100);
+    } else {
+      this.currentFacility = localStorage.getItem("current_facility");
+    }
   }
 }

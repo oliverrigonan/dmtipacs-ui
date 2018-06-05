@@ -25,6 +25,7 @@ import { WjInputModule } from 'wijmo/wijmo.angular2.input';
 // ===================
 // Software Components
 // ===================
+import { FacilityDialogComponent } from '../dialog/facility/facility.dialog.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ModalityProcedureComponent } from '../modality-procedure/modality-procedure.component';
 import { ModalityProcedureDetailDialogComponent } from '../dialog/modality-procedure/modality-procedure-detail.dialog.component';
@@ -49,15 +50,17 @@ import { ReportsComponent } from '../reports/reports.component';
 // ========
 // Services
 // ========
-import { ModalityProcedureService } from '../modality-procedure/modality-procedure.service'
-import { BodyPartsService } from '../body-parts/body-parts.service'
-import { RateService } from '../rate/rate.service'
-import { UserService } from '../user/user.service'
-import { ReportService } from '../reports/reports.service'
-import { ProcedureService } from '../procedure/procedure.service'
+import { LayoutService } from '../layout/layout.service';
+import { ModalityProcedureService } from '../modality-procedure/modality-procedure.service';
+import { BodyPartsService } from '../body-parts/body-parts.service';
+import { RateService } from '../rate/rate.service';
+import { UserService } from '../user/user.service';
+import { ReportService } from '../reports/reports.service';
+import { ProcedureService } from '../procedure/procedure.service';
 
 @NgModule({
     declarations: [
+        FacilityDialogComponent,
         DashboardComponent,
         ModalityProcedureComponent, ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
         BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
@@ -85,6 +88,7 @@ import { ProcedureService } from '../procedure/procedure.service'
         WjGridFilterModule, WjGridModule, WjInputModule
     ],
     providers: [
+        LayoutService,
         ModalityProcedureService,
         BodyPartsService,
         RateService,
@@ -93,6 +97,7 @@ import { ProcedureService } from '../procedure/procedure.service'
         ProcedureService
     ],
     entryComponents: [
+        FacilityDialogComponent,
         ModalityProcedureDetailDialogComponent, ModalityProcedureDeleteDialogComponent,
         BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
         RateDetailDialogComponent, RateDeleteDialogComponent,

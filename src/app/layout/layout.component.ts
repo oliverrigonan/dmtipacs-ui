@@ -40,6 +40,7 @@ export class LayoutComponent {
       this.router.navigate(['/account/login']);
     }
   }
+
   // ===============
   // On Destory Page
   // ===============
