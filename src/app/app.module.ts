@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes, RouteReuseStrategy } from '@angular/router';
 
 // ========
 // Material
@@ -54,6 +55,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module'
 import { LayoutModule } from './layout/layout.module'
 
+// ===============
+// Custom TS Files
+// ===============
+import { AppRouteReuseStrategy } from './app-route-reuse-strategy'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +100,8 @@ import { LayoutModule } from './layout/layout.module'
     MatSidenavModule
   ],
   providers: [
-    AccountService
+    AccountService,
+    { provide: RouteReuseStrategy, useClass: AppRouteReuseStrategy }
   ],
   bootstrap: [
     AppComponent

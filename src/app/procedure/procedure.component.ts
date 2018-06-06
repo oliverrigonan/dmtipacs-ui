@@ -179,6 +179,10 @@ export class ProcedureComponent {
   // Get Procedure Data
   // ==================
   public getProcedureData(): void {
+    let refreshProcedureData: Element = document.getElementById("refreshProcedureData");
+    refreshProcedureData.setAttribute("disabled", "disabled");
+    refreshProcedureData.innerHTML = "<i class='fa fa-refresh'></i>";
+
     this.isProgressBarHidden = false;
 
     let dateStart = [this.procedureStartDateData.getFullYear(), this.procedureStartDateData.getMonth() + 1, this.procedureStartDateData.getDate()].join('-');
@@ -198,6 +202,9 @@ export class ProcedureComponent {
         } else {
           this.isProgressBarHidden = true;
         }
+
+        refreshProcedureData.removeAttribute("disabled");
+        refreshProcedureData.innerHTML = "<i class='fa fa-refresh'></i>";
       }
     );
   }

@@ -64,6 +64,10 @@ export class ReportsComponent {
   public isProcedureDetailReportStartDateSelected: Boolean = false;
   public isProcedureDetailReportEndDateClicked: Boolean = false;
   public isProcedureDetailReportEndDateSelected: Boolean = false;
+  public cboProcedureSummaryReportShowNumberOfRows: ObservableArray = new ObservableArray();
+  public cboProcedureDetailReportShowNumberOfRows: ObservableArray = new ObservableArray();
+  public procedureSummaryReportNumberOfPageIndex: number;
+  public procedureDetailReportNumberOfPageIndex: number;
 
   // ===========
   // Constructor
@@ -134,11 +138,52 @@ export class ReportsComponent {
     }
   }
 
+  // ================================
+  // Create Combo Show Number of Rows
+  // ================================
+  public createCboShowNumberOfRows(): void {
+    for (var i = 0; i <= 4; i++) {
+      var rows = 0;
+      var rowsString = "";
+
+      if (i == 0) {
+        rows = 15;
+        rowsString = "Show 15 Rows";
+      } else if (i == 1) {
+        rows = 50;
+        rowsString = "Show 50 Rows";
+      } else if (i == 2) {
+        rows = 100;
+        rowsString = "Show 100 Rows";
+      } else if (i == 3) {
+        rows = 150;
+        rowsString = "Show 150 Rows";
+      } else {
+        rows = 200;
+        rowsString = "Show 200 Rows";
+      }
+
+      this.cboProcedureSummaryReportShowNumberOfRows.push({
+        rowNumber: rows,
+        rowString: rowsString
+      });
+
+      this.cboProcedureDetailReportShowNumberOfRows.push({
+        rowNumber: rows,
+        rowString: rowsString
+      });
+    }
+  }
+
   // =================================
   // Get Procedure Summary Report Data
   // =================================
   public getProcedureSummaryReportData(): void {
     if (this.procedureSummaryReportSubscription != null) this.procedureSummaryReportSubscription.unsubscribe();
+    let btnRefreshProcedureSummaryReportData: Element = document.getElementById("btnRefreshProcedureSummaryReportData");
+    btnRefreshProcedureSummaryReportData.setAttribute("disabled", "disabled");
+    btnRefreshProcedureSummaryReportData.innerHTML = "<i class='fa fa-refresh'></i>";
+
     this.isProcedureSummaryReportProgressBarHidden = false;
 
     let dateStart = [this.procedureSummaryReportStartDateData.getFullYear(), this.procedureSummaryReportStartDateData.getMonth() + 1, this.procedureSummaryReportStartDateData.getDate()].join('-');
@@ -152,14 +197,28 @@ export class ReportsComponent {
           if (data.length > 0) {
             this.procedureSummaryReportData = data;
             this.procedureSummaryReportCollectionView = new CollectionView(this.procedureSummaryReportData);
-            this.procedureSummaryReportCollectionView.pageSize = 15;
+            this.procedureSummaryReportCollectionView.pageSize = this.procedureSummaryReportNumberOfPageIndex;
             this.procedureSummaryReportCollectionView.trackChanges = true;
           }
         } else {
           this.isProcedureSummaryReportProgressBarHidden = true;
         }
+
+        btnRefreshProcedureSummaryReportData.removeAttribute("disabled");
+        btnRefreshProcedureSummaryReportData.innerHTML = "<i class='fa fa-refresh'></i>";
       }
     );
+  }
+
+  // =============================================================================
+  // Combo Show Number of Rows On Selected Index Changed: Procedure Summary Report
+  // =============================================================================
+  public cboProcedureSummaryReportShowNumberOfRowsOnSelectedIndexChanged(selectedValue: any): void {
+    this.procedureSummaryReportNumberOfPageIndex = selectedValue;
+
+    this.procedureSummaryReportCollectionView.pageSize = this.procedureSummaryReportNumberOfPageIndex;
+    this.procedureSummaryReportCollectionView.refresh();
+    this.procedureSummaryReportFlexGrid.refresh();
   }
 
   // ================================
@@ -167,6 +226,10 @@ export class ReportsComponent {
   // ================================
   public getProcedureDetailReportData(): void {
     if (this.procedureDetailReportSubscription != null) this.procedureDetailReportSubscription.unsubscribe();
+    let btnRefreshProcedureDetailReportData: Element = document.getElementById("btnRefreshProcedureDetailReportData");
+    btnRefreshProcedureDetailReportData.setAttribute("disabled", "disabled");
+    btnRefreshProcedureDetailReportData.innerHTML = "<i class='fa fa-refresh'></i>";
+
     this.isProcedureDetailReportProgressBarHidden = false;
 
     let dateStart = [this.procedureDetailReportStartDateData.getFullYear(), this.procedureDetailReportStartDateData.getMonth() + 1, this.procedureDetailReportStartDateData.getDate()].join('-');
@@ -180,14 +243,28 @@ export class ReportsComponent {
           if (data.length > 0) {
             this.procedureDetailReportData = data;
             this.procedureDetailReportCollectionView = new CollectionView(this.procedureDetailReportData);
-            this.procedureDetailReportCollectionView.pageSize = 15;
+            this.procedureDetailReportCollectionView.pageSize = this.procedureDetailReportNumberOfPageIndex;
             this.procedureDetailReportCollectionView.trackChanges = true;
           }
         } else {
           this.isProcedureDetailReportProgressBarHidden = true;
         }
+
+        btnRefreshProcedureDetailReportData.removeAttribute("disabled");
+        btnRefreshProcedureDetailReportData.innerHTML = "<i class='fa fa-refresh'></i>";
       }
     );
+  }
+
+  // ============================================================================
+  // Combo Show Number of Rows On Selected Index Changed: Procedure Detail Report
+  // ============================================================================
+  public cboProcedureDetailReportShowNumberOfRowsOnSelectedIndexChanged(selectedValue: any): void {
+    this.procedureDetailReportNumberOfPageIndex = selectedValue;
+
+    this.procedureDetailReportCollectionView.pageSize = this.procedureDetailReportNumberOfPageIndex;
+    this.procedureDetailReportCollectionView.refresh();
+    this.procedureDetailReportFlexGrid.refresh();
   }
 
   // ============
@@ -211,8 +288,11 @@ export class ReportsComponent {
   // On Load Page
   // ============
   ngOnInit() {
-    this.getProcedureSummaryReportData();
-    this.getProcedureDetailReportData();
+    this.createCboShowNumberOfRows();
+    setTimeout(() => {
+      this.getProcedureSummaryReportData();
+      this.getProcedureDetailReportData();
+    }, 500);
   }
 
   // ===============

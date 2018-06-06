@@ -10,15 +10,19 @@
     <div class="card-header">
         <table border="0" style="width: 100%;">
             <tr>
-                <td style="width: 95%;">
+                <td style="width: 89%;">
                     <div class="input-group">
+                        <button class="btn btn-info" type="button" id="refreshProcedureData" (click)="getProcedureData()">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        &nbsp; &nbsp;
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <b>Start Date</b>
                             </div>
                         </div>
                         <wj-input-date #procedureStartDate [(ngModel)]="procedureStartDateData" [ngModelOptions]="{standalone: true}" (textChanged)="startDateTextChanged()"
-                            format="MM-dd-yyyy">
+                            format="MM-dd-yyyy" style="width: 150px;">
                         </wj-input-date>
                         &nbsp; &nbsp;
                         <div class="input-group-prepend">
@@ -27,7 +31,7 @@
                             </div>
                         </div>
                         <wj-input-date #procedureEndDate [(ngModel)]="procedureEndDateData" [ngModelOptions]="{standalone: true}" (textChanged)="endDateTextChanged()"
-                            format="MM-dd-yyyy">
+                            format="MM-dd-yyyy" style="width: 150px;">
                         </wj-input-date>
                         &nbsp; &nbsp;
                         <div class="input-group-prepend">
@@ -35,8 +39,9 @@
                                 <b>Show</b>
                             </div>
                         </div>
-                        <wj-combo-box #cboProcedureNumberOfRows [itemsSource]="cboProcedureShowNumberOfRows" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'rowString'"
-                            [selectedValuePath]="'rowNumber'" (selectedIndexChanged)="cboShowNumberOfRowsOnSelectedIndexChanged(cboProcedureNumberOfRows.selectedValue)">
+                        <wj-combo-box #cboProcedureNumberOfRows [itemsSource]="cboProcedureShowNumberOfRows" [isEditable]="false" [isRequired]="true"
+                            [displayMemberPath]="'rowString'" [selectedValuePath]="'rowNumber'" (selectedIndexChanged)="cboShowNumberOfRowsOnSelectedIndexChanged(cboProcedureNumberOfRows.selectedValue)"
+                            style="width: 180px;">
                         </wj-combo-box>
                     </div>
                 </td>
