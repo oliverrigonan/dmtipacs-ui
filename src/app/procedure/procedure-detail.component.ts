@@ -308,12 +308,12 @@ export class ProcedureDetailComponent {
     // On Click Tabs
     // =============
     public onTabClick(event: MatTabChangeEvent) {
-        if (event.index == 0) {
+        if (event.index == 1) {
             setTimeout(() => {
                 this.procedureResultCollectionView.refresh();
                 this.procedureResultFlexGrid.refresh();
             }, 500);
-        } else if (event.index == 1) {
+        } else if (event.index == 2) {
             setTimeout(() => {
                 this.procedureComparativeCollectionView.refresh();
                 this.procedureComparativeFlexGrid.refresh();

@@ -56,6 +56,14 @@ export class ReportsComponent {
   public procedureSummaryReportEndDateData = new Date();
   public procedureDetailReportStartDateData = new Date();
   public procedureDetailReportEndDateData = new Date();
+  public isProcedureSummaryReportStartDateClicked: Boolean = false;
+  public isProcedureSummaryReportStartDateSelected: Boolean = false;
+  public isProcedureSummaryReportEndDateClicked: Boolean = false;
+  public isProcedureSummaryReportEndDateSelected: Boolean = false;
+  public isProcedureDetailReportStartDateClicked: Boolean = false;
+  public isProcedureDetailReportStartDateSelected: Boolean = false;
+  public isProcedureDetailReportEndDateClicked: Boolean = false;
+  public isProcedureDetailReportEndDateSelected: Boolean = false;
 
   // ===========
   // Constructor
@@ -64,6 +72,67 @@ export class ReportsComponent {
     private reportService: ReportService,
     private toastr: ToastrService
   ) { }
+
+
+  // =================================================
+  // Text Change : Start Date Procedure Summary Report
+  // =================================================
+  public procedureSummaryReportStartDateTextChanged() {
+    if (this.isProcedureSummaryReportStartDateClicked == true) {
+      if (this.isProcedureSummaryReportStartDateSelected == true) {
+        this.getProcedureSummaryReportData();
+      } else {
+        this.isProcedureSummaryReportStartDateSelected = true;
+      }
+    } else {
+      this.isProcedureSummaryReportStartDateClicked = true;
+    }
+  }
+
+  // ===============================================
+  // Text Change : End Date Procedure Summary Report
+  // ===============================================
+  public procedureSummaryReportEndDateTextChanged() {
+    if (this.isProcedureSummaryReportEndDateClicked == true) {
+      if (this.isProcedureSummaryReportEndDateSelected == true) {
+        this.getProcedureSummaryReportData();
+      } else {
+        this.isProcedureSummaryReportEndDateClicked = true;
+      }
+    } else {
+      this.isProcedureSummaryReportEndDateSelected = true;
+    }
+  }
+
+  // ================================================
+  // Text Change : Start Date Procedure Detail Report
+  // ================================================
+  public procedureDetailReportStartDateTextChanged() {
+    if (this.isProcedureDetailReportStartDateClicked == true) {
+      if (this.isProcedureDetailReportStartDateSelected == true) {
+        this.getProcedureDetailReportData();
+      } else {
+        this.isProcedureDetailReportStartDateSelected = true;
+      }
+    } else {
+      this.isProcedureDetailReportStartDateClicked = true;
+    }
+  }
+
+  // ==============================================
+  // Text Change : End Date Procedure Detail Report
+  // ==============================================
+  public procedureDetailReportEndDateTextChanged() {
+    if (this.isProcedureDetailReportEndDateClicked == true) {
+      if (this.isProcedureDetailReportEndDateSelected == true) {
+        this.getProcedureDetailReportData();
+      } else {
+        this.isProcedureDetailReportEndDateClicked = true;
+      }
+    } else {
+      this.isProcedureDetailReportEndDateSelected = true;
+    }
+  }
 
   // =================================
   // Get Procedure Summary Report Data

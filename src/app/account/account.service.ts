@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 
+
 // =============
 // Async Classes
 // =============
@@ -21,12 +22,13 @@ export class AccountService {
     private options = new RequestOptions({ headers: this.headers });
     private defaultAPIHostURL: string = "http://localhost:52125";
 
-
     // =================
     // public properties
     // =================
     public loginSource = new Subject<number>();
     public loginObservable = this.loginSource.asObservable();
+    public logoutSource = new Subject<number>();
+    public logoutObservable = this.logoutSource.asObservable();
 
     // ===========
     // Constructor
@@ -58,5 +60,21 @@ export class AccountService {
                 this.loginSource.next(0);
             }
         )
+    }
+
+    // ======
+    // Logout
+    // ======
+    public logout(): void {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('expires_in');
+        localStorage.removeItem('token_type');
+        localStorage.removeItem('username');
+        localStorage.removeItem('current_facility_id');
+        localStorage.removeItem('current_facility');
+        
+        setTimeout(() => {
+            this.logoutSource.next(1);
+        }, 500);
     }
 }

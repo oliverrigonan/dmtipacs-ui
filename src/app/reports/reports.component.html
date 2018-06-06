@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <wj-input-date #procedureSummaryReportStartDate [(ngModel)]="procedureSummaryReportStartDateData" [ngModelOptions]="{standalone: true}"
-                                    (textChanged)="getProcedureSummaryReportData()" format="MM-dd-yyyy">
+                                    (textChanged)="procedureSummaryReportStartDateTextChanged()" format="MM-dd-yyyy">
                                 </wj-input-date>
                                 &nbsp; &nbsp;
                                 <div class="input-group-prepend">
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                                 <wj-input-date #procedureSummaryReportEndDate [(ngModel)]="procedureSummaryReportEndDateData" [ngModelOptions]="{standalone: true}"
-                                    (textChanged)="getProcedureSummaryReportData()" format="MM-dd-yyyy">
+                                    (textChanged)="procedureSummaryReportEndDateTextChanged()" format="MM-dd-yyyy">
                                 </wj-input-date>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
                                 <wj-input-date #procedureDetailReportStartDate [(ngModel)]="procedureDetailReportStartDateData" [ngModelOptions]="{standalone: true}"
-                                    (textChanged)="getProcedureDetailReportData()" format="MM-dd-yyyy">
+                                    (textChanged)="procedureDetailReportStartDateTextChanged()" format="MM-dd-yyyy">
                                 </wj-input-date>
                                 &nbsp; &nbsp;
                                 <div class="input-group-prepend">
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                                 <wj-input-date #procedureDetailReportEndDate [(ngModel)]="procedureDetailReportEndDateData" [ngModelOptions]="{standalone: true}"
-                                    (textChanged)="getProcedureDetailReportData()" format="MM-dd-yyyy">
+                                    (textChanged)="procedureDetailReportEndDateTextChanged()" format="MM-dd-yyyy">
                                 </wj-input-date>
                             </div>
                         </div>

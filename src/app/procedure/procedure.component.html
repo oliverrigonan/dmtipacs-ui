@@ -17,7 +17,7 @@
                                 <b>Start Date</b>
                             </div>
                         </div>
-                        <wj-input-date #procedureStartDate [(ngModel)]="procedureStartDateData" [ngModelOptions]="{standalone: true}" (textChanged)="getProcedureData()"
+                        <wj-input-date #procedureStartDate [(ngModel)]="procedureStartDateData" [ngModelOptions]="{standalone: true}" (textChanged)="startDateTextChanged()"
                             format="MM-dd-yyyy">
                         </wj-input-date>
                         &nbsp; &nbsp;
@@ -26,7 +26,7 @@
                                 <b>End Date</b>
                             </div>
                         </div>
-                        <wj-input-date #procedureEndDate [(ngModel)]="procedureEndDateData" [ngModelOptions]="{standalone: true}" (textChanged)="getProcedureData()"
+                        <wj-input-date #procedureEndDate [(ngModel)]="procedureEndDateData" [ngModelOptions]="{standalone: true}" (textChanged)="endDateTextChanged()"
                             format="MM-dd-yyyy">
                         </wj-input-date>
                         &nbsp; &nbsp;

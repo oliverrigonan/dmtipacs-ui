@@ -3,6 +3,7 @@
 // =======
 import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 // =====
 // Wijmo
@@ -40,10 +41,11 @@ export class FacilityDialogComponent {
   constructor(
     public detailFacilityDialogRef: MatDialogRef<FacilityDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private router: Router
   ) {
     this.title = data.objFacilityTitle;
-    
+
     this.getFacilityData();
   }
 
@@ -74,12 +76,15 @@ export class FacilityDialogComponent {
   // Update Current Facility
   // =======================
   public btnUpdateFacilityClick(): void {
-    this.facilitySubscription.unsubscribe();
-
     localStorage.setItem('current_facility_id', this.cboFacility.selectedValue);
     localStorage.setItem('current_facility', this.cboFacility.selectedItem["UserFacility"]);
 
     this.detailFacilityDialogRef.close(this.cboFacility.selectedItem["UserFacility"]);
+    if (this.facilitySubscription != null) this.facilitySubscription.unsubscribe();
+
+    setTimeout(() => {
+      this.router.navigate(['/software']);
+    }, 500);
   }
 
   // ===============

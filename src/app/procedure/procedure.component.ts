@@ -54,11 +54,16 @@ export class ProcedureComponent {
   public cboProcedureShowNumberOfRows: ObservableArray = new ObservableArray();
   public procedureNumberOfPageIndex: number;
 
+  public isStartDateClicked: Boolean = false;
+  public isStartDateSelected: Boolean = false;
+  public isEndDateClicked: Boolean = false;
+  public isEndDateSelected: Boolean = false;
+
   // =====
   // Wijmo
   // =====
   @ViewChild('procedureFlexGrid') procedureFlexGrid: WjFlexGrid;
-  
+
   // ================
   // Initialize Model
   // ================
@@ -134,10 +139,40 @@ export class ProcedureComponent {
   // ===================================================
   public cboShowNumberOfRowsOnSelectedIndexChanged(selectedValue: any): void {
     this.procedureNumberOfPageIndex = selectedValue;
-    
+
     this.procedureCollectionView.pageSize = this.procedureNumberOfPageIndex;
     this.procedureCollectionView.refresh();
     this.procedureFlexGrid.refresh();
+  }
+
+  // ========================
+  // Text Change : Start Date
+  // ========================
+  public startDateTextChanged() {
+    if (this.isStartDateClicked == true) {
+      if (this.isStartDateSelected == true) {
+        this.getProcedureData();
+      } else {
+        this.isStartDateSelected = true;
+      }
+    } else {
+      this.isStartDateClicked = true;
+    }
+  }
+
+  // ======================
+  // Text Change : End Date
+  // ======================
+  public endDateTextChanged() {
+    if (this.isEndDateClicked == true) {
+      if (this.isEndDateSelected == true) {
+        this.getProcedureData();
+      } else {
+        this.isEndDateSelected = true;
+      }
+    } else {
+      this.isEndDateClicked = true;
+    }
   }
 
   // ==================

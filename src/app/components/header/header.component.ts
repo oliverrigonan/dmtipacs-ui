@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
 // ======
 import { ToastrService } from 'ngx-toastr';
 
+// =======
+// Service
+// =======
+import { AccountService } from '../../account/account.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -18,10 +23,16 @@ export class HeaderComponent {
   title = 'header';
   currentUser = localStorage.getItem("username");
 
+  // ==========================================
+  // Account Subscription Async Task Properties
+  // ==========================================
+  private logoutSubscription: any;
+
   // ===========
   // Constructor
   // ===========
   constructor(
+    private accountService: AccountService,
     private router: Router,
     private toastr: ToastrService) {
   }
@@ -30,14 +41,18 @@ export class HeaderComponent {
   // Logout
   // ======
   public btnLogout(): void {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expires_in');
-    localStorage.removeItem('token_type');
-    localStorage.removeItem('username');
-    localStorage.removeItem('current_facility_id');
-    localStorage.removeItem('current_facility');
+    this.accountService.logout();
+    this.logoutSubscription = this.accountService.logoutObservable.subscribe(
+      data => {
+        if (data == 1) {
+          this.toastr.success("Logout successful.");
+          window.location.reload();
+        }
+      }
+    );
 
-    this.toastr.success("Logout successful.");
-    this.router.navigate(['/account/login']);
+    setTimeout(() => {
+      if (this.logoutSubscription != null) this.logoutSubscription.unsubscribe();
+    }, 500);
   }
 }

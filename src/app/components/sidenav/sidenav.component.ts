@@ -65,9 +65,11 @@ export class SidenavComponent {
   // ============
   ngOnInit() {
     if (localStorage.getItem("current_facility_id") == null || localStorage.getItem("current_facility") == null) {
-      setTimeout(() => {
-        this.launchFacilityDialog();
-      }, 100);
+      if (localStorage.getItem("access_token") != null) {
+        setTimeout(() => {
+          this.launchFacilityDialog();
+        }, 100);
+      }
     } else {
       this.currentFacility = localStorage.getItem("current_facility");
     }
