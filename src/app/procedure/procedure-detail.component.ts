@@ -33,6 +33,7 @@ import { ProcedureResultModel } from '../model/procedure-result.model';
 // =======
 import { ProcedureResultDetailDialogComponent } from '../dialog/procedure/procedure-result-detail.dialog.component';
 import { ProcedureResultDeleteDialogComponent } from '../dialog/procedure/procedure-result-delete.dialog.component';
+import { ProcedureResultPDFDetailPDFDialogComponent } from '../dialog/procedure/procedure-result-detail-pdf.dialog.component';
 
 @Component({
     selector: 'app-procedure-detail',
@@ -76,6 +77,7 @@ export class ProcedureDetailComponent {
         public dialog: MatDialog,
         private procedureService: ProcedureService,
         private toastr: ToastrService,
+        private router: Router,
         private activatedRoute: ActivatedRoute
     ) { }
 
@@ -248,6 +250,26 @@ export class ProcedureDetailComponent {
             } else if (result == 500) {
                 this.toastr.error('Internal Server Error!');
             };
+        });
+    }
+
+    // ======================
+    // Print Procedure Result
+    // ======================
+    public btnPrintProcedureResultClick(): void {
+        let currentProcedureResult = this.procedureResultCollectionView.currentItem;
+        this.procedureResultModel.Id = currentProcedureResult.Id;
+
+        let printProcedureResultDialogRef = this.dialog.open(ProcedureResultPDFDetailPDFDialogComponent, {
+            width: '1300px',
+            data: {
+                objProcedureResultDetailPDFDialogTitle: "Print Result",
+                id: this.procedureResultModel.Id
+            }
+        });
+
+        printProcedureResultDialogRef.afterClosed().subscribe(result => {
+
         });
     }
 

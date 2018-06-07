@@ -5,12 +5,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // ========
 // Material
 // ========
 import { MatButtonModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -45,6 +47,7 @@ import { ProcedureDetailComponent } from '../procedure/procedure-detail.componen
 import { ProcedureDeleteDialogComponent } from '../dialog/procedure/procedure-delete.dialog.component';
 import { ProcedureResultDetailDialogComponent } from '../dialog/procedure/procedure-result-detail.dialog.component';
 import { ProcedureResultDeleteDialogComponent } from '../dialog/procedure/procedure-result-delete.dialog.component';
+import { ProcedureResultPDFDetailPDFDialogComponent } from '../dialog/procedure/procedure-result-detail-pdf.dialog.component';
 import { ReportsComponent } from '../reports/reports.component';
 
 // ========
@@ -66,14 +69,15 @@ import { ProcedureService } from '../procedure/procedure.service';
         BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
         UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
         RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
-        ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent,
+        ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent, ProcedureResultPDFDetailPDFDialogComponent,
         ReportsComponent
     ],
     imports: [
         CommonModule,
         RouterModule,
         FormsModule,
-        MatButtonModule, MatProgressBarModule, MatInputModule, MatDialogModule, MatTabsModule,
+        PdfViewerModule,
+        MatButtonModule, MatProgressBarModule, MatProgressSpinnerModule, MatInputModule, MatDialogModule, MatTabsModule,
         WjGridFilterModule, WjGridModule, WjInputModule
     ],
     exports: [
@@ -82,9 +86,9 @@ import { ProcedureService } from '../procedure/procedure.service';
         BodyPartsComponent, BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
         UserComponent, UserDetailComponent, UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
         RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
-        ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent,
+        ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent, ProcedureResultPDFDetailPDFDialogComponent,
         ReportsComponent,
-        MatButtonModule, MatProgressBarModule, MatInputModule, MatDialogModule, MatTabsModule,
+        MatButtonModule, MatProgressBarModule, MatProgressSpinnerModule, MatInputModule, MatDialogModule, MatTabsModule,
         WjGridFilterModule, WjGridModule, WjInputModule
     ],
     providers: [
@@ -102,7 +106,7 @@ import { ProcedureService } from '../procedure/procedure.service';
         BodyPartsDetailDialogComponent, BodyPartsDeleteDialogComponent,
         RateDetailDialogComponent, RateDeleteDialogComponent,
         UserDoctorDetailDialogComponent, UserDoctorDeleteDialogComponent,
-        ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent
+        ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent, ProcedureResultPDFDetailPDFDialogComponent
     ]
 })
 export class LayoutModule { }

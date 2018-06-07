@@ -2,7 +2,7 @@
 // Angular
 // =======
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import { Headers, Http, RequestOptions, ResponseContentType } from '@angular/http';
 import { Router } from '@angular/router';
 
 // =============
@@ -42,6 +42,8 @@ export class ProcedureService {
     public procedureDeletedObservable = this.procedureDeletedSource.asObservable();
     public procedureResultSource = new Subject<ObservableArray>();
     public procedureResultObservable = this.procedureResultSource.asObservable();
+    public procedureResultPDFSource = new Subject<Blob>();
+    public procedureResultPDFObservable = this.procedureResultPDFSource.asObservable();
     public modalityProcedureSource = new Subject<ObservableArray>();
     public modalityProcedureObservable = this.modalityProcedureSource.asObservable();
     public doctorSource = new Subject<ObservableArray>();
@@ -213,6 +215,19 @@ export class ProcedureService {
                 this.procedureResultSource.next(null);
             }
         );
+    }
+
+    // ========================
+    // Get Procedure Result PDF
+    // ========================
+    public getProcedureResultPDF(id: number): void {
+        let url = this.defaultAPIHostURL + "/api/procedureResultReport/PDF/result/" + id;
+
+        this.http.get(url, { responseType: ResponseContentType.Blob }).subscribe(
+            response => {
+                let pdf = new Blob([response.blob()], { type: 'application/pdf' });
+                this.procedureResultPDFSource.next(pdf);
+            });
     }
 
     // ======================

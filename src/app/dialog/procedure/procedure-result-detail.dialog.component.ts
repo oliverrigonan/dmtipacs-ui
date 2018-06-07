@@ -58,6 +58,8 @@ export class ProcedureResultDetailDialogComponent {
         this.procedureResultModel.Result = data.objCurrentProcedureResult.Result;
         this.procedureResultModel.DoctorId = data.objCurrentProcedureResult.DoctorId;
 
+        console.log(this.procedureResultModel.Id);
+
         this.getModalityProcedureData(this.procedureResultModel.ModalityProcedureId);
         this.geDoctorData(this.procedureResultModel.DoctorId);
     }

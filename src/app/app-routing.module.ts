@@ -18,23 +18,12 @@ import { LayoutComponent } from './layout/layout.component';
 // ===================
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ModalityProcedureComponent } from './modality-procedure/modality-procedure.component';
-import { ModalityProcedureDetailDialogComponent } from './dialog/modality-procedure/modality-procedure-detail.dialog.component';
-import { ModalityProcedureDeleteDialogComponent } from './dialog/modality-procedure/modality-procedure-delete.dialog.component';
 import { BodyPartsComponent } from './body-parts/body-parts.component';
-import { BodyPartsDetailDialogComponent } from './dialog/body-parts/body-parts-detail.dialog.component';
-import { BodyPartsDeleteDialogComponent } from './dialog/body-parts/body-parts-delete.dialog.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user/user-detail.component';
-import { UserDoctorDetailDialogComponent } from './dialog/user/user-doctor-detail.dialog.component';
-import { UserDoctorDeleteDialogComponent } from './dialog/user/user-doctor-delete.dialog.component';
 import { RateComponent } from './rate/rate.component';
-import { RateDetailDialogComponent } from './dialog/rate/rate-detail.dialog.component';
-import { RateDeleteDialogComponent } from './dialog/rate/rate-delete.dialog.component';
 import { ProcedureComponent } from './procedure/procedure.component';
 import { ProcedureDetailComponent } from './procedure/procedure-detail.component';
-import { ProcedureDeleteDialogComponent } from './dialog/procedure/procedure-delete.dialog.component';
-import { ProcedureResultDetailDialogComponent } from './dialog/procedure/procedure-result-detail.dialog.component';
-import { ProcedureResultDeleteDialogComponent } from './dialog/procedure/procedure-result-delete.dialog.component';
 import { ReportsComponent } from './reports/reports.component';
 
 // ======
