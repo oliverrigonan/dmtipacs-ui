@@ -3,6 +3,7 @@
 // =======
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 // =======
 // Service
@@ -41,6 +42,7 @@ export class SidenavComponent {
   constructor(
     private componentsService: ComponentsService,
     private toastr: ToastrService,
+    private router: Router,
     public dialog: MatDialog
   ) { }
 
@@ -65,7 +67,9 @@ export class SidenavComponent {
   // ============
   ngOnInit() {
     if (localStorage.getItem("current_facility_id") == null || localStorage.getItem("current_facility") == null) {
-      if (localStorage.getItem("access_token") != null) {
+      if (localStorage.getItem("access_token") == null) {
+        this.router.navigate(['/account/login']);
+      } else {
         setTimeout(() => {
           this.launchFacilityDialog();
         }, 100);

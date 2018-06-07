@@ -11,7 +11,11 @@ export class AppRouteReuseStrategy implements RouteReuseStrategy {
     }
 
     store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
-        this.handlers[route.url.join("/") || route.parent.url.join("/")] = handle;
+        if (route.routeConfig.path != 'software') {
+            if (route.routeConfig.path != 'software/dashboard') {
+                this.handlers[route.routeConfig.path] = handle;
+            }
+        }
     }
 
     shouldAttach(route: ActivatedRouteSnapshot): boolean {
