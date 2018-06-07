@@ -12,7 +12,7 @@
             <tr>
                 <td style="width: 89%;">
                     <div class="input-group">
-                        <button class="btn btn-info" type="button" id="refreshProcedureData" (click)="getProcedureData()">
+                        <button class="btn btn-info" type="button" [disabled]="isBtnRefreshProcedureDataDisabled" (click)="getProcedureData()">
                             <i class="fa fa-refresh"></i>
                         </button>
                         &nbsp; &nbsp;

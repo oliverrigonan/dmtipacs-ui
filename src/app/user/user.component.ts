@@ -39,6 +39,8 @@ export class UserComponent {
   public userData: ObservableArray = new ObservableArray();
   public userCollectionView: CollectionView = new CollectionView(this.userData);
 
+  public isBtnRefreshUserDataDisabled: Boolean = true;
+
   // ================
   // Initialize Model
   // ================
@@ -65,6 +67,7 @@ export class UserComponent {
   // Get User Data
   // =============
   public getUserData(): void {
+    this.isBtnRefreshUserDataDisabled = true;
     this.isProgressBarHidden = false;
 
     this.userService.getUser();
@@ -81,6 +84,8 @@ export class UserComponent {
         } else {
           this.isProgressBarHidden = true;
         }
+
+        this.isBtnRefreshUserDataDisabled = false;
       }
     );
   }

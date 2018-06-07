@@ -45,6 +45,8 @@ export class ModalityProcedureComponent {
   public modalityProcedureData: ObservableArray = new ObservableArray();
   public modalityProcedureCollectionView: CollectionView = new CollectionView(this.modalityProcedureData);
 
+  public isBtnRefreshModalityProcedureDataDisabled: Boolean = true;
+
   // ================
   // Initialize Model
   // ================
@@ -70,6 +72,7 @@ export class ModalityProcedureComponent {
   // Get Modality Procedure Data
   // ===========================
   public getModalityProcedureData(): void {
+    this.isBtnRefreshModalityProcedureDataDisabled = true;
     this.isProgressBarHidden = false;
 
     this.modalityProcedureService.getModalityProcedure();
@@ -86,6 +89,8 @@ export class ModalityProcedureComponent {
         } else {
           this.isProgressBarHidden = true;
         }
+
+        this.isBtnRefreshModalityProcedureDataDisabled = false;
       }
     );
   }

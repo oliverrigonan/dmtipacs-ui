@@ -59,6 +59,8 @@ export class ProcedureComponent {
   public isEndDateClicked: Boolean = false;
   public isEndDateSelected: Boolean = false;
 
+  public isBtnRefreshProcedureDataDisabled: Boolean = true;
+
   // =====
   // Wijmo
   // =====
@@ -179,9 +181,7 @@ export class ProcedureComponent {
   // Get Procedure Data
   // ==================
   public getProcedureData(): void {
-    let refreshProcedureData: Element = document.getElementById("refreshProcedureData");
-    refreshProcedureData.setAttribute("disabled", "disabled");
-    refreshProcedureData.innerHTML = "<i class='fa fa-refresh'></i>";
+    this.isBtnRefreshProcedureDataDisabled = true;
 
     this.isProgressBarHidden = false;
 
@@ -203,8 +203,7 @@ export class ProcedureComponent {
           this.isProgressBarHidden = true;
         }
 
-        refreshProcedureData.removeAttribute("disabled");
-        refreshProcedureData.innerHTML = "<i class='fa fa-refresh'></i>";
+        this.isBtnRefreshProcedureDataDisabled = false;
       }
     );
   }

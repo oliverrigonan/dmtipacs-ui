@@ -69,6 +69,9 @@ export class ReportsComponent {
   public procedureSummaryReportNumberOfPageIndex: number;
   public procedureDetailReportNumberOfPageIndex: number;
 
+  public isBtnRefreshProcedureSummaryReportDataDisabled: Boolean = true;
+  public isBtnRefreshProcedureDetailReportDataDisabled: Boolean = true;
+
   // ===========
   // Constructor
   // ===========
@@ -180,10 +183,8 @@ export class ReportsComponent {
   // =================================
   public getProcedureSummaryReportData(): void {
     if (this.procedureSummaryReportSubscription != null) this.procedureSummaryReportSubscription.unsubscribe();
-    let btnRefreshProcedureSummaryReportData: Element = document.getElementById("btnRefreshProcedureSummaryReportData");
-    btnRefreshProcedureSummaryReportData.setAttribute("disabled", "disabled");
-    btnRefreshProcedureSummaryReportData.innerHTML = "<i class='fa fa-refresh'></i>";
 
+    this.isBtnRefreshProcedureSummaryReportDataDisabled = true;
     this.isProcedureSummaryReportProgressBarHidden = false;
 
     let dateStart = [this.procedureSummaryReportStartDateData.getFullYear(), this.procedureSummaryReportStartDateData.getMonth() + 1, this.procedureSummaryReportStartDateData.getDate()].join('-');
@@ -204,8 +205,7 @@ export class ReportsComponent {
           this.isProcedureSummaryReportProgressBarHidden = true;
         }
 
-        btnRefreshProcedureSummaryReportData.removeAttribute("disabled");
-        btnRefreshProcedureSummaryReportData.innerHTML = "<i class='fa fa-refresh'></i>";
+        this.isBtnRefreshProcedureSummaryReportDataDisabled = false;
       }
     );
   }
@@ -226,10 +226,8 @@ export class ReportsComponent {
   // ================================
   public getProcedureDetailReportData(): void {
     if (this.procedureDetailReportSubscription != null) this.procedureDetailReportSubscription.unsubscribe();
-    let btnRefreshProcedureDetailReportData: Element = document.getElementById("btnRefreshProcedureDetailReportData");
-    btnRefreshProcedureDetailReportData.setAttribute("disabled", "disabled");
-    btnRefreshProcedureDetailReportData.innerHTML = "<i class='fa fa-refresh'></i>";
 
+    this.isBtnRefreshProcedureDetailReportDataDisabled = true;
     this.isProcedureDetailReportProgressBarHidden = false;
 
     let dateStart = [this.procedureDetailReportStartDateData.getFullYear(), this.procedureDetailReportStartDateData.getMonth() + 1, this.procedureDetailReportStartDateData.getDate()].join('-');
@@ -250,8 +248,7 @@ export class ReportsComponent {
           this.isProcedureDetailReportProgressBarHidden = true;
         }
 
-        btnRefreshProcedureDetailReportData.removeAttribute("disabled");
-        btnRefreshProcedureDetailReportData.innerHTML = "<i class='fa fa-refresh'></i>";
+        this.isBtnRefreshProcedureDetailReportDataDisabled = false;
       }
     );
   }

@@ -45,6 +45,8 @@ export class BodyPartsComponent {
   public bodyPartsData: ObservableArray = new ObservableArray();
   public bodyPartsCollectionView: CollectionView = new CollectionView(this.bodyPartsData);
 
+  public isBtnRefreshBodyPartsDataDisabled: Boolean = true;
+
   // ================
   // Initialize Model
   // ================
@@ -66,6 +68,7 @@ export class BodyPartsComponent {
   // Get Body Parts Data
   // ===================
   public getBodyPartsData(): void {
+    this.isBtnRefreshBodyPartsDataDisabled = true;
     this.isProgressBarHidden = false;
 
     this.bodyPartsService.getBodyParts();
@@ -82,6 +85,8 @@ export class BodyPartsComponent {
         } else {
           this.isProgressBarHidden = true;
         }
+
+        this.isBtnRefreshBodyPartsDataDisabled = false;
       }
     );
   }

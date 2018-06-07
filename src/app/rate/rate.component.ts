@@ -45,6 +45,8 @@ export class RateComponent {
   public rateData: ObservableArray = new ObservableArray();
   public rateCollectionView: CollectionView = new CollectionView(this.rateData);
 
+  public isBtnRefreshRateDataDisabled: Boolean = true;
+
   // ================
   // Initialize Model
   // ================
@@ -72,6 +74,7 @@ export class RateComponent {
   // Get Rate Data
   // =============
   public getRateData(): void {
+    this.isBtnRefreshRateDataDisabled = true;
     this.isProgressBarHidden = false;
 
     this.rateService.getRate();
@@ -88,6 +91,8 @@ export class RateComponent {
         } else {
           this.isProgressBarHidden = true;
         }
+
+        this.isBtnRefreshRateDataDisabled = false;
       }
     );
   }
