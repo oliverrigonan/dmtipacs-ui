@@ -11,9 +11,14 @@ export class AppRouteReuseStrategy implements RouteReuseStrategy {
     }
 
     store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
-        if (route.routeConfig.path != 'software') {
-            if (route.routeConfig.path != 'software/dashboard') {
+        switch (route.routeConfig.path) {
+            case 'software': break;
+            case 'software/dashboard': break;
+            case 'user/detail/:id': break;
+            case 'procedure/detail/:id': break;
+            default: {
                 this.handlers[route.routeConfig.path] = handle;
+                break;
             }
         }
     }
