@@ -250,7 +250,11 @@ export class ProcedureComponent {
   // ============
   ngOnInit() {
     this.createCboShowNumberOfRows();
-    this.getProcedureData();
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/account/login']);
+    } else {
+      this.getProcedureData();
+    }
   }
 
   // ===============

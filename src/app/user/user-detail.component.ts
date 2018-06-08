@@ -80,6 +80,7 @@ export class UserDetailComponent {
     public dialog: MatDialog,
     private userService: UserService,
     private toastr: ToastrService,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -299,8 +300,12 @@ export class UserDetailComponent {
   // On Load Page
   // ============
   ngOnInit() {
-    this.getUserDetailData();
-    this.getUserDoctorData();
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/account/login']);
+    } else {
+      this.getUserDetailData();
+      this.getUserDoctorData();
+    }
   }
 
   // ===============

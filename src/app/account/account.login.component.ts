@@ -61,8 +61,6 @@ export class AccountLoginComponent {
   // Login
   // =====
   public btnLoginClick(): void {
-    if (this.loginSubscription != null) this.loginSubscription.unsubscribe();
-
     let btnLogin: Element = document.getElementById("btnLogin");
     btnLogin.setAttribute("disabled", "disabled");
     btnLogin.innerHTML = "Logging in...";

@@ -3,6 +3,7 @@
 // ====================
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 // ======
 // Toastr
@@ -65,6 +66,7 @@ export class ModalityProcedureComponent {
   constructor(
     public dialog: MatDialog,
     private modalityProcedureService: ModalityProcedureService,
+    private router: Router,
     private toastr: ToastrService
   ) { }
 
@@ -195,7 +197,11 @@ export class ModalityProcedureComponent {
   // On Load Page
   // ============
   ngOnInit() {
-    this.getModalityProcedureData();
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/account/login']);
+    } else {
+      this.getModalityProcedureData();
+    }
   }
 
   // ===============

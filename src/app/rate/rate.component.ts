@@ -3,6 +3,7 @@
 // ====================
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 // ======
 // Toastr
@@ -67,6 +68,7 @@ export class RateComponent {
   constructor(
     public dialog: MatDialog,
     private rateService: RateService,
+    private router: Router,
     private toastr: ToastrService
   ) { }
 
@@ -201,7 +203,11 @@ export class RateComponent {
   // On Load Page
   // ============
   ngOnInit() {
-    this.getRateData();
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/account/login']);
+    } else {
+      this.getRateData();
+    }
   }
 
   // ===============

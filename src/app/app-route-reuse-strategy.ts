@@ -12,6 +12,8 @@ export class AppRouteReuseStrategy implements RouteReuseStrategy {
 
     store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
         switch (route.routeConfig.path) {
+            case 'account/login': break;
+            case 'account/register': break;
             case 'software': break;
             case 'software/dashboard': break;
             case 'user/detail/:id': break;

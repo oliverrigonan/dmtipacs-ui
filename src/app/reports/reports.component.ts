@@ -3,6 +3,7 @@
 // ====================
 import { Component, ViewChild } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material';
+import { Router } from '@angular/router';
 
 // =================================
 // Async Task and Wijmo and Services
@@ -77,6 +78,7 @@ export class ReportsComponent {
   // ===========
   constructor(
     private reportService: ReportService,
+    private router: Router,
     private toastr: ToastrService
   ) { }
 
@@ -286,10 +288,14 @@ export class ReportsComponent {
   // ============
   ngOnInit() {
     this.createCboShowNumberOfRows();
-    setTimeout(() => {
-      this.getProcedureSummaryReportData();
-      this.getProcedureDetailReportData();
-    }, 500);
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/account/login']);
+    } else {
+      setTimeout(() => {
+        this.getProcedureSummaryReportData();
+        this.getProcedureDetailReportData();
+      }, 500);
+    }
   }
 
   // ===============

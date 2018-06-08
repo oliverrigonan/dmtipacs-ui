@@ -46,13 +46,18 @@ export class HeaderComponent {
       data => {
         if (data == 1) {
           this.toastr.success("Logout successful.");
-          window.location.reload();
+          setTimeout(() => {
+            this.router.navigate(['/account/login']);
+          }, 500);
         }
       }
     );
+  }
 
-    setTimeout(() => {
-      if (this.logoutSubscription != null) this.logoutSubscription.unsubscribe();
-    }, 500);
+  // ===============
+  // On Destory Page
+  // ===============
+  ngOnDestroy() {
+    if (this.logoutSubscription != null) this.logoutSubscription.unsubscribe();
   }
 }

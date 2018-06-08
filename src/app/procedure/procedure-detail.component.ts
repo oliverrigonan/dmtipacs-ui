@@ -5,6 +5,7 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatTabChangeEvent } from '@angular/material';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 // ======
 // Toastr
@@ -44,6 +45,7 @@ export class ProcedureDetailComponent {
     title = 'procedure detail';
     isProcedureResultProgressBarHidden = false;
     isProcedureComparativeProgressBarHidden = false;
+    downloadJsonHref: SafeUrl;
 
     // =====
     // Wijmo
@@ -78,7 +80,8 @@ export class ProcedureDetailComponent {
         private procedureService: ProcedureService,
         private toastr: ToastrService,
         private router: Router,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private sanitizer: DomSanitizer
     ) { }
 
     // =======================
@@ -162,6 +165,20 @@ export class ProcedureDetailComponent {
                     this.procedureModel.StudyInstanceId = data.StudyInstanceId;
                 }
             );
+    }
+
+    // =============
+    // Download JSON
+    // =============
+    public btnDownloadJSONProcedureClick(): void {
+        let jsonData = JSON.stringify(this.procedureModel);
+        let element = document.createElement('a');
+        element.setAttribute('href', "data:text/json;charset=UTF-8," + encodeURIComponent(jsonData));
+        element.setAttribute('download', this.procedureModel.TransactionNumber + ".json");
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 
     // =========================
@@ -261,7 +278,7 @@ export class ProcedureDetailComponent {
         this.procedureResultModel.Id = currentProcedureResult.Id;
 
         let printProcedureResultDialogRef = this.dialog.open(ProcedureResultPDFDetailPDFDialogComponent, {
-            width: '1300px',
+            width: '1100px',
             data: {
                 objProcedureResultDetailPDFDialogTitle: "Print Result",
                 id: this.procedureResultModel.Id
@@ -347,9 +364,13 @@ export class ProcedureDetailComponent {
     // On Load Page
     // ============
     ngOnInit() {
-        this.getProcedureDetailData();
-        this.getProcedureResultData();
-        this.getProcedureComparativeData();
+        if (localStorage.getItem("access_token") == null) {
+            this.router.navigate(['/account/login']);
+        } else {
+            this.getProcedureDetailData();
+            this.getProcedureResultData();
+            this.getProcedureComparativeData();
+        }
     }
 
     // ===============
