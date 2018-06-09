@@ -46,6 +46,7 @@ export class ProcedureDetailComponent {
     isProcedureResultProgressBarHidden = false;
     isProcedureComparativeProgressBarHidden = false;
     downloadJsonHref: SafeUrl;
+    isDoctor: Boolean = false;
 
     // =====
     // Wijmo
@@ -57,6 +58,7 @@ export class ProcedureDetailComponent {
     // User Async Task Properties
     // ==========================
     public procedureSubscription: any;
+    public isOtherComponentShow: boolean = false;
 
     // =================================
     // Procedure Result Async Task Properties
@@ -185,6 +187,11 @@ export class ProcedureDetailComponent {
     // Get Procedure Result Data
     // =========================
     public getProcedureResultData(): void {
+        this.procedureResultData = new ObservableArray();
+        this.procedureResultCollectionView = new CollectionView(this.procedureResultData);
+        this.procedureResultCollectionView.pageSize = 15;
+        this.procedureResultCollectionView.trackChanges = true;
+
         this.isProcedureResultProgressBarHidden = false;
 
         this.procedureService.getProcedureResult(this.getId());
@@ -223,6 +230,7 @@ export class ProcedureDetailComponent {
             }
         });
 
+        detailProcedureResultDialogRef.disableClose = true;
         detailProcedureResultDialogRef.afterClosed().subscribe(result => {
             if (result == 200) {
                 this.toastr.success('Save Successful!');
@@ -256,6 +264,7 @@ export class ProcedureDetailComponent {
             }
         });
 
+        detailProcedureResultDialogRef.disableClose = true;
         detailProcedureResultDialogRef.afterClosed().subscribe(result => {
             if (result == 200) {
                 this.toastr.success('Update Successful!');
@@ -285,6 +294,7 @@ export class ProcedureDetailComponent {
             }
         });
 
+        printProcedureResultDialogRef.disableClose = true;
         printProcedureResultDialogRef.afterClosed().subscribe(result => {
 
         });
@@ -305,6 +315,7 @@ export class ProcedureDetailComponent {
             }
         });
 
+        deleteProcedureResultDialogRef.disableClose = true;
         deleteProcedureResultDialogRef.afterClosed().subscribe(result => {
             if (result == 200) {
                 this.toastr.success('Delete Successful!');
@@ -323,6 +334,11 @@ export class ProcedureDetailComponent {
     // Get Procedure Comparative Data
     // ==============================
     public getProcedureComparativeData(): void {
+        this.procedureComparativeData = new ObservableArray();
+        this.procedureComparativeCollectionView = new CollectionView(this.procedureComparativeData);
+        this.procedureComparativeCollectionView.pageSize = 15;
+        this.procedureComparativeCollectionView.trackChanges = true;
+
         this.isProcedureComparativeProgressBarHidden = false;
 
         this.procedureService.getProcedureComparative(this.getId());
@@ -347,16 +363,14 @@ export class ProcedureDetailComponent {
     // On Click Tabs
     // =============
     public onTabClick(event: MatTabChangeEvent) {
-        if (event.index == 1) {
-            setTimeout(() => {
-                this.procedureResultCollectionView.refresh();
-                this.procedureResultFlexGrid.refresh();
-            }, 500);
+        if (event.index == 0) {
+            this.procedureResultCollectionView.refresh();
+            this.procedureResultFlexGrid.refresh();
+        } else if (event.index == 1) {
+            this.procedureComparativeCollectionView.refresh();
+            this.procedureComparativeFlexGrid.refresh();
         } else if (event.index == 2) {
-            setTimeout(() => {
-                this.procedureComparativeCollectionView.refresh();
-                this.procedureComparativeFlexGrid.refresh();
-            }, 500);
+            this.isOtherComponentShow = true;
         }
     }
 
@@ -367,6 +381,10 @@ export class ProcedureDetailComponent {
         if (localStorage.getItem("access_token") == null) {
             this.router.navigate(['/account/login']);
         } else {
+            if (parseInt(localStorage.getItem("current_facility_id")) != 2) {
+                this.isDoctor = true;
+            }
+
             this.getProcedureDetailData();
             this.getProcedureResultData();
             this.getProcedureComparativeData();

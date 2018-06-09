@@ -186,6 +186,11 @@ export class UserDetailComponent {
   // Get User Doctor Data
   // ====================
   public getUserDoctorData(): void {
+    this.userDoctorData = new ObservableArray();
+    this.userDoctorCollectionView = new CollectionView(this.userDoctorData);
+    this.userDoctorCollectionView.pageSize = 15;
+    this.userDoctorCollectionView.trackChanges = true;
+
     this.isUserDoctorProgressBarHidden = false;
 
     this.userService.getUserDoctor(this.getId());
@@ -222,6 +227,7 @@ export class UserDetailComponent {
       }
     });
 
+    detailUserDoctorDialogRef.disableClose = true;
     detailUserDoctorDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Save Successful!');
@@ -253,6 +259,7 @@ export class UserDetailComponent {
       }
     });
 
+    detailUserDoctorDialogRef.disableClose = true;
     detailUserDoctorDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Update Successful!');
@@ -282,6 +289,7 @@ export class UserDetailComponent {
       }
     });
 
+    deleteUserDoctorDialogRef.disableClose = true;
     deleteUserDoctorDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Delete Successful!');

@@ -62,7 +62,9 @@ export class FacilityDialogComponent {
           for (var i = 0; i <= data.length - 1; i++) {
             facilityObservableArray.push({
               Id: data[i].Id,
+              UserId: data[i].UserId,
               UserFacility: data[i].UserFacility,
+              UserTypeId: data[i].UserTypeId
             });
           }
         }
@@ -76,8 +78,9 @@ export class FacilityDialogComponent {
   // Update Current Facility
   // =======================
   public btnUpdateFacilityClick(): void {
-    localStorage.setItem('current_facility_id', this.cboFacility.selectedValue);
+    localStorage.setItem('current_facility_id', this.cboFacility.selectedItem["UserId"]);
     localStorage.setItem('current_facility', this.cboFacility.selectedItem["UserFacility"]);
+    localStorage.setItem('current_userType_Id', this.cboFacility.selectedItem["UserTypeId"]);
 
     this.detailFacilityDialogRef.close(this.cboFacility.selectedItem["UserFacility"]);
     if (this.facilitySubscription != null) this.facilitySubscription.unsubscribe();

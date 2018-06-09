@@ -70,6 +70,11 @@ export class BodyPartsComponent {
   // Get Body Parts Data
   // ===================
   public getBodyPartsData(): void {
+    this.bodyPartsData = new ObservableArray();
+    this.bodyPartsCollectionView = new CollectionView(this.bodyPartsData);
+    this.bodyPartsCollectionView.pageSize = 15;
+    this.bodyPartsCollectionView.trackChanges = true;
+
     this.isBtnRefreshBodyPartsDataDisabled = true;
     this.isProgressBarHidden = false;
 
@@ -108,6 +113,7 @@ export class BodyPartsComponent {
       }
     });
 
+    detailBodyPartsDialogRef.disableClose = true;
     detailBodyPartsDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Save Successful!');
@@ -138,6 +144,7 @@ export class BodyPartsComponent {
       }
     });
 
+    detailBodyPartsDialogRef.disableClose = true;
     detailBodyPartsDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Update Successful!');
@@ -167,6 +174,7 @@ export class BodyPartsComponent {
       }
     });
 
+    deleteBodyPartsDialogRef.disableClose = true;
     deleteBodyPartsDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Delete Successful!');

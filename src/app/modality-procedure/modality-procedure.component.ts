@@ -74,6 +74,11 @@ export class ModalityProcedureComponent {
   // Get Modality Procedure Data
   // ===========================
   public getModalityProcedureData(): void {
+    this.modalityProcedureData = new ObservableArray();
+    this.modalityProcedureCollectionView = new CollectionView(this.modalityProcedureData);
+    this.modalityProcedureCollectionView.pageSize = 15;
+    this.modalityProcedureCollectionView.trackChanges = true;
+
     this.isBtnRefreshModalityProcedureDataDisabled = true;
     this.isProgressBarHidden = false;
 
@@ -116,6 +121,7 @@ export class ModalityProcedureComponent {
       }
     });
 
+    detailModalityProcedureDialogRef.disableClose = true;
     detailModalityProcedureDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Save Successful!');
@@ -150,6 +156,7 @@ export class ModalityProcedureComponent {
       }
     });
 
+    detailModalityProcedureDialogRef.disableClose = true;
     detailModalityProcedureDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Update Successful!');
@@ -179,6 +186,7 @@ export class ModalityProcedureComponent {
       }
     });
 
+    deleteModalityProcedureDialogRef.disableClose = true;
     deleteModalityProcedureDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Delete Successful!');

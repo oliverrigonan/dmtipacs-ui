@@ -76,6 +76,11 @@ export class RateComponent {
   // Get Rate Data
   // =============
   public getRateData(): void {
+    this.rateData = new ObservableArray();
+    this.rateCollectionView = new CollectionView(this.rateData);
+    this.rateCollectionView.pageSize = 15;
+    this.rateCollectionView.trackChanges = true;
+
     this.isBtnRefreshRateDataDisabled = true;
     this.isProgressBarHidden = false;
 
@@ -120,6 +125,7 @@ export class RateComponent {
       }
     });
 
+    detailRateDialogRef.disableClose = true;
     detailRateDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Save Successful!');
@@ -156,6 +162,7 @@ export class RateComponent {
       }
     });
 
+    detailRateDialogRef.disableClose = true;
     detailRateDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Update Successful!');
@@ -185,6 +192,7 @@ export class RateComponent {
       }
     });
 
+    deleteRateDialogRef.disableClose = true;
     deleteRateDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Delete Successful!');

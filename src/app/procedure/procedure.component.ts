@@ -181,8 +181,12 @@ export class ProcedureComponent {
   // Get Procedure Data
   // ==================
   public getProcedureData(): void {
-    this.isBtnRefreshProcedureDataDisabled = true;
+    this.procedureData = new ObservableArray();
+    this.procedureCollectionView = new CollectionView(this.procedureData);
+    this.procedureCollectionView.pageSize = 15;
+    this.procedureCollectionView.trackChanges = true;
 
+    this.isBtnRefreshProcedureDataDisabled = true;
     this.isProgressBarHidden = false;
 
     let dateStart = [this.procedureStartDateData.getFullYear(), this.procedureStartDateData.getMonth() + 1, this.procedureStartDateData.getDate()].join('-');
@@ -231,6 +235,7 @@ export class ProcedureComponent {
       }
     });
 
+    deleteProcedureDialogRef.disableClose = true;
     deleteProcedureDialogRef.afterClosed().subscribe(result => {
       if (result == 200) {
         this.toastr.success('Delete Successful!');

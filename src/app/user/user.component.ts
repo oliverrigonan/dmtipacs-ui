@@ -67,6 +67,11 @@ export class UserComponent {
   // Get User Data
   // =============
   public getUserData(): void {
+    this.userData = new ObservableArray();
+    this.userCollectionView = new CollectionView(this.userData);
+    this.userCollectionView.pageSize = 15;
+    this.userCollectionView.trackChanges = true;
+
     this.isBtnRefreshUserDataDisabled = true;
     this.isProgressBarHidden = false;
 

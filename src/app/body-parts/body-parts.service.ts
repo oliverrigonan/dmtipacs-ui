@@ -65,6 +65,8 @@ export class BodyPartsService {
                     }
 
                     this.bodyPartsSource.next(bodyPartsObservableArray);
+                } else {
+                    this.bodyPartsSource.next(null);
                 }
             },
             error => {

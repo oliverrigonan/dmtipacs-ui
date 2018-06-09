@@ -47,7 +47,8 @@ export class HeaderComponent {
         if (data == 1) {
           this.toastr.success("Logout successful.");
           setTimeout(() => {
-            this.router.navigate(['/account/login']);
+            this.router.navigate(['/software']);
+            window.location.reload();
           }, 500);
         }
       }
