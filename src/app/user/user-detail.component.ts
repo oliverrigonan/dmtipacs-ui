@@ -53,10 +53,12 @@ export class UserDetailComponent {
   // ================
   public userModel: UserModel = {
     Id: 0,
+    Email: "",
     UserName: "",
-    Password: "",
     FullName: "",
     Address: "",
+    Password: "",
+    ConfirmPassword: "",
     ContactNumber: "",
     UserTypeId: 0
   };

@@ -10,6 +10,11 @@ import { Router } from '@angular/router';
 // =============
 import { Subject, Observable } from 'rxjs';
 
+// =====
+// Model
+// =====
+import { UserModel } from '../model/user.model';
+
 import { AppSettings } from '../app-settings'
 
 @Injectable()
@@ -30,6 +35,23 @@ export class AccountService {
     public loginObservable = this.loginSource.asObservable();
     public logoutSource = new Subject<number>();
     public logoutObservable = this.logoutSource.asObservable();
+    public registerSource = new Subject<number>();
+    public registerObservable = this.registerSource.asObservable();
+
+    // ================
+    // Initialize Model
+    // ================
+    public userModel: UserModel = {
+        Id: 0,
+        Email: "",
+        UserName: "",
+        FullName: "",
+        Address: "",
+        Password: "",
+        ConfirmPassword: "",
+        ContactNumber: "",
+        UserTypeId: 0
+    };
 
     // ===========
     // Constructor
@@ -78,5 +100,20 @@ export class AccountService {
         setTimeout(() => {
             this.logoutSource.next(1);
         }, 500);
+    }
+
+    // ========
+    // Register
+    // ========
+    public register(objUser: UserModel): void {
+        let url = this.defaultAPIHostURL + "/api/account/Register";
+        this.http.post(url, JSON.stringify(objUser), this.options).subscribe(
+            response => {
+                this.registerSource.next(1);
+            },
+            error => {
+                this.registerSource.next(0);
+            }
+        )
     }
 }

@@ -218,6 +218,7 @@ export class ProcedureDetailComponent {
         this.procedureResultModel.ModalityProcedureId = 0;
         this.procedureResultModel.Result = "";
         this.procedureResultModel.DoctorId = 0;
+        this.procedureResultModel.Doctor = "";
 
         let detailProcedureResultDialogRef = this.dialog.open(ProcedureResultDetailDialogComponent, {
             width: '800px',
@@ -252,6 +253,7 @@ export class ProcedureDetailComponent {
         this.procedureResultModel.ModalityProcedureId = currentProcedureResult.ModalityProcedureId;
         this.procedureResultModel.Result = currentProcedureResult.Result;
         this.procedureResultModel.DoctorId = currentProcedureResult.DoctorId;
+        this.procedureResultModel.Doctor = currentProcedureResult.Doctor;
 
         let detailProcedureResultDialogRef = this.dialog.open(ProcedureResultDetailDialogComponent, {
             width: '800px',

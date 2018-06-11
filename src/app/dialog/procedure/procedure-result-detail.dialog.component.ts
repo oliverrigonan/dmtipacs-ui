@@ -19,6 +19,7 @@ import { ObservableArray } from 'wijmo/wijmo';
 })
 export class ProcedureResultDetailDialogComponent {
     title = 'Detail Procedure Result';
+    isCurrentDoctor = false;
 
     // ==========================
     // Rate Async Task Properties
@@ -57,11 +58,13 @@ export class ProcedureResultDetailDialogComponent {
         this.procedureResultModel.ModalityProcedureId = data.objCurrentProcedureResult.ModalityProcedureId;
         this.procedureResultModel.Result = data.objCurrentProcedureResult.Result;
         this.procedureResultModel.DoctorId = data.objCurrentProcedureResult.DoctorId;
+        this.procedureResultModel.Doctor = data.objCurrentProcedureResult.Doctor;
 
-        console.log(this.procedureResultModel.Id);
+        if (this.procedureResultModel.Id == 0) {
+            this.isCurrentDoctor = true;
+        }
 
         this.getModalityProcedureData(this.procedureResultModel.ModalityProcedureId);
-        this.geDoctorData(this.procedureResultModel.DoctorId);
     }
 
     // ===========================
@@ -73,7 +76,7 @@ export class ProcedureResultDetailDialogComponent {
             data => {
                 let modalityProcedureObservableArray = new ObservableArray();
 
-                if (data.length > 0) {
+                if (data != null) {
                     for (var i = 0; i <= data.length - 1; i++) {
                         modalityProcedureObservableArray.push({
                             Id: data[i].Id,
@@ -86,33 +89,6 @@ export class ProcedureResultDetailDialogComponent {
 
                 setTimeout(() => {
                     this.procedureResultModel.ModalityProcedureId = modalityProcedureId;
-                }, 1000);
-            }
-        );
-    }
-
-    // ===============
-    // Get Doctor Data
-    // ===============
-    public geDoctorData(doctorId: number): void {
-        this.procedureService.getDoctor();
-        this.doctorSubscription = this.procedureService.doctorObservable.subscribe(
-            data => {
-                let doctorObservableArray = new ObservableArray();
-
-                if (data.length > 0) {
-                    for (var i = 0; i <= data.length - 1; i++) {
-                        doctorObservableArray.push({
-                            Id: data[i].Id,
-                            FullName: data[i].FullName,
-                        });
-                    }
-                }
-
-                this.cboDoctorObservableArray = doctorObservableArray;
-
-                setTimeout(() => {
-                    this.procedureResultModel.DoctorId = doctorId;
                 }, 1000);
             }
         );

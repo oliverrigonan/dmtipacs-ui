@@ -54,6 +54,17 @@ export class UserService {
     // ================
     // Initialize Model
     // ================
+    public userModel: UserModel = {
+        Id: 0,
+        Email: "",
+        UserName: "",
+        FullName: "",
+        Address: "",
+        Password: "",
+        ConfirmPassword: "",
+        ContactNumber: "",
+        UserTypeId: 0
+    };
     public userDoctorModel: UserDoctorModel = {
         Id: 0,
         UserId: 0,
@@ -107,24 +118,18 @@ export class UserService {
     // Get User Detail
     // ===============
     public getUserDetail(id: number): void {
-        let userModel: UserModel;
         let url = this.defaultAPIHostURL + "/api/user/detail/" + id;
 
         this.http.get(url, this.options).subscribe(
             response => {
                 var result = response.json();
                 if (result != null) {
-                    userModel = {
-                        Id: result.Id,
-                        UserName: result.UserName,
-                        Password: result.Password,
-                        FullName: result.FullName,
-                        Address: result.Address,
-                        ContactNumber: result.ContactNumber,
-                        UserTypeId: result.UserTypeId
-                    };
+                    this.userModel.UserName = result.UserName;
+                    this.userModel.FullName = result.FullName;
+                    this.userModel.Address = result.Address;
+                    this.userModel.ContactNumber = result.ContactNumber;
 
-                    this.userDetailSource.next(userModel);
+                    this.userDetailSource.next(this.userModel);
                 }
             },
             error => {

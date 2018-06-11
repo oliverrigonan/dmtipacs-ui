@@ -5,6 +5,11 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 
+// ======
+// Toastr
+// ======
+import { ToastrService } from 'ngx-toastr';
+
 // =====
 // Wijmo
 // =====
@@ -15,6 +20,11 @@ import { WjComboBox } from 'wijmo/wijmo.angular2.input';
 // Service and Model
 // =================
 import { LayoutService } from '../../layout/layout.service';
+
+// =======
+// Service
+// =======
+import { AccountService } from '../../account/account.service';
 
 @Component({
   selector: 'app-facility',
@@ -29,6 +39,7 @@ export class FacilityDialogComponent {
   // ==============================
   public facilitySubscription: any;
   public cboFacilityObservableArray: ObservableArray;
+  private logoutSubscription: any;
 
   // =====
   // Wijmo
@@ -42,6 +53,8 @@ export class FacilityDialogComponent {
     public detailFacilityDialogRef: MatDialogRef<FacilityDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private layoutService: LayoutService,
+    private accountService: AccountService,
+    private toastr: ToastrService,
     private router: Router
   ) {
     this.title = data.objFacilityTitle;
@@ -58,7 +71,7 @@ export class FacilityDialogComponent {
       data => {
         let facilityObservableArray = new ObservableArray();
 
-        if (data.length > 0) {
+        if (data != null) {
           for (var i = 0; i <= data.length - 1; i++) {
             facilityObservableArray.push({
               Id: data[i].Id,
@@ -88,6 +101,24 @@ export class FacilityDialogComponent {
     setTimeout(() => {
       this.router.navigate(['/software']);
     }, 500);
+  }
+
+  // ======
+  // Logout
+  // ======
+  public btnLogoutClick(): void {
+    this.accountService.logout();
+    this.logoutSubscription = this.accountService.logoutObservable.subscribe(
+      data => {
+        if (data == 1) {
+          this.toastr.success("Logout successful.");
+          setTimeout(() => {
+            this.router.navigate(['/software']);
+            window.location.reload();
+          }, 500);
+        }
+      }
+    );
   }
 
   // ===============

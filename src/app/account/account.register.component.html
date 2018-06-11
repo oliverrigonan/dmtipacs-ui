@@ -19,46 +19,56 @@
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <form>
+                    <form (ngSubmit)="btnRegisterClick()">
+                        <mat-form-field class="input-100-percent" appearance="outline">
+                            <mat-label>Full Name</mat-label>
+                            <input required matInput [(ngModel)]="userModel.FullName" [ngModelOptions]="{standalone: true}" [disabled]="isFieldDisabled"
+                            />
+                        </mat-form-field>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <mat-form-field class="input-100-percent" appearance="outline">
-                                    <mat-label>Full Name</mat-label>
-                                    <input matInput />
+                                    <mat-label>Email</mat-label>
+                                    <input required matInput [(ngModel)]="userModel.Email" [ngModelOptions]="{standalone: true}" [disabled]="isFieldDisabled"
+                                    />
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <mat-form-field class="input-100-percent" appearance="outline">
                                     <mat-label>Contact Number</mat-label>
-                                    <input matInput />
+                                    <input required matInput [(ngModel)]="userModel.ContactNumber" [ngModelOptions]="{standalone: true}" [disabled]="isFieldDisabled"
+                                    />
                                 </mat-form-field>
                             </div>
                         </div>
                         <mat-form-field class="input-100-percent" appearance="outline">
                             <mat-label>Address</mat-label>
-                            <textarea rows="3" matInput></textarea>
+                            <textarea required rows="3" matInput [(ngModel)]="userModel.Address" [ngModelOptions]="{standalone: true}" [disabled]="isFieldDisabled"></textarea>
                         </mat-form-field>
                         <mat-form-field class="input-100-percent" appearance="outline">
                             <mat-label>Username</mat-label>
-                            <input matInput />
+                            <input required matInput [(ngModel)]="userModel.UserName" [ngModelOptions]="{standalone: true}" [disabled]="isFieldDisabled"
+                            />
                         </mat-form-field>
                         <div class="row">
                             <div class="col-md-6">
                                 <mat-form-field class="input-100-percent" appearance="outline">
                                     <mat-label>Password</mat-label>
-                                    <input matInput [type]="passwordhide ? 'text' : 'password'">
+                                    <input required matInput [type]="passwordhide ? 'text' : 'password'" [(ngModel)]="userModel.Password" [ngModelOptions]="{standalone: true}"
+                                        [disabled]="isFieldDisabled" />
                                     <mat-icon matSuffix (click)="passwordhide = !passwordhide">{{passwordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
                                 <mat-form-field class="input-100-percent" appearance="outline">
                                     <mat-label>Confirm Password</mat-label>
-                                    <input matInput [type]="confirmPasswordhide ? 'text' : 'password'">
+                                    <input required matInput [type]="confirmPasswordhide ? 'text' : 'password'" [(ngModel)]="userModel.ConfirmPassword" [ngModelOptions]="{standalone: true}"
+                                        [disabled]="isFieldDisabled" />
                                     <mat-icon matSuffix (click)="confirmPasswordhide = !confirmPasswordhide">{{confirmPasswordhide ? 'visibility' : 'visibility_off'}}</mat-icon>
                                 </mat-form-field>
                             </div>
                         </div>
-                        <button mat-raised-button color="primary" type="submit" style="margin-top: 15px; height: 50px; font-size: 20px;">
+                        <button mat-raised-button color="primary" type="submit" id="btnRegister" style="margin-top: 15px; height: 50px; font-size: 20px;">
                             Register
                         </button>
                     </form>

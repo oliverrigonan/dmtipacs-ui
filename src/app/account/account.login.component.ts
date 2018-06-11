@@ -40,10 +40,12 @@ export class AccountLoginComponent {
   // ================
   public userModel: UserModel = {
     Id: 0,
+    Email: "",
     UserName: "",
-    Password: "",
     FullName: "",
     Address: "",
+    Password: "",
+    ConfirmPassword: "",
     ContactNumber: "",
     UserTypeId: 0
   };
@@ -61,6 +63,8 @@ export class AccountLoginComponent {
   // Login
   // =====
   public btnLoginClick(): void {
+    if (this.loginSubscription != null) this.loginSubscription.unsubscribe();
+
     let btnLogin: Element = document.getElementById("btnLogin");
     btnLogin.setAttribute("disabled", "disabled");
     btnLogin.innerHTML = "Logging in...";

@@ -12,14 +12,11 @@
         <mat-label>Result</mat-label>
         <textarea [(ngModel)]="procedureResultModel.Result" rows="10" matInput></textarea>
     </mat-form-field>
-    <div class="form-group">
-        <label>Doctor</label>
-        <div>
-            <wj-combo-box #cboDoctor [itemsSource]="cboDoctorObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'FullName'"
-                [selectedValuePath]="'Id'" [(ngModel)]="procedureResultModel.DoctorId">
-            </wj-combo-box>
-        </div>
-    </div>
+    <mat-form-field class="input-100-percent" appearance="outline" [hidden]="isCurrentDoctor">
+        <mat-label>Doctor</mat-label>
+        <input [(ngModel)]="procedureResultModel.Doctor" matInput disabled />
+    </mat-form-field>
+    <br />
     <br />
 </mat-dialog-content>
 <mat-dialog-actions>

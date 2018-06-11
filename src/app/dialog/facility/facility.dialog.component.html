@@ -13,10 +13,14 @@
 <mat-dialog-actions>
     <table border="0" style="width: 100%;">
         <tr>
-            <td style="width: 95%;"></td>
+            <td style="width: 95%;">
+                <button mat-mini-fab color="warn" id="btnUpdateFacility" (click)="btnLogoutClick()">
+                    <i class="fa fa-power-off fa-fw"></i>
+                </button>
+            </td>
             <td style="width: 5%;" align="right">
                 <button mat-raised-button color="primary" id="btnUpdateFacility" (click)="btnUpdateFacilityClick()">
-                    <i class="fa fa-check"></i> Update
+                    <i class="fa fa-check"></i> Done
                 </button>
             </td>
         </tr>
