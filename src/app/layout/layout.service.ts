@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { ObservableArray } from 'wijmo/wijmo';
 import { Subject, Observable } from 'rxjs';
 
+import { AppSettings } from '../app-settings'
+
 @Injectable()
 export class LayoutService {
     // ================================
@@ -21,7 +23,7 @@ export class LayoutService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
-    private defaultAPIHostURL: string = "http://localhost:52125";
+    private defaultAPIHostURL: string = this.appSettings.defaultAPIHostURL;
 
     // ================
     // Async Properties 
@@ -34,7 +36,8 @@ export class LayoutService {
     // ===========
     constructor(
         private router: Router,
-        private http: Http
+        private http: Http,
+        private appSettings: AppSettings
     ) { }
 
     // =================
@@ -52,7 +55,8 @@ export class LayoutService {
                         facilitiesObservableArray.push({
                             Id: results[i].Id,
                             UserId: results[i].UserId,
-                            UserFacility: results[i].UserFacility
+                            UserFacility: results[i].UserFacility,
+                            UserTypeId: results[i].UserTypeId
                         });
                     }
 

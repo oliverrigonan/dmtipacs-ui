@@ -184,10 +184,15 @@ export class ReportsComponent {
   // Get Procedure Summary Report Data
   // =================================
   public getProcedureSummaryReportData(): void {
+    this.procedureSummaryReportData = new ObservableArray();
+    this.procedureSummaryReportCollectionView = new CollectionView(this.procedureSummaryReportData);
+    this.procedureSummaryReportCollectionView.pageSize = this.procedureSummaryReportNumberOfPageIndex;
+    this.procedureSummaryReportCollectionView.trackChanges = true;
+
     if (this.procedureSummaryReportSubscription != null) this.procedureSummaryReportSubscription.unsubscribe();
 
-    this.isBtnRefreshProcedureSummaryReportDataDisabled = true;
     this.isProcedureSummaryReportProgressBarHidden = false;
+    this.isBtnRefreshProcedureSummaryReportDataDisabled = true;
 
     let dateStart = [this.procedureSummaryReportStartDateData.getFullYear(), this.procedureSummaryReportStartDateData.getMonth() + 1, this.procedureSummaryReportStartDateData.getDate()].join('-');
     let dateEnd = [this.procedureSummaryReportEndDateData.getFullYear(), this.procedureSummaryReportEndDateData.getMonth() + 1, this.procedureSummaryReportEndDateData.getDate()].join('-');
@@ -196,17 +201,13 @@ export class ReportsComponent {
     this.procedureSummaryReportSubscription = this.reportService.procedureSummaryReportObservable.subscribe(
       data => {
         if (data != null) {
-          this.isProcedureSummaryReportProgressBarHidden = true;
-          if (data.length > 0) {
-            this.procedureSummaryReportData = data;
-            this.procedureSummaryReportCollectionView = new CollectionView(this.procedureSummaryReportData);
-            this.procedureSummaryReportCollectionView.pageSize = this.procedureSummaryReportNumberOfPageIndex;
-            this.procedureSummaryReportCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isProcedureSummaryReportProgressBarHidden = true;
+          this.procedureSummaryReportData = data;
+          this.procedureSummaryReportCollectionView = new CollectionView(this.procedureSummaryReportData);
+          this.procedureSummaryReportCollectionView.pageSize = this.procedureSummaryReportNumberOfPageIndex;
+          this.procedureSummaryReportCollectionView.trackChanges = true;
         }
 
+        this.isProcedureSummaryReportProgressBarHidden = true;
         this.isBtnRefreshProcedureSummaryReportDataDisabled = false;
       }
     );
@@ -227,10 +228,15 @@ export class ReportsComponent {
   // Get Procedure Detail Report Data
   // ================================
   public getProcedureDetailReportData(): void {
+    this.procedureDetailReportData = new ObservableArray();
+    this.procedureDetailReportCollectionView = new CollectionView(this.procedureDetailReportData);
+    this.procedureDetailReportCollectionView.pageSize = this.procedureDetailReportNumberOfPageIndex;
+    this.procedureDetailReportCollectionView.trackChanges = true;
+
     if (this.procedureDetailReportSubscription != null) this.procedureDetailReportSubscription.unsubscribe();
 
-    this.isBtnRefreshProcedureDetailReportDataDisabled = true;
     this.isProcedureDetailReportProgressBarHidden = false;
+    this.isBtnRefreshProcedureDetailReportDataDisabled = true;
 
     let dateStart = [this.procedureDetailReportStartDateData.getFullYear(), this.procedureDetailReportStartDateData.getMonth() + 1, this.procedureDetailReportStartDateData.getDate()].join('-');
     let dateEnd = [this.procedureDetailReportEndDateData.getFullYear(), this.procedureDetailReportEndDateData.getMonth() + 1, this.procedureDetailReportEndDateData.getDate()].join('-');
@@ -239,17 +245,13 @@ export class ReportsComponent {
     this.procedureDetailReportSubscription = this.reportService.procedureDetailReportObservable.subscribe(
       data => {
         if (data != null) {
-          this.isProcedureDetailReportProgressBarHidden = true;
-          if (data.length > 0) {
-            this.procedureDetailReportData = data;
-            this.procedureDetailReportCollectionView = new CollectionView(this.procedureDetailReportData);
-            this.procedureDetailReportCollectionView.pageSize = this.procedureDetailReportNumberOfPageIndex;
-            this.procedureDetailReportCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isProcedureDetailReportProgressBarHidden = true;
+          this.procedureDetailReportData = data;
+          this.procedureDetailReportCollectionView = new CollectionView(this.procedureDetailReportData);
+          this.procedureDetailReportCollectionView.pageSize = this.procedureDetailReportNumberOfPageIndex;
+          this.procedureDetailReportCollectionView.trackChanges = true;
         }
 
+        this.isProcedureDetailReportProgressBarHidden = true;
         this.isBtnRefreshProcedureDetailReportDataDisabled = false;
       }
     );

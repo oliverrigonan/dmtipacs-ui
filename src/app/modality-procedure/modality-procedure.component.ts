@@ -79,24 +79,20 @@ export class ModalityProcedureComponent {
     this.modalityProcedureCollectionView.pageSize = 15;
     this.modalityProcedureCollectionView.trackChanges = true;
 
-    this.isBtnRefreshModalityProcedureDataDisabled = true;
     this.isProgressBarHidden = false;
+    this.isBtnRefreshModalityProcedureDataDisabled = true;
 
     this.modalityProcedureService.getModalityProcedure();
     this.modalityProcedureSubscription = this.modalityProcedureService.modalityProcedureObservable.subscribe(
       data => {
         if (data != null) {
-          this.isProgressBarHidden = true;
-          if (data.length > 0) {
-            this.modalityProcedureData = data;
-            this.modalityProcedureCollectionView = new CollectionView(this.modalityProcedureData);
-            this.modalityProcedureCollectionView.pageSize = 15;
-            this.modalityProcedureCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isProgressBarHidden = true;
+          this.modalityProcedureData = data;
+          this.modalityProcedureCollectionView = new CollectionView(this.modalityProcedureData);
+          this.modalityProcedureCollectionView.pageSize = 15;
+          this.modalityProcedureCollectionView.trackChanges = true;
         }
 
+        this.isProgressBarHidden = true;
         this.isBtnRefreshModalityProcedureDataDisabled = false;
       }
     );

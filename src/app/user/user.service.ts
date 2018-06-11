@@ -17,6 +17,8 @@ import { Subject, Observable } from 'rxjs';
 import { UserModel } from '../model/user.model';
 import { UserDoctorModel } from '../model/user-doctor.model';
 
+import { AppSettings } from '../app-settings'
+
 @Injectable()
 export class UserService {
     // ================================
@@ -27,7 +29,7 @@ export class UserService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
-    private defaultAPIHostURL: string = "http://localhost:52125";
+    private defaultAPIHostURL: string = this.appSettings.defaultAPIHostURL;
 
     // ================
     // Async Properties 
@@ -63,7 +65,8 @@ export class UserService {
     // ===========
     constructor(
         private router: Router,
-        private http: Http
+        private http: Http,
+        private appSettings: AppSettings
     ) { }
 
     // ========
@@ -90,6 +93,8 @@ export class UserService {
                     }
 
                     this.userSource.next(userObservableArray);
+                } else {
+                    this.userSource.next(null);
                 }
             },
             error => {

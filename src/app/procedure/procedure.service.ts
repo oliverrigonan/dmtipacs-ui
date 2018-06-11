@@ -17,6 +17,8 @@ import { Subject, Observable } from 'rxjs';
 import { ProcedureModel } from '../model/procedure.model';
 import { ProcedureResultModel } from '../model/procedure-result.model';
 
+import { AppSettings } from '../app-settings'
+
 @Injectable()
 export class ProcedureService {
     // ================================
@@ -27,7 +29,7 @@ export class ProcedureService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
-    private defaultAPIHostURL: string = "http://localhost:52125";
+    private defaultAPIHostURL: string = this.appSettings.defaultAPIHostURL;
 
     // ================
     // Async Properties 
@@ -74,7 +76,8 @@ export class ProcedureService {
     // ===========
     constructor(
         private router: Router,
-        private http: Http
+        private http: Http,
+        private appSettings: AppSettings
     ) { }
 
     // =============

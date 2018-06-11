@@ -75,24 +75,20 @@ export class BodyPartsComponent {
     this.bodyPartsCollectionView.pageSize = 15;
     this.bodyPartsCollectionView.trackChanges = true;
 
-    this.isBtnRefreshBodyPartsDataDisabled = true;
     this.isProgressBarHidden = false;
+    this.isBtnRefreshBodyPartsDataDisabled = true;
 
     this.bodyPartsService.getBodyParts();
     this.bodyPartsSubscription = this.bodyPartsService.bodyPartsObservable.subscribe(
       data => {
         if (data != null) {
-          this.isProgressBarHidden = true;
-          if (data.length > 0) {
-            this.bodyPartsData = data;
-            this.bodyPartsCollectionView = new CollectionView(this.bodyPartsData);
-            this.bodyPartsCollectionView.pageSize = 15;
-            this.bodyPartsCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isProgressBarHidden = true;
+          this.bodyPartsData = data;
+          this.bodyPartsCollectionView = new CollectionView(this.bodyPartsData);
+          this.bodyPartsCollectionView.pageSize = 15;
+          this.bodyPartsCollectionView.trackChanges = true;
         }
-
+        
+        this.isProgressBarHidden = true;
         this.isBtnRefreshBodyPartsDataDisabled = false;
       }
     );

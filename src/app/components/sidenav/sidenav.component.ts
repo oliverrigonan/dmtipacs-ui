@@ -56,6 +56,7 @@ export class SidenavComponent {
         objFacilityTitle: "Choose Facility",
       }
     });
+    
     detailFacilityDialogRef.disableClose = true;
     detailFacilityDialogRef.afterClosed().subscribe(result => {
       this.currentFacility = result;

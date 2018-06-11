@@ -186,8 +186,8 @@ export class ProcedureComponent {
     this.procedureCollectionView.pageSize = 15;
     this.procedureCollectionView.trackChanges = true;
 
-    this.isBtnRefreshProcedureDataDisabled = true;
     this.isProgressBarHidden = false;
+    this.isBtnRefreshProcedureDataDisabled = true;
 
     let dateStart = [this.procedureStartDateData.getFullYear(), this.procedureStartDateData.getMonth() + 1, this.procedureStartDateData.getDate()].join('-');
     let dateEnd = [this.procedureEndDateData.getFullYear(), this.procedureEndDateData.getMonth() + 1, this.procedureEndDateData.getDate()].join('-');
@@ -196,17 +196,13 @@ export class ProcedureComponent {
     this.procedureSubscription = this.procedureService.procedureObservable.subscribe(
       data => {
         if (data != null) {
-          this.isProgressBarHidden = true;
-          if (data.length > 0) {
-            this.procedureData = data;
-            this.procedureCollectionView = new CollectionView(this.procedureData);
-            this.procedureCollectionView.pageSize = this.procedureNumberOfPageIndex;
-            this.procedureCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isProgressBarHidden = true;
+          this.procedureData = data;
+          this.procedureCollectionView = new CollectionView(this.procedureData);
+          this.procedureCollectionView.pageSize = this.procedureNumberOfPageIndex;
+          this.procedureCollectionView.trackChanges = true;
         }
 
+        this.isProgressBarHidden = true;
         this.isBtnRefreshProcedureDataDisabled = false;
       }
     );

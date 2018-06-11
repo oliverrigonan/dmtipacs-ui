@@ -197,16 +197,13 @@ export class UserDetailComponent {
     this.userDoctorSubscription = this.userService.userDoctorObservable.subscribe(
       data => {
         if (data != null) {
-          this.isUserDoctorProgressBarHidden = true;
-          if (data.length > 0) {
-            this.userDoctorData = data;
-            this.userDoctorCollectionView = new CollectionView(this.userDoctorData);
-            this.userDoctorCollectionView.pageSize = 15;
-            this.userDoctorCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isUserDoctorProgressBarHidden = true;
+          this.userDoctorData = data;
+          this.userDoctorCollectionView = new CollectionView(this.userDoctorData);
+          this.userDoctorCollectionView.pageSize = 15;
+          this.userDoctorCollectionView.trackChanges = true;
         }
+
+        this.isUserDoctorProgressBarHidden = true;
       }
     );
   }

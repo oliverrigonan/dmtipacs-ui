@@ -81,24 +81,20 @@ export class RateComponent {
     this.rateCollectionView.pageSize = 15;
     this.rateCollectionView.trackChanges = true;
 
-    this.isBtnRefreshRateDataDisabled = true;
     this.isProgressBarHidden = false;
+    this.isBtnRefreshRateDataDisabled = true;
 
     this.rateService.getRate();
     this.rateSubscription = this.rateService.rateObservable.subscribe(
       data => {
         if (data != null) {
-          this.isProgressBarHidden = true;
-          if (data.length > 0) {
-            this.rateData = data;
-            this.rateCollectionView = new CollectionView(this.rateData);
-            this.rateCollectionView.pageSize = 15;
-            this.rateCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isProgressBarHidden = true;
+          this.rateData = data;
+          this.rateCollectionView = new CollectionView(this.rateData);
+          this.rateCollectionView.pageSize = 15;
+          this.rateCollectionView.trackChanges = true;
         }
 
+        this.isProgressBarHidden = true;
         this.isBtnRefreshRateDataDisabled = false;
       }
     );

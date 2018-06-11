@@ -5,11 +5,12 @@ import { Injectable } from "@angular/core";
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 
-
 // =============
 // Async Classes
 // =============
 import { Subject, Observable } from 'rxjs';
+
+import { AppSettings } from '../app-settings'
 
 @Injectable()
 export class AccountService {
@@ -20,7 +21,7 @@ export class AccountService {
         'Content-Type': 'application/json'
     });
     private options = new RequestOptions({ headers: this.headers });
-    private defaultAPIHostURL: string = "http://localhost:52125";
+    private defaultAPIHostURL: string = this.appSettings.defaultAPIHostURL;
 
     // =================
     // public properties
@@ -35,8 +36,9 @@ export class AccountService {
     // ===========
     constructor(
         private router: Router,
-        private http: Http) {
-    }
+        private http: Http,
+        private appSettings: AppSettings
+    ) { }
 
     // =====
     // Login
@@ -72,7 +74,7 @@ export class AccountService {
         localStorage.removeItem('username');
         localStorage.removeItem('current_facility_id');
         localStorage.removeItem('current_facility');
-        
+
         setTimeout(() => {
             this.logoutSource.next(1);
         }, 500);

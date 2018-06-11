@@ -198,16 +198,13 @@ export class ProcedureDetailComponent {
         this.procedureResultSubscription = this.procedureService.procedureResultObservable.subscribe(
             data => {
                 if (data != null) {
-                    this.isProcedureResultProgressBarHidden = true;
-                    if (data.length > 0) {
-                        this.procedureResultData = data;
-                        this.procedureResultCollectionView = new CollectionView(this.procedureResultData);
-                        this.procedureResultCollectionView.pageSize = 15;
-                        this.procedureResultCollectionView.trackChanges = true;
-                    }
-                } else {
-                    this.isProcedureResultProgressBarHidden = true;
+                    this.procedureResultData = data;
+                    this.procedureResultCollectionView = new CollectionView(this.procedureResultData);
+                    this.procedureResultCollectionView.pageSize = 15;
+                    this.procedureResultCollectionView.trackChanges = true;
                 }
+
+                this.isProcedureResultProgressBarHidden = true;
             }
         );
     }
@@ -345,16 +342,13 @@ export class ProcedureDetailComponent {
         this.procedureComparativeSubscription = this.procedureService.procedureComparativeObservable.subscribe(
             data => {
                 if (data != null) {
-                    this.isProcedureComparativeProgressBarHidden = true;
-                    if (data.length > 0) {
-                        this.procedureComparativeData = data;
-                        this.procedureComparativeCollectionView = new CollectionView(this.procedureComparativeData);
-                        this.procedureComparativeCollectionView.pageSize = 15;
-                        this.procedureComparativeCollectionView.trackChanges = true;
-                    }
-                } else {
-                    this.isProcedureComparativeProgressBarHidden = true;
+                    this.procedureComparativeData = data;
+                    this.procedureComparativeCollectionView = new CollectionView(this.procedureComparativeData);
+                    this.procedureComparativeCollectionView.pageSize = 15;
+                    this.procedureComparativeCollectionView.trackChanges = true;
                 }
+
+                this.isProcedureComparativeProgressBarHidden = true;
             }
         );
     }
@@ -381,7 +375,7 @@ export class ProcedureDetailComponent {
         if (localStorage.getItem("access_token") == null) {
             this.router.navigate(['/account/login']);
         } else {
-            if (parseInt(localStorage.getItem("current_facility_id")) != 2) {
+            if (parseInt(localStorage.getItem("current_userType_Id")) != 2) {
                 this.isDoctor = true;
             }
 

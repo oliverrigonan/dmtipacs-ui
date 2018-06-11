@@ -72,24 +72,20 @@ export class UserComponent {
     this.userCollectionView.pageSize = 15;
     this.userCollectionView.trackChanges = true;
 
-    this.isBtnRefreshUserDataDisabled = true;
     this.isProgressBarHidden = false;
+    this.isBtnRefreshUserDataDisabled = true;
 
     this.userService.getUser();
     this.userSubscription = this.userService.userObservable.subscribe(
       data => {
         if (data != null) {
-          this.isProgressBarHidden = true;
-          if (data.length > 0) {
-            this.userData = data;
-            this.userCollectionView = new CollectionView(this.userData);
-            this.userCollectionView.pageSize = 15;
-            this.userCollectionView.trackChanges = true;
-          }
-        } else {
-          this.isProgressBarHidden = true;
+          this.userData = data;
+          this.userCollectionView = new CollectionView(this.userData);
+          this.userCollectionView.pageSize = 15;
+          this.userCollectionView.trackChanges = true;
         }
 
+        this.isProgressBarHidden = true;
         this.isBtnRefreshUserDataDisabled = false;
       }
     );

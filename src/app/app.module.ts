@@ -59,6 +59,7 @@ import { LayoutModule } from './layout/layout.module'
 // Custom TS Files
 // ===============
 import { AppRouteReuseStrategy } from './app-route-reuse-strategy'
+import { AppSettings } from './app-settings'
 
 @NgModule({
   declarations: [
@@ -88,7 +89,7 @@ import { AppRouteReuseStrategy } from './app-route-reuse-strategy'
     MatCardModule,
     MatInputModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
   ],
   exports: [
     MatDividerModule,
@@ -100,6 +101,7 @@ import { AppRouteReuseStrategy } from './app-route-reuse-strategy'
     MatSidenavModule
   ],
   providers: [
+    AppSettings,
     AccountService,
     { provide: RouteReuseStrategy, useClass: AppRouteReuseStrategy }
   ],
