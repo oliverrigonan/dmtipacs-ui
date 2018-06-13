@@ -46,7 +46,9 @@ export class ProcedureDetailComponent {
     isProcedureResultProgressBarHidden = false;
     isProcedureComparativeProgressBarHidden = false;
     downloadJsonHref: SafeUrl;
-    isDoctor: Boolean = false;
+    isBtnAddProcedureResultDisabled: Boolean = false;
+    isBtnEditProcedureResultDisabled: Boolean = false;
+    isBtnDeleteProcedureResultDisabled: Boolean = false;
 
     // =====
     // Wijmo
@@ -169,9 +171,9 @@ export class ProcedureDetailComponent {
             );
     }
 
-    // =============
-    // Download JSON
-    // =============
+    // =========================
+    // Download Procedure - JSON
+    // =========================
     public btnDownloadJSONProcedureClick(): void {
         let jsonData = JSON.stringify(this.procedureModel);
         let element = document.createElement('a');
@@ -202,6 +204,16 @@ export class ProcedureDetailComponent {
                     this.procedureResultCollectionView = new CollectionView(this.procedureResultData);
                     this.procedureResultCollectionView.pageSize = 15;
                     this.procedureResultCollectionView.trackChanges = true;
+
+                    if (parseInt(localStorage.getItem("current_user_Id")) != this.procedureResultCollectionView.items[0].DoctorId) {
+                        this.isBtnAddProcedureResultDisabled = true;
+                        this.isBtnEditProcedureResultDisabled = true;
+                        this.isBtnDeleteProcedureResultDisabled = true;
+                    } else {
+                        this.isBtnAddProcedureResultDisabled = false;
+                        this.isBtnEditProcedureResultDisabled = false;
+                        this.isBtnDeleteProcedureResultDisabled = false;
+                    }
                 }
 
                 this.isProcedureResultProgressBarHidden = true;
@@ -355,6 +367,50 @@ export class ProcedureDetailComponent {
         );
     }
 
+    // =====================================
+    // Download Procedure Comparative - JSON
+    // =====================================
+    public btnDownloadJSONProcedureComparativeClick(): void {
+        let procedureComparative = [];
+
+        for (let i = 0; i < this.procedureComparativeCollectionView.items.length; i++) {
+            procedureComparative.push({
+                Id: this.procedureComparativeCollectionView.items[i].Id,
+                TransactionNumber: this.procedureComparativeCollectionView.items[i].TransactionNumber,
+                TransactionDateTime: this.procedureComparativeCollectionView.items[i].TransactionDateTime,
+                TransactionTime: this.procedureComparativeCollectionView.items[i].TransactionTime,
+                DICOMFileName: this.procedureComparativeCollectionView.items[i].DICOMFileName,
+                PatientName: this.procedureComparativeCollectionView.items[i].PatientName,
+                Gender: this.procedureComparativeCollectionView.items[i].Gender,
+                DateOfBirth: this.procedureComparativeCollectionView.items[i].DateOfBirth,
+                Age: this.procedureComparativeCollectionView.items[i].Age,
+                Particulars: this.procedureComparativeCollectionView.items[i].Particulars,
+                ModalityId: this.procedureComparativeCollectionView.items[i].ModalityId,
+                Modality: this.procedureComparativeCollectionView.items[i].Modality,
+                BodyPartId: this.procedureComparativeCollectionView.items[i].BodyPartId,
+                BodyPart: this.procedureComparativeCollectionView.items[i].BodyPart,
+                UserId: this.procedureComparativeCollectionView.items[i].UserId,
+                User: this.procedureComparativeCollectionView.items[i].User,
+                PatientAddress: this.procedureComparativeCollectionView.items[i].PatientAddress,
+                ReferringPhysician: this.procedureComparativeCollectionView.items[i].ReferringPhysician,
+                StudyDate: this.procedureComparativeCollectionView.items[i].StudyDate,
+                HospitalNumber: this.procedureComparativeCollectionView.items[i].HospitalNumber,
+                HospitalWardNumber: this.procedureComparativeCollectionView.items[i].HospitalWardNumber,
+                StudyInstanceId: this.procedureComparativeCollectionView.items[i].StudyInstanceId,
+                Doctor: this.procedureComparativeCollectionView.items[i].Doctor
+            });
+        }
+
+        let jsonData = JSON.stringify(procedureComparative);
+        let element = document.createElement('a');
+        element.setAttribute('href', "data:text/json;charset=UTF-8," + encodeURIComponent(jsonData));
+        element.setAttribute('download', this.procedureModel.TransactionNumber + ".json");
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
     // =============
     // On Click Tabs
     // =============
@@ -377,8 +433,8 @@ export class ProcedureDetailComponent {
         if (localStorage.getItem("access_token") == null) {
             this.router.navigate(['/account/login']);
         } else {
-            if (parseInt(localStorage.getItem("current_userType_Id")) != 2) {
-                this.isDoctor = true;
+            if (parseInt(localStorage.getItem("current_user_type_Id")) != 2) {
+                this.isBtnAddProcedureResultDisabled = true;
             }
 
             this.getProcedureDetailData();

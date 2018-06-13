@@ -77,7 +77,8 @@ export class FacilityDialogComponent {
               Id: data[i].Id,
               UserId: data[i].UserId,
               UserFacility: data[i].UserFacility,
-              UserTypeId: data[i].UserTypeId
+              UserTypeId: data[i].UserTypeId,
+              CurrentUserId: data[i].CurrentUserId
             });
           }
         }
@@ -93,7 +94,8 @@ export class FacilityDialogComponent {
   public btnUpdateFacilityClick(): void {
     localStorage.setItem('current_facility_id', this.cboFacility.selectedItem["UserId"]);
     localStorage.setItem('current_facility', this.cboFacility.selectedItem["UserFacility"]);
-    localStorage.setItem('current_userType_Id', this.cboFacility.selectedItem["UserTypeId"]);
+    localStorage.setItem('current_user_type_Id', this.cboFacility.selectedItem["UserTypeId"]);
+    localStorage.setItem('current_user_Id', this.cboFacility.selectedItem["CurrentUserId"]);
 
     this.detailFacilityDialogRef.close(this.cboFacility.selectedItem["UserFacility"]);
     if (this.facilitySubscription != null) this.facilitySubscription.unsubscribe();

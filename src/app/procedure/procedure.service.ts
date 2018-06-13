@@ -356,7 +356,8 @@ export class ProcedureService {
     // Get Procedure Comparative
     // =========================
     public getProcedureComparative(id: number): void {
-        let url = this.defaultAPIHostURL + "/api/procedure/list/comparative/" + id + "/24";
+        let facilityId: number = parseInt(localStorage.getItem("current_facility_id"));
+        let url = this.defaultAPIHostURL + "/api/procedure/list/comparative/" + id + "/" + facilityId;
         let procedureComparativeObservableArray = new ObservableArray();
 
         this.http.get(url, this.options).subscribe(
@@ -369,11 +370,24 @@ export class ProcedureService {
                             TransactionNumber: results[i].TransactionNumber,
                             TransactionDateTime: results[i].TransactionDateTime,
                             TransactionTime: results[i].TransactionTime,
+                            DICOMFileName: results[i].DICOMFileName,
                             PatientName: results[i].PatientName,
                             Gender: results[i].Gender,
+                            DateOfBirth: results[i].DateOfBirth,
                             Age: results[i].Age,
+                            Particulars: results[i].Particulars,
+                            ModalityId: results[i].ModalityId,
                             Modality: results[i].Modality,
+                            BodyPartId: results[i].BodyPartId,
                             BodyPart: results[i].BodyPart,
+                            UserId: results[i].UserId,
+                            User: results[i].User,
+                            PatientAddress: results[i].PatientAddress,
+                            ReferringPhysician: results[i].ReferringPhysician,
+                            StudyDate: results[i].StudyDate,
+                            HospitalNumber: results[i].HospitalNumber,
+                            HospitalWardNumber: results[i].HospitalWardNumber,
+                            StudyInstanceId: results[i].StudyInstanceId,
                             Doctor: results[i].Doctor
                         });
                     }

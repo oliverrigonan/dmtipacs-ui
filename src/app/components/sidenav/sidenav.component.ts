@@ -56,7 +56,7 @@ export class SidenavComponent {
         objFacilityTitle: "Choose Facility",
       }
     });
-    
+
     detailFacilityDialogRef.disableClose = true;
     detailFacilityDialogRef.afterClosed().subscribe(result => {
       this.currentFacility = result;
@@ -67,16 +67,20 @@ export class SidenavComponent {
   // On Load Page
   // ============
   ngOnInit() {
-    if (localStorage.getItem("current_facility_id") == null || localStorage.getItem("current_facility") == null) {
-      if (localStorage.getItem("access_token") == null) {
-        this.router.navigate(['/account/login']);
-      } else {
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/account/login']);
+    } else {
+      if (localStorage.getItem("current_facility_id") == null ||
+        localStorage.getItem("current_facility") == null ||
+        localStorage.getItem("current_user_type_Id") == null ||
+        localStorage.getItem("current_user_Id") == null
+      ) {
         setTimeout(() => {
           this.launchFacilityDialog();
         }, 100);
+      } else {
+        this.currentFacility = localStorage.getItem("current_facility");
       }
-    } else {
-      this.currentFacility = localStorage.getItem("current_facility");
     }
   }
 }

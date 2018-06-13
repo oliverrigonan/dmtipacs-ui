@@ -56,7 +56,8 @@ export class LayoutService {
                             Id: results[i].Id,
                             UserId: results[i].UserId,
                             UserFacility: results[i].UserFacility,
-                            UserTypeId: results[i].UserTypeId
+                            UserTypeId: results[i].UserTypeId,
+                            CurrentUserId: results[i].CurrentUserId
                         });
                     }
 

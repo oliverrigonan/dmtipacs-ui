@@ -106,7 +106,7 @@
                     <tr>
                         <td style="width: 95%;"></td>
                         <td style="width: 5%;" align="right">
-                            <button mat-raised-button color="primary" (click)="btnAddProcedureResultClick()" [disabled]="isDoctor">
+                            <button mat-raised-button color="primary" (click)="btnAddProcedureResultClick()" [disabled]="isBtnAddProcedureResultDisabled">
                                 <i class="fa fa-plus"></i> Add
                             </button>
                         </td>
@@ -119,7 +119,7 @@
                     <wj-flex-grid-filter></wj-flex-grid-filter>
                     <wj-flex-grid-column [header]="Edit" [isReadOnly]="true" [isContentHtml]="true" [width]="95">
                         <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                            <button mat-raised-button color="primary" class="btn-xs" (click)="btnEditProcedureResultClick()">
+                            <button mat-raised-button color="primary" class="btn-xs" (click)="btnEditProcedureResultClick()" [disabled]="isBtnEditProcedureResultDisabled">
                                 <i class="fa fa-edit fa-fw"></i> Edit
                             </button>
                         </ng-template>
@@ -133,7 +133,7 @@
                     </wj-flex-grid-column>
                     <wj-flex-grid-column [header]="Delete" [isReadOnly]="true" [width]="96">
                         <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-                            <button mat-raised-button color="warn" class="btn-xs" (click)="btnDeleteProcedureResultClick()">
+                            <button mat-raised-button color="warn" class="btn-xs" (click)="btnDeleteProcedureResultClick()" [disabled]="isBtnDeleteProcedureResultDisabled">
                                 <i class="fa fa-trash fa-fw"></i> Delete
                             </button>
                         </ng-template>
@@ -174,7 +174,7 @@
                     <tr>
                         <td style="width: 90%;"></td>
                         <td style="width: 5%;" align="right">
-                            <button mat-raised-button color="primary" (click)="btnViewProcedureComparativeAllImagesClick()">
+                            <button mat-raised-button color="primary" (click)="btnDownloadJSONProcedureComparativeClick()">
                                 <i class="fa fa-eye"></i> View All Images
                             </button>
                         </td>
