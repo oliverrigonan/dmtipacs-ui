@@ -38,6 +38,8 @@ export class UserService {
     public userObservable = this.userSource.asObservable();
     public userDetailSource = new Subject<UserModel>();
     public userDetailObservable = this.userDetailSource.asObservable();
+    public userCurrentSource = new Subject<UserModel>();
+    public userCurrentObservable = this.userCurrentSource.asObservable();
     public userTypeSource = new Subject<ObservableArray>();
     public userTypeObservable = this.userTypeSource.asObservable();
     public userUpdateSource = new Subject<number>();
@@ -306,5 +308,33 @@ export class UserService {
                 }
             }
         )
+    }
+
+    // ================
+    // Get Current User
+    // ================
+    public getCurrentUser(): void {
+        let url = this.defaultAPIHostURL + "/api/user/current";
+
+        this.http.get(url, this.options).subscribe(
+            response => {
+                var result = response.json();
+                if (result != null) {
+                    this.userModel.Id = result.Id;
+                    this.userModel.UserName = result.UserName;
+                    this.userModel.FullName = result.FullName;
+                    this.userModel.Address = result.Address;
+                    this.userModel.ContactNumber = result.ContactNumber;
+                    this.userModel.UserTypeId = result.UserTypeId;
+
+                    this.userCurrentSource.next(this.userModel);
+                } else {
+                    this.userCurrentSource.next(null);
+                }
+            },
+            error => {
+                this.userCurrentSource.next(null);
+            }
+        );
     }
 }

@@ -3,8 +3,8 @@
     <div class="form-group">
         <label>Doctor</label>
         <div>
-            <wj-combo-box #cboModality [itemsSource]="cboDoctorObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'FullName'"
-                [selectedValuePath]="'Id'" [(ngModel)]="userDoctorModel.DoctorId">
+            <wj-combo-box class="input-100-percent" #cboModality [itemsSource]="cboDoctorObservableArray" [isEditable]="false" [isRequired]="true"
+                [displayMemberPath]="'FullName'" [selectedValuePath]="'Id'" [(ngModel)]="userDoctorModel.DoctorId">
             </wj-combo-box>
         </div>
     </div>

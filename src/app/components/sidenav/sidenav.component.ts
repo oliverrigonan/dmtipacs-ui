@@ -70,11 +70,7 @@ export class SidenavComponent {
     if (localStorage.getItem("access_token") == null) {
       this.router.navigate(['/account/login']);
     } else {
-      if (localStorage.getItem("current_facility_id") == null ||
-        localStorage.getItem("current_facility") == null ||
-        localStorage.getItem("current_user_type_Id") == null ||
-        localStorage.getItem("current_user_Id") == null
-      ) {
+      if (localStorage.getItem("current_facility_id") == null || localStorage.getItem("current_facility") == null) {
         setTimeout(() => {
           this.launchFacilityDialog();
         }, 100);

@@ -76,9 +76,7 @@ export class FacilityDialogComponent {
             facilityObservableArray.push({
               Id: data[i].Id,
               UserId: data[i].UserId,
-              UserFacility: data[i].UserFacility,
-              UserTypeId: data[i].UserTypeId,
-              CurrentUserId: data[i].CurrentUserId
+              UserFacility: data[i].UserFacility
             });
           }
         }
@@ -94,8 +92,6 @@ export class FacilityDialogComponent {
   public btnUpdateFacilityClick(): void {
     localStorage.setItem('current_facility_id', this.cboFacility.selectedItem["UserId"]);
     localStorage.setItem('current_facility', this.cboFacility.selectedItem["UserFacility"]);
-    localStorage.setItem('current_user_type_Id', this.cboFacility.selectedItem["UserTypeId"]);
-    localStorage.setItem('current_user_Id', this.cboFacility.selectedItem["CurrentUserId"]);
 
     this.detailFacilityDialogRef.close(this.cboFacility.selectedItem["UserFacility"]);
     if (this.facilitySubscription != null) this.facilitySubscription.unsubscribe();
@@ -128,5 +124,6 @@ export class FacilityDialogComponent {
   // ===============
   ngOnDestroy() {
     if (this.facilitySubscription != null) this.facilitySubscription.unsubscribe();
+    if (this.logoutSubscription != null) this.logoutSubscription.unsubscribe();
   }
 }

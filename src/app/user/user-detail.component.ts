@@ -219,7 +219,7 @@ export class UserDetailComponent {
     this.userDoctorModel.DoctorId = 0;
 
     let detailUserDoctorDialogRef = this.dialog.open(UserDoctorDetailDialogComponent, {
-      width: '800px',
+      width: '600px',
       data: {
         objUserDoctorDetailDialogTitle: "Add User Doctor",
         objCurrentUserDoctor: this.userDoctorModel

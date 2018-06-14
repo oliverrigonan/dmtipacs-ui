@@ -31,8 +31,8 @@
     <div class="form-group">
         <label>Modality Procedure</label>
         <div>
-            <wj-combo-box #cboModality [itemsSource]="cboModalityProcedureObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'ModalityProcedure'"
-                [selectedValuePath]="'Id'" [(ngModel)]="rateModel.ModalityProcedureId">
+            <wj-combo-box class="form-control" #cboModality [itemsSource]="cboModalityProcedureObservableArray" [isEditable]="false"
+                [isRequired]="true" [displayMemberPath]="'ModalityProcedure'" [selectedValuePath]="'Id'" [(ngModel)]="rateModel.ModalityProcedureId">
             </wj-combo-box>
         </div>
     </div>

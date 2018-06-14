@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 // Service
 // =======
 import { ProcedureService } from './procedure.service';
+import { UserService } from '../user/user.service';
 
 // ====================
 // Async Task and Wijmo
@@ -76,12 +77,18 @@ export class ProcedureDetailComponent {
     public procedureComparativeData: ObservableArray = new ObservableArray();
     public procedureComparativeCollectionView: CollectionView = new CollectionView(this.procedureComparativeData);
 
+    // ============
+    // Current User
+    // ============
+    public procedureCurrentUserSubscription: any;
+
     // ===========
     // Constructor
     // ===========
     constructor(
         public dialog: MatDialog,
         private procedureService: ProcedureService,
+        private userService: UserService,
         private toastr: ToastrService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -205,15 +212,19 @@ export class ProcedureDetailComponent {
                     this.procedureResultCollectionView.pageSize = 15;
                     this.procedureResultCollectionView.trackChanges = true;
 
-                    if (parseInt(localStorage.getItem("current_user_Id")) != this.procedureResultCollectionView.items[0].DoctorId) {
-                        this.isBtnAddProcedureResultDisabled = true;
-                        this.isBtnEditProcedureResultDisabled = true;
-                        this.isBtnDeleteProcedureResultDisabled = true;
-                    } else {
-                        this.isBtnAddProcedureResultDisabled = false;
-                        this.isBtnEditProcedureResultDisabled = false;
-                        this.isBtnDeleteProcedureResultDisabled = false;
-                    }
+                    this.userService.getCurrentUser();
+                    this.procedureCurrentUserSubscription = this.userService.userCurrentObservable.subscribe(
+                        data => {
+                            if (data != null) {
+                                console.log(data.UserTypeId);
+                                if (data.Id != this.procedureResultCollectionView.items[0].DoctorId) {
+                                    this.isBtnAddProcedureResultDisabled = true;
+                                    this.isBtnEditProcedureResultDisabled = true;
+                                    this.isBtnDeleteProcedureResultDisabled = true;
+                                }
+                            }
+                        }
+                    );
                 }
 
                 this.isProcedureResultProgressBarHidden = true;
@@ -433,10 +444,6 @@ export class ProcedureDetailComponent {
         if (localStorage.getItem("access_token") == null) {
             this.router.navigate(['/account/login']);
         } else {
-            if (parseInt(localStorage.getItem("current_user_type_Id")) != 2) {
-                this.isBtnAddProcedureResultDisabled = true;
-            }
-
             this.getProcedureDetailData();
             this.getProcedureResultData();
             this.getProcedureComparativeData();
@@ -450,5 +457,6 @@ export class ProcedureDetailComponent {
         if (this.procedureSubscription != null) this.procedureSubscription.unsubscribe();
         if (this.procedureResultSubscription != null) this.procedureResultSubscription.unsubscribe();
         if (this.procedureComparativeSubscription != null) this.procedureComparativeSubscription.unsubscribe();
+        if (this.procedureCurrentUserSubscription != null) this.procedureCurrentUserSubscription.unsubscribe();
     }
 }

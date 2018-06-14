@@ -1,7 +1,7 @@
 // =======
 // Angular
 // =======
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 // =================
@@ -11,6 +11,7 @@ import { ProcedureResultModel } from '../../model/procedure-result.model';
 import { ProcedureService } from '../../procedure/procedure.service';
 
 import { ObservableArray } from 'wijmo/wijmo';
+import { WjComboBox } from 'wijmo/wijmo.angular2.input';
 
 @Component({
     selector: 'app-procedure-result-detail-dialog',
@@ -20,6 +21,8 @@ import { ObservableArray } from 'wijmo/wijmo';
 export class ProcedureResultDetailDialogComponent {
     title = 'Detail Procedure Result';
     isCurrentDoctor = false;
+    isCboProcedureClicked = false;
+    isCboProcedureSelected = false;
 
     // ==========================
     // Rate Async Task Properties
@@ -29,6 +32,11 @@ export class ProcedureResultDetailDialogComponent {
     public cboDoctorObservableArray: ObservableArray;
     public modalityProcedureSubscription: any;
     public cboModalityProcedureObservableArray: ObservableArray;
+
+    // =====
+    // Wijmo
+    // =====
+    @ViewChild('cboModality') cboModality: WjComboBox;
 
     // ================
     // Initialize Model
@@ -81,6 +89,7 @@ export class ProcedureResultDetailDialogComponent {
                         modalityProcedureObservableArray.push({
                             Id: data[i].Id,
                             ModalityProcedure: data[i].ModalityProcedure,
+                            ModalityResultTemplate: data[i].ModalityResultTemplate
                         });
                     }
                 }
@@ -92,6 +101,13 @@ export class ProcedureResultDetailDialogComponent {
                 }, 1000);
             }
         );
+    }
+
+    // =========================================
+    // Procedure Get Modality Procedure Template
+    // =========================================
+    public btnGetModalityProcedureTemplate(): void {
+        this.procedureResultModel.Result = this.cboModality.selectedItem["ModalityResultTemplate"];
     }
 
     // =====================

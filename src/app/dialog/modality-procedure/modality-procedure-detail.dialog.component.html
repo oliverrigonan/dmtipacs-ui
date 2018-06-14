@@ -11,7 +11,7 @@
     <div class="form-group">
         <label>Modality</label>
         <div>
-            <wj-combo-box #cboModality [itemsSource]="cboModalityObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'Modality'"
+            <wj-combo-box class="form-control" #cboModality [itemsSource]="cboModalityObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'Modality'"
                 [selectedValuePath]="'Id'" [(ngModel)]="modalityProcedureModel.ModalityId">
             </wj-combo-box>
         </div>
