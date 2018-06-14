@@ -89,6 +89,7 @@ export class ProcedureResultDetailDialogComponent {
                         modalityProcedureObservableArray.push({
                             Id: data[i].Id,
                             ModalityProcedure: data[i].ModalityProcedure,
+                            ModalityProcedureResultTemplate: data[i].ModalityProcedure + " - " + data[i].ModalityResultTemplate.substring(0, 70) + "...",
                             ModalityResultTemplate: data[i].ModalityResultTemplate
                         });
                     }

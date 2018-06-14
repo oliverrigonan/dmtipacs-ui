@@ -4,7 +4,7 @@
         <label>Procedure</label>
         <div class="input-group">
             <wj-combo-box class="form-control" #cboModality [itemsSource]="cboModalityProcedureObservableArray" [isEditable]="false"
-                [isRequired]="true" [displayMemberPath]="'ModalityProcedure'" [selectedValuePath]="'Id'" [(ngModel)]="procedureResultModel.ModalityProcedureId">
+                [isRequired]="true" [displayMemberPath]="'ModalityProcedureResultTemplate'" [selectedValuePath]="'Id'" [(ngModel)]="procedureResultModel.ModalityProcedureId">
             </wj-combo-box>
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button" (click)="btnGetModalityProcedureTemplate()">
