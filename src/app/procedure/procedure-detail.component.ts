@@ -182,7 +182,31 @@ export class ProcedureDetailComponent {
     // Download Procedure - JSON
     // =========================
     public btnDownloadJSONProcedureClick(): void {
-        let jsonData = JSON.stringify(this.procedureModel);
+        let currentProcedure = [];
+
+        currentProcedure.push({
+            Id: this.procedureModel.Id,
+            TransactionNumber: this.procedureModel.TransactionNumber,
+            TransactionDateTime: this.procedureModel.TransactionDateTime,
+            DICOMFileName: this.procedureModel.DICOMFileName,
+            PatientName: this.procedureModel.PatientName,
+            Gender: this.procedureModel.Gender,
+            DateOfBirth: this.procedureModel.DateOfBirth,
+            Age: this.procedureModel.Age,
+            Particulars: this.procedureModel.Particulars,
+            ModalityId: this.procedureModel.ModalityId,
+            BodyPartId: this.procedureModel.BodyPartId,
+            BodyPart: this.procedureModel.BodyPart,
+            User: this.procedureModel.User,
+            PatientAddress: this.procedureModel.PatientAddress,
+            ReferringPhysician: this.procedureModel.ReferringPhysician,
+            StudyDate: this.procedureModel.StudyDate,
+            HospitalNumber: this.procedureModel.HospitalNumber,
+            HospitalWardNumber: this.procedureModel.HospitalWardNumber,
+            StudyInstanceId: this.procedureModel.StudyInstanceId
+        });
+
+        let jsonData = JSON.stringify(currentProcedure);
         let element = document.createElement('a');
         element.setAttribute('href', "data:text/json;charset=UTF-8," + encodeURIComponent(jsonData));
         element.setAttribute('download', this.procedureModel.TransactionNumber + ".json");
