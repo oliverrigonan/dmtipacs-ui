@@ -59,6 +59,10 @@
 }
 
 .about-section{
+    padding: 50px 0px;
+}
+
+.features-section {
     background: #fbfbfb;
     padding: 50px 0px;
 }
@@ -73,6 +77,36 @@
 }
 
 .contact-section {
-    background: #3366cc;
+    background: #0099cc;
     padding: 50px 0px;
 }
+
+/* ============= */
+/* custom header */
+/* ============= */
+header.masthead {
+    position: relative;
+    background-color: #202122;
+    background: url("../../assets/images/header-bg.png") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+header.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+}
+
+.container-header {
+    padding: 110px 0;
+}
+  
