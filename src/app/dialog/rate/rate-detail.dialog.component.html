@@ -28,14 +28,24 @@
         <mat-label>Remarks</mat-label>
         <textarea [(ngModel)]="rateModel.Remarks" rows="9" matInput></textarea>
     </mat-form-field>
-    <div class="form-group">
+    <mat-form-field class="input-100-percent" appearance="outline">
+        <mat-label>Modality Procedure</mat-label>
+        <mat-select matInput placeholder="Select Modality Procedure" [(ngModel)]="rateModel.ModalityProcedureId">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let cboModalityProcedure of cboModalityProcedureObservableArray" [value]="cboModalityProcedure.Id">
+                {{ cboModalityProcedure.ModalityProcedureResultTemplate }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- <div class="form-group">
         <label>Modality Procedure</label>
         <div>
             <wj-combo-box class="form-control" #cboModality [itemsSource]="cboModalityProcedureObservableArray" [isEditable]="false"
                 [isRequired]="true" [displayMemberPath]="'ModalityProcedure'" [selectedValuePath]="'Id'" [(ngModel)]="rateModel.ModalityProcedureId">
             </wj-combo-box>
         </div>
-    </div>
+    </div> -->
+    <br />
     <br />
 </mat-dialog-content>
 <mat-dialog-actions>

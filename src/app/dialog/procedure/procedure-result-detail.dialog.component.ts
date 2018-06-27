@@ -23,6 +23,7 @@ export class ProcedureResultDetailDialogComponent {
     isCurrentDoctor = false;
     isCboProcedureClicked = false;
     isCboProcedureSelected = false;
+    isClickedEdit = false;
 
     // ==========================
     // Rate Async Task Properties
@@ -70,6 +71,8 @@ export class ProcedureResultDetailDialogComponent {
 
         if (this.procedureResultModel.Id == 0) {
             this.isCurrentDoctor = true;
+        } else {
+            this.isClickedEdit = true;
         }
 
         this.getModalityProcedureData(this.procedureResultModel.ModalityProcedureId);
@@ -89,7 +92,7 @@ export class ProcedureResultDetailDialogComponent {
                         modalityProcedureObservableArray.push({
                             Id: data[i].Id,
                             ModalityProcedure: data[i].ModalityProcedure,
-                            ModalityProcedureResultTemplate: data[i].ModalityProcedure + " - " + data[i].ModalityResultTemplate.substring(0, 70) + "...",
+                            ModalityProcedureResultTemplate: data[i].ModalityProcedure + " - " + data[i].ModalityResultTemplate,
                             ModalityResultTemplate: data[i].ModalityResultTemplate
                         });
                     }
@@ -104,11 +107,22 @@ export class ProcedureResultDetailDialogComponent {
         );
     }
 
-    // =========================================
-    // Procedure Get Modality Procedure Template
-    // =========================================
-    public btnGetModalityProcedureTemplate(): void {
-        this.procedureResultModel.Result = this.cboModality.selectedItem["ModalityResultTemplate"];
+    // ======================================
+    // Modality Procedure On Selection Change
+    // ======================================
+    public cboModalityProcedureOnSelectionChange(event): void {
+        if (event.isUserInput) {
+            let currentModalityProcedureId = event.source.value;
+            if (currentModalityProcedureId == undefined) {
+                this.procedureResultModel.Result = "";
+            } else {
+                if (!this.isClickedEdit) {
+                    this.procedureResultModel.Result = this.cboModalityProcedureObservableArray.filter(cboModality => cboModality.Id === currentModalityProcedureId)[0].ModalityResultTemplate;;
+                } else {
+                    this.isClickedEdit = false;
+                }
+            }
+        }
     }
 
     // =====================

@@ -126,10 +126,12 @@ export class UserService {
             response => {
                 var result = response.json();
                 if (result != null) {
+                    this.userModel.Id = result.Id;
                     this.userModel.UserName = result.UserName;
                     this.userModel.FullName = result.FullName;
                     this.userModel.Address = result.Address;
                     this.userModel.ContactNumber = result.ContactNumber;
+                    this.userModel.UserTypeId = result.UserTypeId;
 
                     this.userDetailSource.next(this.userModel);
                 }

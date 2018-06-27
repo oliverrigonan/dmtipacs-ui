@@ -4,6 +4,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material';
 import { Router } from '@angular/router';
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 // =================================
 // Async Task and Wijmo and Services
@@ -213,6 +214,24 @@ export class ReportsComponent {
     );
   }
 
+  // ========================================
+  // Export CSV Procedure Summary Report Data
+  // ============================-===========
+  public btnExportCSVProcedureSummaryReport() {
+    let options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: false,
+      useBom: true,
+      noDownload: false,
+      headers: ["Facility", "Tx No.", "Tx Date", "Tx Time", "Patient", "Age", "Modality", "Doctor"]
+    };
+
+    new Angular5Csv(this.procedureSummaryReportCollectionView.items, 'Procedure Summary Report', options);
+  }
+
   // =============================================================================
   // Combo Show Number of Rows On Selected Index Changed: Procedure Summary Report
   // =============================================================================
@@ -255,6 +274,24 @@ export class ReportsComponent {
         this.isBtnRefreshProcedureDetailReportDataDisabled = false;
       }
     );
+  }
+
+  // =======================================
+  // Export CSV Procedure Detail Report Data
+  // =======================================
+  public btnExportCSVProcedureDetailReport() {
+    let options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: false,
+      useBom: true,
+      noDownload: false,
+      headers: ["Facility", "Tx No.", "Tx Date", "Tx Time", "Patient", "Exam Taken", "Procedure", "Doctor", "Facility Rate", "Doctor Rate", "Image Rate"]
+    };
+
+    new Angular5Csv(this.procedureDetailReportCollectionView.items, 'Procedure Detail Report', options);
   }
 
   // ============================================================================

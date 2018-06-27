@@ -4,18 +4,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // ========
 // Material
 // ========
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 
 // =============
 // Wijmo Modules
@@ -76,8 +80,9 @@ import { ProcedureService } from '../procedure/procedure.service';
         CommonModule,
         RouterModule,
         FormsModule,
+        ReactiveFormsModule,
         PdfViewerModule,
-        MatButtonModule, MatProgressBarModule, MatProgressSpinnerModule, MatInputModule, MatDialogModule, MatTabsModule,
+        MatButtonModule, MatProgressBarModule, MatProgressSpinnerModule, MatInputModule, MatDialogModule, MatTabsModule, MatAutocompleteModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatNativeDateModule,
         WjGridFilterModule, WjGridModule, WjInputModule
     ],
     exports: [
@@ -88,7 +93,7 @@ import { ProcedureService } from '../procedure/procedure.service';
         RateComponent, RateDetailDialogComponent, RateDeleteDialogComponent,
         ProcedureComponent, ProcedureDetailComponent, ProcedureDeleteDialogComponent, ProcedureResultDetailDialogComponent, ProcedureResultDeleteDialogComponent, ProcedureResultPDFDetailPDFDialogComponent,
         ReportsComponent,
-        MatButtonModule, MatProgressBarModule, MatProgressSpinnerModule, MatInputModule, MatDialogModule, MatTabsModule,
+        MatButtonModule, MatProgressBarModule, MatProgressSpinnerModule, MatInputModule, MatDialogModule, MatTabsModule, MatAutocompleteModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatNativeDateModule,
         WjGridFilterModule, WjGridModule, WjInputModule
     ],
     providers: [

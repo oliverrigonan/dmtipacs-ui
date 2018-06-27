@@ -57,7 +57,7 @@ export class ReportService {
                 if (results.length > 0) {
                     for (var i = 0; i <= results.length - 1; i++) {
                         procedureSummaryReportObservableArray.push({
-                            Id: results[i].Id,
+                            // Id: results[i].Id,
                             Facility: results[i].Facility,
                             TransactionNumber: results[i].TransactionNumber,
                             TransactionDateTime: results[i].TransactionDateTime,
@@ -93,7 +93,7 @@ export class ReportService {
                 if (results.length > 0) {
                     for (var i = 0; i <= results.length - 1; i++) {
                         procedureDetailReportObservableArray.push({
-                            Id: results[i].Id,
+                            // Id: results[i].Id,
                             Facility: results[i].Facility,
                             TransactionNumber: results[i].TransactionNumber,
                             TransactionDateTime: results[i].TransactionDateTime,

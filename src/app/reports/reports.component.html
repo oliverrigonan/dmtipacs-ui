@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="input-group">
                                 <button class="btn btn-info" [disabled]="isBtnRefreshProcedureSummaryReportDataDisabled" (click)="getProcedureSummaryReportData()">
                                     <i class="fa fa-refresh"></i>
@@ -21,7 +21,7 @@
                                 &nbsp; &nbsp;
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <b>Start Date</b>
+                                        <b>Start</b>
                                     </div>
                                 </div>
                                 <wj-input-date #procedureSummaryReportStartDate [(ngModel)]="procedureSummaryReportStartDateData" [ngModelOptions]="{standalone: true}"
@@ -30,7 +30,7 @@
                                 &nbsp; &nbsp;
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <b>End Date</b>
+                                        <b>End</b>
                                     </div>
                                 </div>
                                 <wj-input-date #procedureSummaryReportEndDate [(ngModel)]="procedureSummaryReportEndDateData" [ngModelOptions]="{standalone: true}"
@@ -48,7 +48,10 @@
                                 </wj-combo-box>
                             </div>
                         </div>
-                        <div class="col-md-2" align="right">
+                        <div class="col-md-3" align="right">
+                            <button style="margin-right: 5px;" mat-raised-button color="primary" (click)="btnExportCSVProcedureSummaryReport()">
+                                <i class="fa fa-file-excel-o"></i> CSV
+                            </button>
                             <button mat-raised-button color="warn" routerLink="/software/dashboard">
                                 <i class="fa fa-close"></i> Close
                             </button>
@@ -97,7 +100,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="input-group">
                                 <button class="btn btn-info" [disabled]="isBtnRefreshProcedureDetailReportDataDisabled" (click)="getProcedureDetailReportData()">
                                     <i class="fa fa-refresh"></i>
@@ -105,7 +108,7 @@
                                 &nbsp; &nbsp;
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <b>Start Date</b>
+                                        <b>Start</b>
                                     </div>
                                 </div>
                                 <wj-input-date #procedureDetailReportStartDate [(ngModel)]="procedureDetailReportStartDateData" [ngModelOptions]="{standalone: true}"
@@ -114,7 +117,7 @@
                                 &nbsp; &nbsp;
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <b>End Date</b>
+                                        <b>End</b>
                                     </div>
                                 </div>
                                 <wj-input-date #procedureDetailReportEndDate [(ngModel)]="procedureDetailReportEndDateData" [ngModelOptions]="{standalone: true}"
@@ -132,8 +135,11 @@
                                 </wj-combo-box>
                             </div>
                         </div>
-                        <div class="col-md-2" align="right">
-                            <button mat-raised-button color="warn" class="pull-right" routerLink="/software/dashboard">
+                        <div class="col-md-3" align="right">
+                            <button style="margin-right: 5px;" mat-raised-button color="primary" (click)="btnExportCSVProcedureDetailReport()">
+                                <i class="fa fa-file-excel-o"></i> CSV
+                            </button>
+                            <button mat-raised-button color="warn" routerLink="/software/dashboard">
                                 <i class="fa fa-close"></i> Close
                             </button>
                         </div>

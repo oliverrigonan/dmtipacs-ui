@@ -8,15 +8,25 @@
         <mat-label>Result Template</mat-label>
         <textarea [(ngModel)]="modalityProcedureModel.ModalityResultTemplate" rows="10" matInput></textarea>
     </mat-form-field>
-    <div class="form-group">
+    <mat-form-field class="input-100-percent" appearance="outline">
+        <mat-label>Modality</mat-label>
+        <mat-select matInput placeholder="Select Modality" [(ngModel)]="modalityProcedureModel.ModalityId">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let cboModality of cboModalityObservableArray" [value]="cboModality.Id">
+                {{ cboModality.Modality }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- <div class="form-group">
         <label>Modality</label>
         <div>
             <wj-combo-box class="form-control" #cboModality [itemsSource]="cboModalityObservableArray" [isEditable]="false" [isRequired]="true" [displayMemberPath]="'Modality'"
                 [selectedValuePath]="'Id'" [(ngModel)]="modalityProcedureModel.ModalityId">
             </wj-combo-box>
         </div>
-    </div>
-    <br /><br />
+    </div> -->
+    <br />
+    <br />
 </mat-dialog-content>
 <mat-dialog-actions>
     <table border="0" style="width: 100%;">

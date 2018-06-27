@@ -189,6 +189,7 @@
             <div class="card-body">
                 <mat-progress-bar class="example-margin" [hidden]="isProcedureComparativeProgressBarHidden" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
                 <wj-flex-grid #procedureComparativeFlexGrid [itemsSource]="procedureComparativeCollectionView" [selectionMode]="3">
+                    <wj-flex-grid-filter></wj-flex-grid-filter>
                     <wj-flex-grid-column [header]="'Tx No.'" [binding]="'TransactionNumber'" [isReadOnly]="true" [width]="'2*'"></wj-flex-grid-column>
                     <wj-flex-grid-column [header]="'Date'" [binding]="'TransactionDateTime'" [isReadOnly]="true" [width]="'1.5*'"></wj-flex-grid-column>
                     <wj-flex-grid-column [header]="'Time'" [binding]="'TransactionTime'" [isReadOnly]="true" [width]="'1.5*'"></wj-flex-grid-column>

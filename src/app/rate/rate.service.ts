@@ -103,6 +103,7 @@ export class RateService {
                         modalityProcedureObservableArray.push({
                             Id: results[i].Id,
                             ModalityProcedure: results[i].ModalityProcedure,
+                            ModalityResultTemplate: results[i].ModalityResultTemplate
                         });
                     }
 
