@@ -1,13 +1,22 @@
 <h2 mat-dialog-title>{{ title }}</h2>
 <mat-dialog-content>
-    <div class="form-group">
+    <mat-form-field class="input-100-percent" appearance="outline">
+        <mat-label>Facility</mat-label>
+        <mat-select matInput placeholder="Select Facility" [(ngModel)]='defaultSelectedFacilityId'>
+            <mat-option *ngFor="let cboFacility of cboFacilityObservableArray" [value]="cboFacility.Id">
+                {{ cboFacility.UserFacility }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- <div class="form-group">
         <label>Facility</label>
         <div>
             <wj-combo-box style="width: 100%;" #cboFacility [itemsSource]="cboFacilityObservableArray" [isEditable]="false" [isRequired]="true"
                 [displayMemberPath]="'UserFacility'" [selectedValuePath]="'Id'">
             </wj-combo-box>
         </div>
-    </div>
+    </div> -->
+    <br />
     <br />
 </mat-dialog-content>
 <mat-dialog-actions>

@@ -33,6 +33,7 @@ import { AccountService } from '../../account/account.service';
 })
 export class FacilityDialogComponent {
   title = 'facility';
+  defaultSelectedFacilityId = 0;
 
   // ==============================
   // Facility Async Task Properties
@@ -82,6 +83,7 @@ export class FacilityDialogComponent {
         }
 
         this.cboFacilityObservableArray = facilityObservableArray;
+        this.defaultSelectedFacilityId = this.cboFacilityObservableArray[0].Id;
       }
     );
   }
@@ -90,10 +92,13 @@ export class FacilityDialogComponent {
   // Update Current Facility
   // =======================
   public btnUpdateFacilityClick(): void {
-    localStorage.setItem('current_facility_id', this.cboFacility.selectedItem["UserId"]);
-    localStorage.setItem('current_facility', this.cboFacility.selectedItem["UserFacility"]);
+    let current_facility_id = this.cboFacilityObservableArray.filter(cboFacility => cboFacility.Id === this.defaultSelectedFacilityId)[0].UserId;
+    let current_facility = this.cboFacilityObservableArray.filter(cboFacility => cboFacility.Id === this.defaultSelectedFacilityId)[0].UserFacility;
 
-    this.detailFacilityDialogRef.close(this.cboFacility.selectedItem["UserFacility"]);
+    localStorage.setItem('current_facility_id', current_facility_id);
+    localStorage.setItem('current_facility', current_facility);
+
+    this.detailFacilityDialogRef.close(current_facility);
     if (this.facilitySubscription != null) this.facilitySubscription.unsubscribe();
 
     setTimeout(() => {

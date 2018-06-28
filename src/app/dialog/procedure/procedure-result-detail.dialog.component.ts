@@ -117,7 +117,7 @@ export class ProcedureResultDetailDialogComponent {
                 this.procedureResultModel.Result = "";
             } else {
                 if (!this.isClickedEdit) {
-                    this.procedureResultModel.Result = this.cboModalityProcedureObservableArray.filter(cboModality => cboModality.Id === currentModalityProcedureId)[0].ModalityResultTemplate;;
+                    this.procedureResultModel.Result = this.cboModalityProcedureObservableArray.filter(cboModality => cboModality.Id === currentModalityProcedureId)[0].ModalityResultTemplate;
                 } else {
                     this.isClickedEdit = false;
                 }
